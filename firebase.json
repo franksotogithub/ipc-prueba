@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/INEI-PRY-IPC-FRONTEND",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites":[
+      {"source":"**",
+        "destination":"/index.html"
+      }
+
+    ]
+  }
+}

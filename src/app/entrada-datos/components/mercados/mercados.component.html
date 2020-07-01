@@ -1,0 +1,185 @@
+<form [formGroup]="form" (ngSubmit)="saveMovMercadoCab($event)">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Formato de Mercados</mat-card-title>
+
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <div class="row">
+
+          <div class="col-md-2">
+            <mat-form-field class="full-width">
+              <mat-label>Codigo</mat-label>
+              <input placeholder="Codigo de Mercado" formControlName="mercado" matInput type="text" readonly>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+         
+            <mat-form-field class="full-width">
+              <input type="text"
+                     placeholder="Buscar Mercado"
+                     aria-label="Number"
+                     matInput
+                   
+                     [matAutocomplete]="auto"      (input)="mercadoSearch($event)"   >
+              <mat-autocomplete #auto="matAutocomplete"   [displayWith]="displayFnMercado" (optionSelected)="mercadoSelected($event)"  >
+                <mat-option *ngFor="let option of filteredMercados" [value]="option"  >
+                  {{option.razon_social}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="full-width">
+              <mat-label>Hora Inicio</mat-label>
+              <input type="time" placeholder="Nombre de Mercado" formControlName="hora_ini" matInput  >
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="full-width">
+              <mat-label>Hora Fin</mat-label>
+              <input type="time" placeholder="Nombre de Mercado" formControlName="hora_fin" matInput  >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="full-width">
+              <mat-label>Dia de la Semana</mat-label>
+              <mat-select formControlName="n_dia" >
+                <mat-option value="1">Viernes</mat-option>
+                <mat-option value="2">Sabado</mat-option>
+                <mat-option value="3">Domingo</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <mat-form-field class="full-width">
+              <mat-label>Nro Semana</mat-label>
+              <input type="number" placeholder="Nro Semana" formControlName="n_semana" matInput  >
+            </mat-form-field>
+          </div>
+
+
+          
+          <div class="col-md-2">
+
+            <mat-form-field class="full-width">
+              <mat-label>Cod Investigador</mat-label>
+              <input type="number" placeholder="Cod Inv" formControlName="inv" matInput  readonly>
+            </mat-form-field>
+
+          </div>
+          <div class="col-md-4">
+
+        
+            <mat-form-field class="full-width">
+              <input type="text"
+                     placeholder="Buscar Investigador"
+                     aria-label="Number"
+                     matInput
+                   
+                     [matAutocomplete]="auto2"      (input)="invSearch($event)"   >
+              <mat-autocomplete #auto2="matAutocomplete"   [displayWith]="displayFnInv" (optionSelected)="invSelected($event)"  >
+                <mat-option *ngFor="let option of filteredInvestigador" [value]="option"  >
+                  {{option.nombre}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+          </div>
+        
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            
+<mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8" >
+  <ng-container matColumnDef="codigo">
+    <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="codigo"> {{element.codigo}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef> Producto </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="nombre" > {{element.nombre}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="valor">
+    <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="valor" > 
+      
+      
+     
+    
+      <mat-form-field >
+        
+        <input    [ngModel]=" element.valor " matInput  >
+      </mat-form-field>
+    </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="peso">
+    <mat-header-cell *matHeaderCellDef> Peso </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="peso" >       
+      <mat-form-field >
+        <input    [ngModel]=" element.peso " matInput  >
+      </mat-form-field> 
+  </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="cc">
+    <mat-header-cell *matHeaderCellDef> CC </mat-header-cell>
+    <mat-cell *matCellDef="let element"  data-label="cc"  > 
+      <mat-form-field >
+        <input    [ngModel]="element.cc " matInput  >
+      </mat-form-field> 
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="ce">
+    <mat-header-cell *matHeaderCellDef> CE </mat-header-cell>
+    <mat-cell *matCellDef="let element" data-label="ce"> 
+      <mat-form-field >
+        <input    [ngModel]=" element.ce " matInput  >
+      </mat-form-field>   
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+
+          </div>
+          
+        </div>
+
+
+      <!--
+        <div class="row">
+       
+          <div class="col-md-12" *ngFor="let mercado of movMercadoCab;" >
+            {{mercado.id}} -- {{mercado.hora_ini}}
+
+          </div>
+
+        </div>
+      -->
+      </mat-card-content>
+      <mat-card-actions>
+        <button  mat-raised-button type="submit"  color ="accent" >Guardar</button>
+        <!--<button  mat-raised-button   color ="primary" (click)="getAllMercadosCab()" >Mostrar</button>-->
+       
+      </mat-card-actions>
+    </mat-card>
+
+</form>
+  
