@@ -1,5 +1,12 @@
 export interface Producto {
-  id: number;
-  codigo: string;
-  nombre: string;
+  orden:number;
+  codigo:string;
+  producto:string;
+  marca:string;
+  cap:string;
+  presentacion:string;
+  id:number;
+  precio:number;
+  ce:string;
+  observacion:string;
 }

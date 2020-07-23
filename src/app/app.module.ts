@@ -8,12 +8,16 @@ import { MenuComponent } from './menu/menu.component';
 import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import {TokenInterceptor} from './core/helpers/token.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -21,10 +25,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserAnimationsModule,
     SharedModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

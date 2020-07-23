@@ -8,13 +8,13 @@
       <mat-card-content>
 
         <div class="row">
-          <div class="col-md-4"  >
+          <div class="col-md-4">
             <button  mat-raised-button   color ="accent" (click)="addMercado()" >Añadir</button>
             
         </div>
         </div>
         <div class="row">
-          <div class="col-md-12"  >
+          <div class="col-md-12">
             <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8" >
               <ng-container matColumnDef="mercado">
                 <mat-header-cell *matHeaderCellDef> COD. MERCADO </mat-header-cell>

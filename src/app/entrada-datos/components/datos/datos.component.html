@@ -1,23 +1,18 @@
 
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Formato de Mercados</mat-card-title>
+        <mat-card-title>Descarga de datos</mat-card-title>
 
       </mat-card-header>
 
       <mat-card-content>
-
-
-        <div class="row">
-          <div class="col-md-6">
-             <button  mat-raised-button   color ="primary" (click)="descargando()" ><mat-icon>cloud_download</mat-icon>Descargando Datos</button>
-        
-     
+        <div class="row col-md-12">
+          <div class="col-md-6 form-group">
+             <button  mat-raised-button class="form-control"  color ="primary" (click)="descargando()" ><mat-icon>cloud_download</mat-icon>Descargando Datos</button>
           </div>
-          <div class="col-md-6">
-            <button  mat-raised-button   color ="primary" (click)="cargando()" ><mat-icon>cloud_upload </mat-icon>Subiendo Datos</button>
+          <div class="col-md-6 form-group">
+            <button  mat-raised-button  class="form-control" color ="primary" (click)="cargando()" ><mat-icon>cloud_upload </mat-icon>Subiendo Datos</button>
           </div>
-
         </div>
 
 

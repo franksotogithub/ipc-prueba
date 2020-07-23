@@ -1,0 +1,121 @@
+
+    <mat-card>
+        <mat-card-header>
+          
+        </mat-card-header>
+        <!--
+        <button mat-raised-button color="primary" [routerLink]="['/producto', element.id]"><mat-icon>edit</mat-icon></button>
+-->
+        <mat-card-content >
+            <div *ngIf="informante">
+            <div class="row col-12">
+
+                <div class="col-6 form-group" >
+                    <mat-form-field class="full-width"  appearance="fill">
+                        <mat-label>ID:</mat-label>
+                       
+                        <input  type="text" placeholder="ID"  [(ngModel)]="informante.id"  readonly  matInput>
+                        
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6 form-group">
+                    <mat-form-field   class="full-width" appearance="fill">
+                        <mat-label>RUC:</mat-label>
+                        <input  type="text" placeholder="RUC"    [(ngModel)]="informante.ruc" readonly matInput>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field  class="full-width" appearance="fill">
+                        <mat-label>Establecimiento:</mat-label>
+                        <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.establecimiento"  readonly matInput>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-4 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Orden:</mat-label>
+                        <input  placeholder="Orden"   [(ngModel)]="producto.orden"  readonly matInput>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-4 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Codigo:</mat-label>
+                        <input  placeholder="Codigo"    [(ngModel)]="producto.codigo"  readonly matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-4 form-group">
+                    
+                        <button mat-raised-button (click)="openCamera()" color="primary"> <mat-icon>photo</mat-icon></button>
+                    
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field  class="full-width" appearance="fill">
+                        <mat-label>Producto:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="producto.producto" readonly  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Marca:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="producto.marca" readonly  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Cap/tam:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="producto.cap" readonly  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Presentacion:</mat-label>
+                        <input  placeholder="Presentacion"   [(ngModel)]="producto.presentacion" readonly  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Precio:</mat-label>
+                        <input  placeholder="Precio"   [(ngModel)]="producto.precio"  matInput>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>CE:</mat-label>
+                        <input  placeholder="CE" [(ngModel)]="producto.ce"  matInput>
+                    </mat-form-field>
+                </div>
+               
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Observacion:</mat-label>
+                        <textarea matInput  [(ngModel)]="producto.observacion"  ></textarea>
+                    </mat-form-field>
+                </div>
+                
+
+            </div>
+
+       
+           
+  
+        </div>
+  
+
+        </mat-card-content>
+        
+        
+        
+        <mat-card-actions>
+        
+        </mat-card-actions>
+      </mat-card>

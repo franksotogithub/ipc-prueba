@@ -1,5 +1,7 @@
+import {Usuario} from './usuario.model';
 export interface Investigador {
-  id: number;
   codigo: string;
   nombre: string;
+  estado: number;
+  ciudad: number;  
 }

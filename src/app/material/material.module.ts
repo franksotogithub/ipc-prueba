@@ -20,6 +20,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTableResponsiveModule } from './../shared/directive/mat-table-responsive/mat-table-responsive.module';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
 @NgModule({
   declarations: [],
   imports: [
@@ -43,6 +47,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatFormFieldModule,
     MatStepperModule,
     MatAutocompleteModule,
+    MatTableResponsiveModule,
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatDividerModule
   ],
   exports: [
     MatButtonModule,
@@ -63,7 +71,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatPaginatorModule,
     MatFormFieldModule,
     MatStepperModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTableResponsiveModule,
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatDividerModule
   ]
 })
 export class MaterialModule { }

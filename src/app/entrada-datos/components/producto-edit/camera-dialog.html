@@ -1,0 +1,18 @@
+<div id="app">
+    <div><video #video id="video" width="480" height="480" autoplay></video></div>
+    <div><button mat-raised-button  id="snap" (click)="capture()"> <mat-icon>photo</mat-icon></button></div>
+    <canvas #canvas id="canvas" width="480" height="480"></canvas>
+    
+        <!--<li *ngFor="let c of captures">
+            <img src="{{ c }}" height="50" />
+        </li>-->
+
+        <div *ngIf ="c" class="box" >
+            <img src="{{ c }}"  />
+        </div>
+    
+</div>
+<!--
+<button mat-raised-button (click)="openCamera()" color="primary"> <mat-icon>photo</mat-icon></button>
+
+-->

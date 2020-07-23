@@ -116,28 +116,33 @@
     <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
     <mat-cell *matCellDef="let element" data-label="valor" > 
       
-      
+      {{element.valor}}
      
     
-      <mat-form-field >
+      <!--<mat-form-field >
         
         <input    [ngModel]=" element.valor " matInput  >
-      </mat-form-field>
+      </mat-form-field>-->
     </mat-cell>
   </ng-container>
   
   <ng-container matColumnDef="peso">
     <mat-header-cell *matHeaderCellDef> Peso </mat-header-cell>
-    <mat-cell *matCellDef="let element" data-label="peso" >       
+    <mat-cell *matCellDef="let element" data-label="peso" > 
+      {{element.peso  }}
+      <!--
       <mat-form-field >
         <input    [ngModel]=" element.peso " matInput  >
       </mat-form-field> 
+
+      -->
   </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="cc">
     <mat-header-cell *matHeaderCellDef> CC </mat-header-cell>
     <mat-cell *matCellDef="let element"  data-label="cc"  > 
+      {{element.cc}}
       <mat-form-field >
         <input    [ngModel]="element.cc " matInput  >
       </mat-form-field> 
@@ -147,9 +152,10 @@
   <ng-container matColumnDef="ce">
     <mat-header-cell *matHeaderCellDef> CE </mat-header-cell>
     <mat-cell *matCellDef="let element" data-label="ce"> 
-      <mat-form-field >
+      {{element.ce}}
+      <!--<mat-form-field >
         <input    [ngModel]=" element.ce " matInput  >
-      </mat-form-field>   
+      </mat-form-field>   -->
     </mat-cell>
   </ng-container>
 

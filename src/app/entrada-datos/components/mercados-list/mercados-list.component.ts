@@ -14,6 +14,7 @@ export class MercadosListComponent implements OnInit {
 
   dataSource=[];
   displayedColumns = ['mercado','hora_ini','hora_fin'];
+  
   constructor(private idbService:IdbService,
     private router: Router,
     ) { 

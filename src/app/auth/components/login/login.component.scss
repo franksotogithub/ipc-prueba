@@ -1,0 +1,30 @@
+.mat-form-field{
+    width: 100%;
+}
+
+.mat-raised-button{
+    width: 100%;
+}
+
+.content{
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  mat-card{
+    margin: auto;
+    width: 90%;
+}
+
+@media (min-width: 576px) {
+    mat-card{
+        max-width:  500px;
+        margin: auto;
+       
+       
+    }
+    
+  
+  }
