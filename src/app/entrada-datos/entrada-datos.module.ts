@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {WebcamModule} from 'ngx-webcam';
 import { EntradaDatosRoutingModule } from './entrada-datos-routing.module';
 import { MercadosComponent } from './components/mercados/mercados.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { MercadosListComponent } from './components/mercados-list/mercados-list.
 import { ComercialesListComponent } from './components/comerciales-list/comerciales-list.component';
 
 import {ProductoEditComponent,CameraDialogComponent} from './components/producto-edit/producto-edit.component';
+
 
 @NgModule({
   declarations: [MercadosComponent, 
@@ -31,7 +32,8 @@ import {ProductoEditComponent,CameraDialogComponent} from './components/producto
     MaterialModule,
     SharedModule,   
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    WebcamModule
   ],
   entryComponents: [
     CameraDialogComponent

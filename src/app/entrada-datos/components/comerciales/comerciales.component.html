@@ -86,12 +86,12 @@
                         </ng-container>
             -->
                         <ng-container matColumnDef="orden">
-                            <mat-header-cell *matHeaderCellDef> Nº O. </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
                             <mat-cell *matCellDef="let element" > {{element.orden}} </mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="codigo">
-                        <mat-header-cell *matHeaderCellDef> Codigo </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
                         <mat-cell *matCellDef="let element" data-label="Codigo"> 
                             
                             {{element.codigo}} 
@@ -99,7 +99,7 @@
                         </ng-container>
                         
                         <ng-container matColumnDef="producto">
-                            <mat-header-cell *matHeaderCellDef> Producto/articulo </mat-header-cell>
+                            <mat-header-cell *matHeaderCellDef>Producto/articulo</mat-header-cell>
                             <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
                             
                             {{element.producto}} /{{element.presentacion}} /{{element.cap}} /{{element.marca}} 
@@ -134,27 +134,35 @@
         -->
 
                     <ng-container matColumnDef="precio">
-                        <mat-header-cell *matHeaderCellDef>Precio </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
                         <mat-cell *matCellDef="let element" data-label="Presentacion"> 
-                            <mat-form-field class="full-width" appearance="fill">
-                            <input type="text"   [(ngModel)]="element.precio"  matInput>    
+                            <mat-form-field class="full-width" appearance="outline">
+                            <input type="number"   [(ngModel)]="element.precio" (change)="changeProducto(element)"  matInput>    
                         </mat-form-field>
                         </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="ce">
-                        <mat-header-cell *matHeaderCellDef>CE. </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef>CE.</mat-header-cell>
                         <mat-cell *matCellDef="let element" data-label="ce" > 
-                            <mat-select [(ngModel)]="element.ce">
-                                <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
-                            </mat-select>
+                            <mat-form-field class="full-width" appearance="outline">
+
+                                <mat-select [(ngModel)]="element.ce" (change)="changeProducto(element)">
+                                    <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            
                         </mat-cell>
                     </ng-container>
 
-                    <ng-container matColumnDef="observaciones">
-                        <mat-header-cell *matHeaderCellDef>CE. </mat-header-cell>
-                        <mat-cell *matCellDef="let element" data-label="Presentacion"> 
-                            <input type="text"   [(ngModel)]="element.observaciones">    
+                    <ng-container matColumnDef="observacion">
+                        <mat-header-cell *matHeaderCellDef>Observacion</mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="observacion"> 
+                            <mat-form-field class="full-width" appearance="outline">
+                                <input type="text"  [(ngModel)]="element.observacion" (change)="changeProducto(element)" matInput >   
+                            </mat-form-field>
+                            
                         </mat-cell>
                     </ng-container>
                     

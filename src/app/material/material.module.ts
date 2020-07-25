@@ -24,6 +24,8 @@ import {MatTableResponsiveModule } from './../shared/directive/mat-table-respons
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [],
   imports: [
@@ -50,7 +52,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatTableResponsiveModule,
     MatSlideToggleModule,
     MatDialogModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   exports: [
     MatButtonModule,
@@ -75,7 +79,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatTableResponsiveModule,
     MatSlideToggleModule,
     MatDialogModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

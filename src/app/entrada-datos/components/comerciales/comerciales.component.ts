@@ -60,10 +60,13 @@ export class ComercialesComponent implements OnInit {
 
       }); 
 
-      this.dataSource = [
-        {'orden':1,'codigo':'001','producto':'producto1','marca':'marca1','cap':'100L','presentacion':'presentacion1','id':1,precio:0,ce:'N','observacion':''},
-        {'orden':2,'codigo':'002','producto':'producto2','marca':'marca2','cap':'200L','presentacion':'presentacion2','id':2,precio:0,ce:'N','observacion':''},
-      ];
+      this.idbService.productos$.subscribe( (productos:Producto[])=>{
+        
+       
+        /*console.log('this.id>>>',datos);*/
+        this.dataSource=productos.filter((p)=>{ return p.idInformante==this.id});
+        /*productos.filter((p)=>{if (p.idInvestigador== 107287) return p});*/
+      });
 
     });
 
@@ -72,7 +75,7 @@ export class ComercialesComponent implements OnInit {
     this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
       this.displayedColumns = result.matches ? 
       ['codigo','producto','id'] : 
-      ['orden','codigo','producto','precio','ce'];
+      ['orden','codigo','producto','precio','ce','observacion'];
     });
 
   }
@@ -108,6 +111,10 @@ export class ComercialesComponent implements OnInit {
 
   }
 
+  changeProducto(producto:Producto) {
+    this.idbService.producto$.next(producto);
+
+  }
 /*
   detalle(id){
     this.producto=this.dataSource.find((e)=>{return e.id==id});

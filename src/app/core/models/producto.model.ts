@@ -9,4 +9,5 @@ export interface Producto {
   precio:number;
   ce:string;
   observacion:string;
+  idInformante:number;
 }

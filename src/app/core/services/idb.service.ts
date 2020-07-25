@@ -27,6 +27,8 @@ export class IdbService   {
   public movMercadoCab$ =new BehaviorSubject<any>([]);
   public informantes$ =new BehaviorSubject<Informante[]>([]);
   public programacionRutas$ = new BehaviorSubject<ProgramacionRuta[]>([]);
+  public producto$ = new BehaviorSubject<Producto>(null);
+
   constructor(
     /*private directorioService:DirectorioService,
     private productoService : ProductoService,
@@ -41,7 +43,7 @@ export class IdbService   {
 
   async connectToIDB() {
     
-    this._db = await openDB('ipc-local-database-1',12, {
+    this._db = await openDB('ipc-local-database-1',13, {
       upgrade(db){
 
         /*let tables = ['investigador','informante','ruta'];*/
@@ -55,6 +57,20 @@ export class IdbService   {
           }
         });
         
+
+        let tables2 = ['productos'];
+
+
+        tables2.forEach((table)=>{
+          if(!db.objectStoreNames.contains(table))
+          {
+
+            const store=db.createObjectStore(table);
+
+            /*store.createIndex('id', 'id'); */
+
+          }
+        });
 
         
 
@@ -97,8 +113,9 @@ export class IdbService   {
 
 
     this.programacionRutas$.next(await this._db.getAllFromIndex('programacion_ruta', 'id'));
+    this.productos$.next(await this._db.getAll('productos'));
 
-
+    
     /*
     this.informantes$.next(await this._db.getAllFromIndex('informante', 'id'));
 */
@@ -108,7 +125,30 @@ export class IdbService   {
     this.productos$.next(await this._db.getAllFromIndex('productos', 'id'));
     this.investigadores$.next(await this._db.getAllFromIndex('investigadores', 'id'));
 */
+    
 
+
+    /*this.producto$.subscribe(p=>);*/
+
+    /*await db.put(storeName, value, key);*/
+    this.producto$.subscribe(async(p)=>{
+      /*console.log('actualizando>>',p);*/
+      /*await this._db.delete('productos', key);*/
+      console.log('producto>>>',p);
+      console.log('p.id>>>',p.id);
+       await this._db.put('productos',p,p.id);
+
+      
+        /*const tx = this._db.transaction('productos', 'readwrite');
+
+        const store = tx.objectStore('productos');
+        await store.put(p, p.id);
+     
+        await tx.done;*/
+      
+
+    });
+    
   }
 
 
@@ -130,14 +170,47 @@ export class IdbService   {
     
     this.programacionRutaService.getProgramacionRuta().subscribe(( data:any )=>{
       let results:ProgramacionRuta[] = data['results'];
-      
+      let idInformantes =[]
+
       results.forEach((r)=>{
         this._db.add('programacion_ruta',r);
+
+        for (const key in r.informantes) {
+          if (Object.prototype.hasOwnProperty.call(r.informantes, key)) {
+            const element = r.informantes[key].id;
+            idInformantes.push(element);
+          }
+        } 
+
+
       });
 
       this.programacionRutas$.next(results);
 
+      let listProductos = [];
+      
+      let productos = [
+        {'orden':1,'codigo':'001','producto':'producto1','marca':'marca1','cap':'100L','presentacion':'presentacion1',precio:0,ce:'N','observacion':''},
+        {'orden':2,'codigo':'002','producto':'producto2','marca':'marca2','cap':'200L','presentacion':'presentacion2',precio:0,ce:'N','observacion':''},
+      ];
+
+      
+      idInformantes.forEach((id)=>{
+        listProductos=listProductos.concat(productos.map(p=>({...p,'idInformante':id})) )
+      });
+      
+
+      listProductos.forEach(async (p,index)=>{
+        await this._db.put('productos',{... p,'id':index},index);
+        
+      });
+
+      /*this.productos$.next(listProductos);*/
+
+
     });
+
+    
 
     /*this._db.clear('informante');
 

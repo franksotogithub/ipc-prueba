@@ -1,16 +1,24 @@
 
     <mat-card>
         <mat-card-header>
+            <mat-card-title>Producto</mat-card-title>
+                <div class="col-md-2 form-group">
+                    <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>reply</mat-icon>Regresar</button>
+                </div>
           
+
         </mat-card-header>
         <!--
         <button mat-raised-button color="primary" [routerLink]="['/producto', element.id]"><mat-icon>edit</mat-icon></button>
 -->
         <mat-card-content >
-            <div *ngIf="informante">
+            <div *ngIf="informante && producto">
             <div class="row col-12">
 
-                <div class="col-6 form-group" >
+                
+<!--
+                <div class="col-4 " >
+                    
                     <mat-form-field class="full-width"  appearance="fill">
                         <mat-label>ID:</mat-label>
                        
@@ -19,27 +27,40 @@
                     </mat-form-field>
                 </div>
 
-                <div class="col-6 form-group">
+                <div class="col-8 ">
                     <mat-form-field   class="full-width" appearance="fill">
                         <mat-label>RUC:</mat-label>
                         <input  type="text" placeholder="RUC"    [(ngModel)]="informante.ruc" readonly matInput>
                     </mat-form-field>
+                    
                 </div>
 
-                <div class="col-12 form-group">
+
+                
+                <div class="col-12 ">
                     <mat-form-field  class="full-width" appearance="fill">
                         <mat-label>Establecimiento:</mat-label>
                         <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.establecimiento"  readonly matInput>
                     </mat-form-field>
                 </div>
-
+                -->
                 <div class="col-4 form-group">
                     <mat-form-field class="full-width" appearance="fill">
+
+                        <button mat-icon-button matPrefix  [routerLink]="['../', preview]" >
+                            <mat-icon>keyboard_arrow_left</mat-icon>
+                        </button>
+
                         <mat-label>Orden:</mat-label>
                         <input  placeholder="Orden"   [(ngModel)]="producto.orden"  readonly matInput>
+                        <button mat-icon-button matSuffix  [routerLink]="['../', next]" >
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                        </button>
+
                     </mat-form-field>
                 </div>
 
+              
                 <div class="col-4 form-group">
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Codigo:</mat-label>
@@ -82,27 +103,34 @@
                 </div>
 
                 <div class="col-12 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
+                    <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Precio:</mat-label>
-                        <input  placeholder="Precio"   [(ngModel)]="producto.precio"  matInput>
+                        <input  type="number" placeholder="Precio"  (change)="change(producto)"  [(ngModel)]="producto.precio"  matInput>
                     </mat-form-field>
                 </div>
 
                 <div class="col-12 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
+                    <mat-form-field class="full-width" appearance="outline">
                         <mat-label>CE:</mat-label>
-                        <input  placeholder="CE" [(ngModel)]="producto.ce"  matInput>
+                        <!--<input  placeholder="CE" [(ngModel)]="producto.ce"  matInput>-->
+
+                        <mat-select [(ngModel)]="producto.ce" (change)="change(producto)">
+                            <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
+
+                
+              
                
                 <div class="col-12 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
+                    <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Observacion:</mat-label>
-                        <textarea matInput  [(ngModel)]="producto.observacion"  ></textarea>
+                        <textarea matInput  [(ngModel)]="producto.observacion" (change)="change(producto)" ></textarea>
                     </mat-form-field>
                 </div>
-                
 
+      
             </div>
 
        

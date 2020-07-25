@@ -6,14 +6,20 @@
       </mat-card-header>
 
       <mat-card-content>
-        <div class="row col-md-12">
+        <div class="row align-items-center col-md-12">
           <div class="col-md-6 form-group">
              <button  mat-raised-button class="form-control"  color ="primary" (click)="descargando()" ><mat-icon>cloud_download</mat-icon>Descargando Datos</button>
           </div>
           <div class="col-md-6 form-group">
             <button  mat-raised-button  class="form-control" color ="primary" (click)="cargando()" ><mat-icon>cloud_upload </mat-icon>Subiendo Datos</button>
           </div>
+          <div class="col-md-12 form-group">
+            <app-loader></app-loader>
+            <app-notification [message]="message"></app-notification>
+          </div>
+          
         </div>
+       
 
 
       </mat-card-content>

@@ -10,8 +10,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { LoaderService } from './core/services/loader.service';
 import {TokenInterceptor} from './core/helpers/token.interceptor';
+import {LoaderInterceptor} from './core/helpers/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,11 @@ import {TokenInterceptor} from './core/helpers/token.interceptor';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
