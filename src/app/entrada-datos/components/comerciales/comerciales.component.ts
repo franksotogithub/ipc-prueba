@@ -22,7 +22,7 @@ export class ComercialesComponent implements OnInit {
   isDetalle=false;
   producto: Producto;
   /*displayedColumns = ['orden','codigo','producto','marca','cap','presentacion','id'];*/
-  displayedColumns = ['orden','codigo','producto','precio','ce','observacion','id'];
+  displayedColumns = ['orden','art_id','art_desc','precio','ce','observacion','id'];
   ces =[
     {id:"N" ,name:"Dato normal"},
     {id:"O" ,name:"Precio estacional "},
@@ -63,19 +63,17 @@ export class ComercialesComponent implements OnInit {
       this.idbService.productos$.subscribe( (productos:Producto[])=>{
         
        
-        /*console.log('this.id>>>',datos);*/
-        this.dataSource=productos.filter((p)=>{ return p.idInformante==this.id});
-        /*productos.filter((p)=>{if (p.idInvestigador== 107287) return p});*/
+        this.dataSource=productos.filter((p)=>{ return p.informante_id==this.id});
+       
       });
 
     });
 
 
-
     this.breakpointObserver.observe(['(max-width: 770px)']).subscribe(result => {
       this.displayedColumns = result.matches ? 
-      ['codigo','producto','id'] : 
-      ['orden','codigo','producto','precio','ce','observacion'];
+      ['art_id','art_desc','id'] : 
+      ['orden','art_id','art_desc','precio','ce','observacion'];
     });
 
   }
@@ -83,12 +81,12 @@ export class ComercialesComponent implements OnInit {
   getIdsNextPreview(array,id){
     let idPreview,idNext;
 
-    console.log('array,id>>',array,id);
+    
 
     let index = array.findIndex((e:Informante)=>{
       return e.id === id
       });
-      console.log('index>>',index);
+     
     if(array.length==0)  {
       idPreview=id;idNext=id
     }
@@ -106,7 +104,7 @@ export class ComercialesComponent implements OnInit {
       idPreview=array[index-1].id;
       idNext=array[index+1].id;
     }
-    console.log('idPreview,idNext>>',idPreview,idNext);
+    
     return [idPreview,idNext];
 
   }

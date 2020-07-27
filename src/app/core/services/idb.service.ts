@@ -167,43 +167,58 @@ export class IdbService   {
 
   async descargandoDatos(){
     this._db.clear('programacion_ruta');
-    
+    this._db.clear('productos');
+
     this.programacionRutaService.getProgramacionRuta().subscribe(( data:any )=>{
       let results:ProgramacionRuta[] = data['results'];
-      let idInformantes =[]
+      let idInformantes =[];
+      let list_articulos:Producto[] = [];
 
       results.forEach((r)=>{
         this._db.add('programacion_ruta',r);
+        Object.keys(r.informantes).map((key, index)=> {
+          const articulos = r.informantes[key].articulos;
+          Object.keys(articulos).map(async (key2, index)=> { 
+              let art:Producto=articulos[key2];
 
-        for (const key in r.informantes) {
+              await this._db.put('productos',art,art.id);
+              list_articulos.push(art);
+          });
+        });
+
+        /*for (const key in r.informantes) {
           if (Object.prototype.hasOwnProperty.call(r.informantes, key)) {
-            const element = r.informantes[key].id;
-            idInformantes.push(element);
+            const element = r.informantes[key];
+            const list_articulos = element["articulos"];
+
+            for (const key2 in list_articulos){
+              if(Object.prototype.hasOwnProperty.call(list_articulos, key2)) {
+                list_articulos
+              }
+            }
+            
           }
-        } 
+        }*/ 
 
 
       });
 
       this.programacionRutas$.next(results);
-
-      let listProductos = [];
+      this.productos$.next(list_articulos);
+    
       
-      let productos = [
-        {'orden':1,'codigo':'001','producto':'producto1','marca':'marca1','cap':'100L','presentacion':'presentacion1',precio:0,ce:'N','observacion':''},
-        {'orden':2,'codigo':'002','producto':'producto2','marca':'marca2','cap':'200L','presentacion':'presentacion2',precio:0,ce:'N','observacion':''},
-      ];
+      /*let productos = [
+        {'orden':1,'codigo':'001','producto':'producto1','marca':'marca1','cap':'100L','presentacion':'presentacion1',precio:0,ce:'N','observacion':'',imgUrl:''},
+        {'orden':2,'codigo':'002','producto':'producto2','marca':'marca2','cap':'200L','presentacion':'presentacion2',precio:0,ce:'N','observacion':'',imgUrl:''},
+      ];*/
 
-      
+      /*
       idInformantes.forEach((id)=>{
         listProductos=listProductos.concat(productos.map(p=>({...p,'idInformante':id})) )
       });
-      
+      */
 
-      listProductos.forEach(async (p,index)=>{
-        await this._db.put('productos',{... p,'id':index},index);
-        
-      });
+     
 
       /*this.productos$.next(listProductos);*/
 
@@ -274,7 +289,10 @@ export class IdbService   {
   }
 
   async cargandoDatos(target){
-
+    let productos=await this._db.getAll('productos');
+    this.programacionRutaService.updateProductos(productos).subscribe(res=>{
+      
+    })
       /*let movMercadosCab=await this._db.getAllFromIndex('mov_mercados_cab', 'id');
 
       movMercadosCab.forEach((item)=>{

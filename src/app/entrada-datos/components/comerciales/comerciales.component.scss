@@ -1,14 +1,10 @@
-.mat-table .mat-cell {
-    /*margin: 0px 5px;*/
-   
-  }
 
   .mat-column-orden {
     flex: 0 0 100px !important;
     white-space: unset !important;
 
   }
-  .mat-column-codigo {
+  .mat-column-art_id {
     flex: 0 0 100px;
     white-space: unset !important;
   }
@@ -16,86 +12,5 @@
     margin: 0px 5px;
   }
   
-  
-/*
-  .w-100{
-    max-width: 100px;
-}
-*/
-  
-  @media(max-width: 770px) {
-    /*.mobile-label {
-      width: 200px;
-      display: block;
-     font-weight: bold;
-     align-items: start;
-    }*/
-  
-    .mat-header-row {
-      display: none;
-    }
-  
-    .mat-table {
-        border: 0;
-        vertical-align: middle
-      }
-    
-      .mat-table caption {
-        font-size: 1em;
-      }
-      
-      /*  Enable this to hide header
-      .mat-table .mat-header-cell {
-        
-        border: 10px solid;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-      }
-      */
-      .mat-table .mat-row {
-        border-bottom: 5px solid #ddd;
-        display: block;
-      }
-      /*
-      .mat-table .mat-row:nth-child(even) {background: #CCC}
-      .mat-table .mat-row:nth-child(odd) {background: #FFF}
-      */
-      .mat-table .mat-cell {
-        border-bottom: 1px solid #ddd;
-        display: block;
-        font-size: 1em;
-        text-align: right;
-        
-        padding: 0px 50px;
-        margin-bottom: 0%;
-      }
-      .mat-table .mat-cell:before {
-       
-        content: attr(data-label);
-        float: left;
-        text-transform: uppercase;
-        font-weight: bold;
-        
-        font-size: .85em;
-      }
-      .mat-table .mat-cell:last-child {
-        border-bottom: 0;
-      }
-    
-      .mat-table .mat-cell:first-child {
-        margin-top: 4%;
-      }
 
-    mat-cell:first-of-type, mat-footer-cell:first-of-type, mat-header-cell:first-of-type {
-        padding-left: 0px;
-    }
-   
-    mat-cell:last-of-type, mat-footer-cell:last-of-type, mat-header-cell:last-of-type {
-        padding-right: 0px;
-    }
-  }
-  
+

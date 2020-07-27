@@ -87,22 +87,24 @@
             -->
                         <ng-container matColumnDef="orden">
                             <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
-                            <mat-cell *matCellDef="let element" > {{element.orden}} </mat-cell>
+                            <mat-cell *matCellDef="let element"  data-label="Orden" > 
+                                {{element.orden}} 
+                            </mat-cell>
                         </ng-container>
 
-                        <ng-container matColumnDef="codigo">
+                        <ng-container matColumnDef="art_id">
                         <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
                         <mat-cell *matCellDef="let element" data-label="Codigo"> 
                             
-                            {{element.codigo}} 
+                            {{element.art_id}} 
                         </mat-cell>
                         </ng-container>
                         
-                        <ng-container matColumnDef="producto">
+                        <ng-container matColumnDef="art_desc">
                             <mat-header-cell *matHeaderCellDef>Producto/articulo</mat-header-cell>
                             <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
-                            
-                            {{element.producto}} /{{element.presentacion}} /{{element.cap}} /{{element.marca}} 
+                           <!--{{element.art_desc}} /{{element.presentacion}} /{{element.cap}} /{{element.marca}} -->
+                            {{element.art_desc}} 
                             </mat-cell>
                         </ng-container>
 

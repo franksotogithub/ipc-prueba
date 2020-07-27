@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit ,ViewChild, ElementRef ,Inject} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Producto} from './../../../core/models/producto.model';
 import { Informante } from 'src/app/core/models/informante.model';
@@ -7,6 +7,7 @@ import { ProgramacionRuta} from './../../../core/models/programacionRuta.model';
 import {MatDialog} from '@angular/material/dialog';
 import {Subject, Observable} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-producto-edit',
@@ -61,7 +62,7 @@ export class ProductoEditComponent implements OnInit {
 
 
       this.idbService.productos$.subscribe((productos:Producto[])=>{
-        productos = productos.filter((p)=>p.idInformante==this.id);
+        productos = productos.filter((p)=>p.informante_id==this.id);
         this.producto= productos.find((p)=>p.id==this.idProducto);
         /*this.preview;
         next;*/
@@ -96,10 +97,20 @@ export class ProductoEditComponent implements OnInit {
 
 
   openCamera() {
-    const dialogRef = this.dialog.open(CameraDialogComponent);
+    const dialogRef = this.dialog.open(CameraDialogComponent,{
+      /*width: '400px',*/
+      data: {idProducto: this.idProducto}
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result){
+        if (result.imgUrl)
+        { 
+          this.producto.imgUrl=result.imgUrl;          
+          this.idbService.producto$.next(this.producto);
+        }
+      }
     });
   }
 
@@ -227,8 +238,9 @@ export class CameraDialogComponent implements OnInit{
   }
 
   public handleImage(webcamImage: WebcamImage): void {
-    console.info('received webcam image', webcamImage);
+    console.info('received webcam image', webcamImage.imageAsDataUrl);
     this.webcamImage = webcamImage;
+
   }
 
   public cameraWasSwitched(deviceId: string): void {
@@ -244,4 +256,20 @@ export class CameraDialogComponent implements OnInit{
     return this.nextWebcam.asObservable();
   }
 
+  constructor(
+    public dialogRef: MatDialogRef<any>,
+    @Inject(MAT_DIALOG_DATA) public matDialogData: any,
+  ) {
+
+   
+
+      /*this.data=  this.matDialogData.data ;
+      this.action=this.matDialogData.action;
+      this.actionItemSelect=this.actionItems.find(x=>x.action==this.action);*/
+   }
+
+   guardar(){
+    (this.webcamImage)?(this.webcamImage.imageAsDataUrl)?this.dialogRef.close({ imgUrl:this.webcamImage.imageAsDataUrl}):false:false;
+   }
+   
 }
