@@ -1,191 +1,200 @@
-<form [formGroup]="form" (ngSubmit)="saveMovMercadoCab($event)">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Formato de Mercados</mat-card-title>
 
+    <mat-card>
+      
+      <mat-card-header>
+      <mat-card-title>Mercados</mat-card-title>
+          <div class="col-md-2 form-group">
+              <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>reply</mat-icon>Regresar</button>
+          </div>
       </mat-card-header>
 
-      <mat-card-content>
+      <mat-card-content >
+      <div *ngIf="informante">
+      <div class="row col-md-12">
 
-        <div class="row">
-
-          <div class="col-md-2">
-            <mat-form-field class="full-width">
-              <mat-label>Codigo</mat-label>
-              <input placeholder="Codigo de Mercado" formControlName="mercado" matInput type="text" readonly>
-            </mat-form-field>
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>ID:</mat-label>
+                  <button mat-icon-button matPrefix  [routerLink]="['../', preview]" >
+                      <mat-icon>keyboard_arrow_left</mat-icon>
+                  </button>
+                  <input  type="text" placeholder="ID"  [(ngModel)]="informante.id"  readonly  matInput>
+                  <button mat-icon-button matSuffix  [routerLink]="['../', next]" >
+                      <mat-icon>keyboard_arrow_right</mat-icon>
+                  </button>
+              </mat-form-field>
           </div>
 
-          <div class="col-md-4">
-         
-            <mat-form-field class="full-width">
-              <input type="text"
-                     placeholder="Buscar Mercado"
-                     aria-label="Number"
-                     matInput
-                   
-                     [matAutocomplete]="auto"      (input)="mercadoSearch($event)"   >
-              <mat-autocomplete #auto="matAutocomplete"   [displayWith]="displayFnMercado" (optionSelected)="mercadoSelected($event)"  >
-                <mat-option *ngFor="let option of filteredMercados" [value]="option"  >
-                  {{option.razon_social}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>RUC:</mat-label>
+                  <input  type="text" placeholder="RUC"    [(ngModel)]="informante.ruc" readonly matInput>
+              </mat-form-field>
           </div>
 
-          <div class="col-md-3">
-            <mat-form-field class="full-width">
-              <mat-label>Hora Inicio</mat-label>
-              <input type="time" placeholder="Nombre de Mercado" formControlName="hora_ini" matInput  >
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-3">
-            <mat-form-field class="full-width">
-              <mat-label>Hora Fin</mat-label>
-              <input type="time" placeholder="Nombre de Mercado" formControlName="hora_fin" matInput  >
-            </mat-form-field>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-3">
-            <mat-form-field class="full-width">
-              <mat-label>Dia de la Semana</mat-label>
-              <mat-select formControlName="n_dia" >
-                <mat-option value="1">Viernes</mat-option>
-                <mat-option value="2">Sabado</mat-option>
-                <mat-option value="3">Domingo</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-3">
-            <mat-form-field class="full-width">
-              <mat-label>Nro Semana</mat-label>
-              <input type="number" placeholder="Nro Semana" formControlName="n_semana" matInput  >
-            </mat-form-field>
-          </div>
-
-
-          
-          <div class="col-md-2">
-
-            <mat-form-field class="full-width">
-              <mat-label>Cod Investigador</mat-label>
-              <input type="number" placeholder="Cod Inv" formControlName="inv" matInput  readonly>
-            </mat-form-field>
-
-          </div>
-          <div class="col-md-4">
-
-        
-            <mat-form-field class="full-width">
-              <input type="text"
-                     placeholder="Buscar Investigador"
-                     aria-label="Number"
-                     matInput
-                   
-                     [matAutocomplete]="auto2"      (input)="invSearch($event)"   >
-              <mat-autocomplete #auto2="matAutocomplete"   [displayWith]="displayFnInv" (optionSelected)="invSelected($event)"  >
-                <mat-option *ngFor="let option of filteredInvestigador" [value]="option"  >
-                  {{option.nombre}}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-
-          </div>
-        
-        </div>
-
-
-        <div class="row">
-          <div class="col-md-12">
-            
-<mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8" >
-  <ng-container matColumnDef="codigo">
-    <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
-    <mat-cell *matCellDef="let element" data-label="codigo"> {{element.codigo}} </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="nombre">
-    <mat-header-cell *matHeaderCellDef> Producto </mat-header-cell>
-    <mat-cell *matCellDef="let element" data-label="nombre" > {{element.nombre}} </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="valor">
-    <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
-    <mat-cell *matCellDef="let element" data-label="valor" > 
       
-      {{element.valor}}
-     
-    
-      <!--<mat-form-field >
-        
-        <input    [ngModel]=" element.valor " matInput  >
-      </mat-form-field>-->
-    </mat-cell>
-  </ng-container>
-  
-  <ng-container matColumnDef="peso">
-    <mat-header-cell *matHeaderCellDef> Peso </mat-header-cell>
-    <mat-cell *matCellDef="let element" data-label="peso" > 
-      {{element.peso  }}
-      <!--
-      <mat-form-field >
-        <input    [ngModel]=" element.peso " matInput  >
-      </mat-form-field> 
 
-      -->
-  </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="cc">
-    <mat-header-cell *matHeaderCellDef> CC </mat-header-cell>
-    <mat-cell *matCellDef="let element"  data-label="cc"  > 
-      {{element.cc}}
-      <mat-form-field >
-        <input    [ngModel]="element.cc " matInput  >
-      </mat-form-field> 
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="ce">
-    <mat-header-cell *matHeaderCellDef> CE </mat-header-cell>
-    <mat-cell *matCellDef="let element" data-label="ce"> 
-      {{element.ce}}
-      <!--<mat-form-field >
-        <input    [ngModel]=" element.ce " matInput  >
-      </mat-form-field>   -->
-    </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
-
-
+          <div class="col-md-8 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Establecimiento:</mat-label>
+                  <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.establecimiento"  readonly matInput>
+              </mat-form-field>
           </div>
+          <div class="col-md-4 form-group">
           
-        </div>
+                  <mat-slide-toggle [(ngModel)]="isChecked">Reportar local como cerrado </mat-slide-toggle>
 
-
-      <!--
-        <div class="row">
-       
-          <div class="col-md-12" *ngFor="let mercado of movMercadoCab;" >
-            {{mercado.id}} -- {{mercado.hora_ini}}
-
+          
+          </div>
+  
+          <div class="col-md-12 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Direccion:</mat-label>
+                  <input  placeholder="Direccion"   [(ngModel)]="informante.direccion"  readonly matInput>
+              </mat-form-field>
           </div>
 
-        </div>
-      -->
-      </mat-card-content>
-      <mat-card-actions>
-        <button  mat-raised-button type="submit"  color ="accent" >Guardar</button>
-        <!--<button  mat-raised-button   color ="primary" (click)="getAllMercadosCab()" >Mostrar</button>-->
-       
-      </mat-card-actions>
-    </mat-card>
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Giro:</mat-label>
+                  <input  placeholder="Giro"    [(ngModel)]="informante.giro"  readonly matInput >
+              </mat-form-field>
+          </div>
 
-</form>
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Avance:</mat-label>
+                  <input  placeholder="Avance"   [(ngModel)]="informante.avance" readonly  matInput >
+              </mat-form-field>
+          </div>
+
+      </div>
+
+
+          <div class="row">
+              <div class="col-md-12 form-group ">
+              <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
+              
+                  <!--
+                  <ng-container matColumnDef="orden">
+                  <mat-header-cell *matHeaderCellDef> Orden  </mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Orden"> 
+                      
+                      {{element.orden}} 
+                  </mat-cell>
+                  </ng-container>
+      -->
+                  <ng-container matColumnDef="orden">
+                      <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
+                      <mat-cell *matCellDef="let element"  data-label="Orden" > 
+                          {{element.orden}} 
+                      </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="art_id">
+                  <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Codigo"> 
+                      
+                      {{element.art_id}} 
+                  </mat-cell>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="art_desc">
+                      <mat-header-cell *matHeaderCellDef>Producto/articulo</mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
+                     <!--{{element.art_desc}} /{{element.presentacion}} /{{element.cap}} /{{element.marca}} -->
+                      {{element.art_desc}} 
+                      </mat-cell>
+                  </ng-container>
+
+                  <!--
+                  <ng-container matColumnDef="marca">
+                      <mat-header-cell *matHeaderCellDef> Marca/modelo </mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Marca/modelo"> 
+                      
+                      {{element.marca}} 
   
+                      </mat-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="cap">
+                      <mat-header-cell *matHeaderCellDef>Cap/tam </mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Cap/tam"> 
+                      
+                      {{element.cap}} 
+                      </mat-cell>
+                  </ng-container>
+                      
+                      <ng-container matColumnDef="presentacion">
+                          <mat-header-cell *matHeaderCellDef>Presentacion </mat-header-cell>
+                          <mat-cell *matCellDef="let element" data-label="Presentacion"> 
+                          
+                          {{element.presentacion}} 
+                          </mat-cell>
+                      </ng-container>
+  -->
+
+              <ng-container matColumnDef="precio">
+                  <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Presentacion"> 
+                      <mat-form-field class="full-width" appearance="outline">
+                      <input type="number"   [(ngModel)]="element.precio" (change)="changeProducto(element)"  matInput>    
+                  </mat-form-field>
+                  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="ce">
+                  <mat-header-cell *matHeaderCellDef>CE.</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="ce" > 
+                      <mat-form-field class="full-width" appearance="outline">
+
+                          <mat-select [(ngModel)]="element.ce" (change)="changeProducto(element)">
+                              <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+
+                      
+                  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="observacion">
+                  <mat-header-cell *matHeaderCellDef>Observacion</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="observacion"> 
+                      <mat-form-field class="full-width" appearance="outline">
+                          <input type="text"  [(ngModel)]="element.observacion" (change)="changeProducto(element)" matInput >   
+                      </mat-form-field>
+                      
+                  </mat-cell>
+              </ng-container>
+              
+                      <ng-container  matColumnDef="id">
+                          <mat-header-cell *matHeaderCellDef>Accion </mat-header-cell>
+                          <mat-cell *matCellDef="let element" data-label="accion"> 
+                          
+                          <button mat-raised-button color="primary" [routerLink]="['producto/', element.id]"><mat-icon>edit</mat-icon></button>
+                          
+                          <!--<button mat-raised-button color="primary" (click)= "detalle(element.id)"><mat-icon>edit</mat-icon></button>-->
+                          </mat-cell>
+                      </ng-container>
+  
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+  
+              </div>
+  
+          </div>
+      
+      </div>
+      </mat-card-content>
+ 
+
+
+  <mat-card-actions>
+  
+  </mat-card-actions>
+</mat-card>
+
+
+
+

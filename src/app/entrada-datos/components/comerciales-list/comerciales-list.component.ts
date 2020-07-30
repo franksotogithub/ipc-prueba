@@ -3,6 +3,7 @@ import { IdbService } from 'src/app/core/services/idb.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {ProgramacionRuta} from './../../../core/models/programacionRuta.model';
+import {Informante} from './../../../core/models/informante.model';
 import * as moment from 'moment';
 
 
@@ -24,10 +25,13 @@ export class ComercialesListComponent implements OnInit {
     distrito:'',
     ubicacion:'',
   }
+  
   dataSource=[];
   
   displayedColumns = ['ruc','establecimiento','direccion','giro','avance','estado','id'];
 
+  codComerciales='00';
+  informantes :Informante[];
 
   ngOnInit() {
  
@@ -61,8 +65,14 @@ export class ComercialesListComponent implements OnInit {
           this.datos.circuito = ruta.circuito;
           this.datos.distrito = ruta.ciudad_nombre;
           this.datos.ubicacion = ruta.descripcion;
-        
-        this.dataSource = Object.keys(programacionRuta.informantes).map(i => programacionRuta.informantes[i]); ;
+          
+          
+        this.informantes =Object.keys(programacionRuta.informantes).map((i) => {
+          let el : Informante=programacionRuta.informantes[i];
+          return el
+        }).filter((e)=>{return e.encuesta_id==this.codComerciales}); 
+
+        this.dataSource = this.informantes;
 
         }
         

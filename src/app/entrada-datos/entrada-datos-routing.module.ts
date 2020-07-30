@@ -29,11 +29,18 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       
+
       {
-        path: 'mercado_nuevo',
+        path: 'mercados/edit/:id',
         component: MercadosComponent, 
         canActivate: [AuthGuard]
       },
+
+     {
+        path: 'mercados/edit/:id/producto/:idProducto',
+        component: ProductoEditComponent
+      },
+      
 
       {
         path:'comerciales',
@@ -41,12 +48,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
 
-      {
-        path: 'datos',
-        component: DatosComponent, 
-        canActivate: [AuthGuard]
-      },
-
+    
       {
         path: 'comerciales/edit/:id',
         component: ComercialesComponent
@@ -57,6 +59,11 @@ const routes: Routes = [
         component: ProductoEditComponent
       },
 
+      {
+        path: 'datos',
+        component: DatosComponent, 
+        canActivate: [AuthGuard]
+      },
     ]
   }
 ];

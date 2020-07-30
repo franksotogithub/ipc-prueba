@@ -43,7 +43,7 @@ export class IdbService   {
 
   async connectToIDB() {
     
-    this._db = await openDB('ipc-local-database-1',13, {
+    this._db = await openDB('ipc-local-database-1',10, {
       upgrade(db){
 
         /*let tables = ['investigador','informante','ruta'];*/
@@ -74,39 +74,6 @@ export class IdbService   {
 
         
 
-        /*if(!db.objectStoreNames.contains('mercados')){
-          db.createObjectStore('mercados',{keyPath: 'id', autoIncrement: true});
-        }*/
-        
-        
-        /*if(!db.objectStoreNames.contains('mercados'))
-        {
-          const store=db.createObjectStore('mercados',{keyPath: 'id', autoIncrement: true});
-          store.createIndex('id', 'id');
-      
-        }
-
-        if(!db.objectStoreNames.contains('mov_mercados_cab'))
-        {
-          const store=db.createObjectStore('mov_mercados_cab',{keyPath: 'id', autoIncrement: true});
-          store.createIndex('id', 'id');
-      
-        }
-        if(!db.objectStoreNames.contains('productos'))
-        {
-          const store=db.createObjectStore('productos',{keyPath: 'id', autoIncrement: true});
-          store.createIndex('id', 'id');
-      
-        }
-
-        if(!db.objectStoreNames.contains('investigadores'))
-        {
-          const store=db.createObjectStore('investigadores',{keyPath: 'id', autoIncrement: true});
-          store.createIndex('id', 'id');
-      
-        }*/
-        
-        
       }
   
     });
@@ -186,41 +153,12 @@ export class IdbService   {
           });
         });
 
-        /*for (const key in r.informantes) {
-          if (Object.prototype.hasOwnProperty.call(r.informantes, key)) {
-            const element = r.informantes[key];
-            const list_articulos = element["articulos"];
-
-            for (const key2 in list_articulos){
-              if(Object.prototype.hasOwnProperty.call(list_articulos, key2)) {
-                list_articulos
-              }
-            }
-            
-          }
-        }*/ 
-
 
       });
 
       this.programacionRutas$.next(results);
       this.productos$.next(list_articulos);
-    
-      
-      /*let productos = [
-        {'orden':1,'codigo':'001','producto':'producto1','marca':'marca1','cap':'100L','presentacion':'presentacion1',precio:0,ce:'N','observacion':'',imgUrl:''},
-        {'orden':2,'codigo':'002','producto':'producto2','marca':'marca2','cap':'200L','presentacion':'presentacion2',precio:0,ce:'N','observacion':'',imgUrl:''},
-      ];*/
 
-      /*
-      idInformantes.forEach((id)=>{
-        listProductos=listProductos.concat(productos.map(p=>({...p,'idInformante':id})) )
-      });
-      */
-
-     
-
-      /*this.productos$.next(listProductos);*/
 
 
     });

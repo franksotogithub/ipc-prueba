@@ -6,6 +6,8 @@ import { Informante} from './../../../core/models/informante.model';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Producto } from 'src/app/core/models/producto.model';
 
+import { Utils} from './../../../shared/class/utils';
+
 @Component({
   selector: 'app-comerciales',
   templateUrl: './comerciales.component.html',
@@ -21,6 +23,8 @@ export class ComercialesComponent implements OnInit {
   dataSource=[];
   isDetalle=false;
   producto: Producto;
+  informantes :Informante[];
+  codComerciales ='00';
   /*displayedColumns = ['orden','codigo','producto','marca','cap','presentacion','id'];*/
   displayedColumns = ['orden','art_id','art_desc','precio','ce','observacion','id'];
   ces =[
@@ -35,7 +39,8 @@ export class ComercialesComponent implements OnInit {
     private idbService:IdbService,
     private router: Router,
     private activatedRoute: ActivatedRoute,  
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    
     ) { }
 
   ngOnInit() {
@@ -47,14 +52,21 @@ export class ComercialesComponent implements OnInit {
         if (datos.length>0){
           let programacionRuta=datos[0];
 
-          let informantes = Object.keys(programacionRuta.informantes)
-          .map(i => programacionRuta.informantes[i])
+ 
+
+          this.informantes =Object.keys(programacionRuta.informantes).map((i) => {
+            let el : Informante=programacionRuta.informantes[i];
+            return el
+          }).filter((e)=>{return e.encuesta_id==this.codComerciales}); 
+  
+      
+
           
-          this.informante = informantes.find((e:Informante)=>{
+          this.informante =  this.informantes.find((e:Informante)=>{
             return e.id === this.id
             });
 
-            [this.preview,this.next] = this.getIdsNextPreview(informantes,this.id);
+            [this.preview,this.next] = Utils.getIdsNextPreview(this.informantes,this.id);
           
           }
 
@@ -78,44 +90,9 @@ export class ComercialesComponent implements OnInit {
 
   }
 
-  getIdsNextPreview(array,id){
-    let idPreview,idNext;
-
-    
-
-    let index = array.findIndex((e:Informante)=>{
-      return e.id === id
-      });
-     
-    if(array.length==0)  {
-      idPreview=id;idNext=id
-    }
-
-    else if ((index - 1 ) < 0 ){
-      idPreview=id;
-      idNext=array[index+1].id;
-    }
-
-    else if(array.length==(index+1)){
-      idPreview=array[index-1].id;
-      idNext=id;
-    }
-    else{
-      idPreview=array[index-1].id;
-      idNext=array[index+1].id;
-    }
-    
-    return [idPreview,idNext];
-
-  }
-
   changeProducto(producto:Producto) {
     this.idbService.producto$.next(producto);
 
   }
-/*
-  detalle(id){
-    this.producto=this.dataSource.find((e)=>{return e.id==id});
-    this.isDetalle=true;
-  }*/
+
 }

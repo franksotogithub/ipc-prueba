@@ -6,31 +6,115 @@
       </mat-card-header>
 
       <mat-card-content>
+          
+        <div class="row col-md-12">
+
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Usuario:</mat-label>
+                  <input  type="text" placeholder="Usuario"  [(ngModel)]="datos.usuario"  readonly  matInput>
+              </mat-form-field>
+          </div>
+
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Fecha:</mat-label>
+                  <input  type="date" placeholder="Fecha"    [(ngModel)]="datos.fecha" readonly matInput>
+              </mat-form-field>
+          </div>
+
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Ruta:</mat-label>
+                  <input type="text"  placeholder="Ruta"    [(ngModel)]="datos.ruta"  readonly matInput>
+              </mat-form-field>
+          </div>
+   
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Circuito:</mat-label>
+                  <input  placeholder="Circuito"   [(ngModel)]="datos.circuito"  readonly matInput>
+              </mat-form-field>
+          </div>
+
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Distrito:</mat-label>
+                  <input  placeholder="Distrito"    [(ngModel)]="datos.distrito"  readonly matInput >
+              </mat-form-field>
+          </div>
+
+          <div class="col-md-6 form-group">
+              <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Ubicacion:</mat-label>
+                  <input  placeholder="Ubicacion"   [(ngModel)]="datos.ubicacion" readonly  matInput >
+              </mat-form-field>
+          </div>
+
+        </div>
 
         <div class="row">
-          <div class="col-md-4">
-            <button  mat-raised-button   color ="accent" (click)="addMercado()" >Añadir</button>
-            
-        </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8" >
-              <ng-container matColumnDef="mercado">
-                <mat-header-cell *matHeaderCellDef> COD. MERCADO </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.mercado}} </mat-cell>
+          <div class="col-md-12 form-group ">
+            <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
+             
+    
+              <ng-container matColumnDef="ruc">
+                <mat-header-cell *matHeaderCellDef> RUC </mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="ruc"> 
+                  <!--<span class="mobile-label">RUC:</span>-->
+                  {{element.ruc}} 
+                </mat-cell>
               </ng-container>
     
-              <ng-container matColumnDef="hora_ini">
-                <mat-header-cell *matHeaderCellDef> Hora Ini </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.hora_ini}} </mat-cell>
-              </ng-container>
-    
-              <ng-container matColumnDef="hora_fin">
-                <mat-header-cell *matHeaderCellDef> Hora Fin </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.hora_fin}} </mat-cell>
+              <ng-container matColumnDef="establecimiento">
+                <mat-header-cell *matHeaderCellDef> Establecimiento </mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="establecimiento"> 
+                  <!--<span class="mobile-label">Establecimiento:</span>-->
+                  {{element.establecimiento}} 
+                </mat-cell>
               </ng-container>
               
+              <ng-container matColumnDef="direccion">
+                  <mat-header-cell *matHeaderCellDef> Direccion </mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="direccion"> 
+                    <!--<span class="mobile-label">Direccion:</span>-->
+                    {{element.direccion}} 
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="giro">
+                  <mat-header-cell *matHeaderCellDef> Giro </mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="giro"> 
+                    <!--<span class="mobile-label">Giro:</span>-->
+                    {{element.giro}} 
+
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="avance">
+                  <mat-header-cell *matHeaderCellDef> Avance </mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="avance"> 
+                    <!--<span class="mobile-label">Avance:</span>-->
+                    {{element.avance}} 
+                  </mat-cell>
+                </ng-container>
+                  
+                  <ng-container matColumnDef="estado">
+                      <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="estado"> 
+                        <!--<span class="mobile-label">Estado:</span>-->
+                        {{element.estado}} 
+                      </mat-cell>
+                  </ng-container>
+
+                  <ng-container  matColumnDef="id">
+                      <mat-header-cell *matHeaderCellDef> Accion </mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="accion"> 
+                        <button mat-raised-button color="primary" [routerLink]="['edit', element.id]"><mat-icon>edit</mat-icon></button>
+                        
+                      </mat-cell>
+                  </ng-container>
+
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
@@ -41,26 +125,7 @@
         
 
 
-<!--
 
-        <div class="row">
-         
-                <div class="col-md-4"  >
-                    <button  mat-raised-button   color ="accent" (click)="addMercado()" >Añadir</button>
-                    
-                </div>
-
-
-        </div>
-        <div class="row">
-        <div class="col-md-12" *ngFor="let mercado of movMercadoCab;" >
-            {{mercado.id}}   {{mercado.hora_ini}}  {{mercado.hora_fin}} 
-
-          </div>
-        </div>
-
-
-      -->
       </mat-card-content>
       
       
@@ -69,6 +134,7 @@
       
       </mat-card-actions>
     </mat-card>
+
 
 
 

@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {Subject, Observable} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Utils} from './../../../shared/class/utils';
 
 @Component({
   selector: 'app-producto-edit',
@@ -31,11 +32,9 @@ export class ProductoEditComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private idbService:IdbService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    
     ) {
-
-
-
 
 
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -55,40 +54,17 @@ export class ProductoEditComponent implements OnInit {
             return e.id === this.id
             });
           }
-
-
-
       }); 
 
 
       this.idbService.productos$.subscribe((productos:Producto[])=>{
         productos = productos.filter((p)=>p.informante_id==this.id);
-        this.producto= productos.find((p)=>p.id==this.idProducto);
-        /*this.preview;
-        next;*/
-        [this.preview,this.next] = this.getIdsNextPreview(productos,this.idProducto);
+        this.producto= productos.find((p)=>p.id==this.idProducto);     
+        [this.preview,this.next] = Utils.getIdsNextPreview(productos,this.idProducto);
 
       });
       
-
-      /*this.producto={
-        orden:1,
-        codigo:'001',
-        producto:'producto1',
-        marca:'marca1',
-        cap:'100L',
-        presentacion:'presentacion1',
-        id:1,
-        precio:0,
-        ce:'N',
-        observacion:''
-      }*/
-           
     });
-
-
-
-
 
    }
 
@@ -118,39 +94,7 @@ export class ProductoEditComponent implements OnInit {
     this.idbService.producto$.next(producto);
   }
 
-  
-  getIdsNextPreview(array,id){
-    let idPreview,idNext;
-
-    console.log('array,id>>',array,id);
-
-    let index = array.findIndex((e:Informante)=>{
-      return e.id === id
-      });
-      console.log('index>>',index);
-    if(array.length==0)  {
-      idPreview=id;idNext=id
-    }
-
-    else if ((index - 1 ) < 0 ){
-      idPreview=id;
-      idNext=array[index+1].id;
-    }
-
-    else if(array.length==(index+1)){
-      idPreview=array[index-1].id;
-      idNext=id;
-    }
-    else{
-      idPreview=array[index-1].id;
-      idNext=array[index+1].id;
-    }
-    console.log('idPreview,idNext>>',idPreview,idNext);
-    return [idPreview,idNext];
-
-  }
 }
-
 
 
 @Component({

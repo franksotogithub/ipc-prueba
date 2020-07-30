@@ -8,5 +8,9 @@ export interface Informante {
   giro: string;
   avance: string;
   estado: string;
+  encuesta_id : string;
+  encuesta_desc: string;
+  cant_articulos: number;
   
+
 }
