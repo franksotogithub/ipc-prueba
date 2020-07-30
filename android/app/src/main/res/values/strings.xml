@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">inei-pry-ipc-frontend</string>
+    <string name="title_activity_main">inei-pry-ipc-frontend</string>
+    <string name="package_name">com.ineipryipc.app</string>
+    <string name="custom_url_scheme">com.ineipryipc.app</string>
+</resources>

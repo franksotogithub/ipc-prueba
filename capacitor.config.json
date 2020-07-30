@@ -1,0 +1,13 @@
+{
+  "appId": "com.ineipryipc.app",
+  "appName": "inei-pry-ipc-frontend",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/INEI-PRY-IPC-FRONTEND",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
