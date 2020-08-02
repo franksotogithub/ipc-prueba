@@ -1,0 +1,32 @@
+<h1 mat-dialog-title> Articulos</h1>
+<div mat-dialog-contet>
+    <div class="row">
+        <div class="col-md-12 form-group full-width " *ngIf="dataSource">
+          <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
+  
+            <ng-container [matColumnDef]="column.data" *ngFor="let column of columns" >
+                <mat-header-cell *matHeaderCellDef  > {{column.label}} </mat-header-cell>
+
+                <mat-cell *matCellDef="let element" >
+             
+                  {{element[column.data]}}
+                </mat-cell>
+              </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row  (click)="selectArticulo(row,$event)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+        </div>
+
+      </div>
+      
+
+</div>
+
+<div mat-dialod-actions>  
+  <button mat-button (click)="closeDialog(true)" mat-flat-button color="primary">OK</button>
+  <button mat-button (click)="closeDialog(false)" mat-flat-button color="warn">Cerrar</button>
+</div>
+

@@ -1,0 +1,112 @@
+
+<mat-card>
+      
+    <mat-card-header>
+    <mat-card-title>Casa Comercial</mat-card-title>
+        <div class="col-md-2 form-group">
+            <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>reply</mat-icon>Regresar</button>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content >
+    <div *ngIf="directorio">
+    <div class="row col-md-12">
+
+        <div class="col-md-12 form-group">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Secuencia:</mat-label>
+                <!--<button mat-icon-button matPrefix  [routerLink]="['../', 1]" >
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>-->
+                <input  type="text" placeholder="ID"  [(ngModel)]="directorio.id_directorio_ipc"  readonly  matInput>
+                <!--<button mat-icon-button matSuffix  [routerLink]="['../', 2]" >
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>-->
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-12 form-group">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Razon Social:</mat-label>
+                <input  type="text" placeholder="RUC"    [(ngModel)]="directorio.nombre_comercial" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-12 form-group">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Direccion:</mat-label>
+                <input  type="text" placeholder="RUC"    [(ngModel)]="directorio.direccion" matInput>
+            </mat-form-field>
+        </div>
+
+
+
+        <div class="col-md-12 form-group">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Estado:</mat-label>
+                <input  type="text" placeholder="RUC"    [(ngModel)]="directorio.estado" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-12 form-group">
+            <button mat-raised-button color="primary" [routerLink]="['articulo']" ><mat-icon>add-item</mat-icon>Agregar Articulo</button>
+        </div>
+
+        <div class="col-md-12 full-width">
+
+            
+
+            <mat-table  [dataSource]="dataSource"  class="mat-elevation-z8" >
+                    <ng-container matColumnDef="orden">
+                        <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
+                        <mat-cell *matCellDef="let element"  data-label="Orden" > 
+                            {{element.orden}} 
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="art_id">
+                    <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Codigo"> 
+                        
+                        {{element.art_id}} 
+                    </mat-cell>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="art_desc">
+                        <mat-header-cell *matHeaderCellDef>Producto/articulo</mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
+                       <!--{{element.art_desc}} /{{element.presentacion}} /{{element.cap}} /{{element.marca}} -->
+                        {{element.art_desc}} 
+                        </mat-cell>
+                    </ng-container>
+
+             
+                
+                        <ng-container  matColumnDef="accion">
+                            <mat-header-cell *matHeaderCellDef>Accion </mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="accion"> 
+                            
+                            <button mat-raised-button color="primary" ><mat-icon>edit</mat-icon></button>
+                            
+                            <!--<button mat-raised-button color="primary" (click)= "detalle(element.id)"><mat-icon>edit</mat-icon></button>-->
+                            </mat-cell>
+                        </ng-container>
+    
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+    
+        </div>
+
+        <div class="col-md-12 form-group ">
+            <button class="float-right" mat-raised-button color="primary" (click)="guardarDirectorio()" ><mat-icon>save</mat-icon>Guardar</button>
+        </div>
+    </div>
+    </div>
+    </mat-card-content>
+
+
+<mat-card-actions>
+   
+</mat-card-actions>
+</mat-card>

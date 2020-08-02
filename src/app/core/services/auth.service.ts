@@ -52,9 +52,10 @@ export class AuthService {
     return this.afa.authState;
   }*/
 
-  logout() {
-    this.currentUserSubject.next(null);
+  logout() { 
     localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+   
     
   }
 

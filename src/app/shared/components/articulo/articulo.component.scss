@@ -1,0 +1,45 @@
+@import  './../../../../main-theme.scss';
+mat-table{
+    //width: 100%;
+    position: relative;
+    height: 450px;
+    overflow: auto;
+  }
+
+  .mat-row {
+    border: 1px solid mat-color($primary);
+    cursor: pointer;
+  }
+
+
+  
+.mat-header-row{
+  
+    border: 1px solid mat-color($primary);
+    background: mat-color($primary);
+  
+  }
+  
+  .mat-header-cell{
+    color: $primary-color-text;
+  }
+  
+  .mat-row {
+    border: 1px solid mat-color($primary);
+    cursor: pointer;
+  }
+  
+  
+  .mat-row:hover{
+    background : mat-color($primary,100) ;
+  }
+  
+  .mat-row:active{
+  
+    background : mat-color($primary,300) ;
+  }
+  
+  .mat-row-select{
+    background : mat-color($primary,300) ;
+  }
+  

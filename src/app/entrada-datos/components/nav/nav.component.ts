@@ -19,7 +19,7 @@ export class NavComponent implements OnInit {
     private authService : AuthService
     ) { 
 
-    this.mobileQuery = media.matchMedia('(max-width: 800px)');
+    this.mobileQuery = media.matchMedia('(max-width: 700px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
@@ -28,7 +28,7 @@ export class NavComponent implements OnInit {
   }
   logout(){
     this.authService.logout();
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/login']);
   }
 
 }

@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderService } from './core/services/loader.service';
 import {TokenInterceptor} from './core/helpers/token.interceptor';
 import {LoaderInterceptor} from './core/helpers/loader.interceptor';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {LoaderInterceptor} from './core/helpers/loader.interceptor';
     
   ],
   imports: [
+    AuthModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

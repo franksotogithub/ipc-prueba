@@ -1,0 +1,60 @@
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Crear Orden</mat-card-title>
+                <div class="col-md-2 form-group">
+                    <button mat-raised-button color="primary" [routerLink]="['../']" ><mat-icon>reply</mat-icon>Regresar</button>
+                </div>
+          
+
+        </mat-card-header>
+
+        <mat-card-content >
+           
+            <div class="row col-12">
+ 
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Codigo Articulo:</mat-label>
+                        <input  placeholder="Codigo"    [(ngModel)]="rutaDetalleProd.articulo"   matInput >
+                        <button mat-icon-button matSuffix  (click)="openDialogArticulos()" >
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Articulo:</mat-label>
+                        <input  placeholder="Codigo"    [(ngModel)]="rutaDetalleProd.art_desc" readonly  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Precio Anterior:</mat-label>
+                        <input  placeholder="Codigo"    [(ngModel)]="rutaDetalleProd.precio"   matInput >
+                    </mat-form-field>
+                </div>
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>CE:</mat-label>
+                     
+
+                        <mat-select [(ngModel)]="rutaDetalleProd.ce">
+                            <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+           
+        </div>
+  
+        </mat-card-content>
+        
+        <mat-card-actions>
+            <div class="col-md-2 form-group">
+                <button mat-raised-button color="primary" (click)="guardarOrden()" ><mat-icon>save</mat-icon>Guardar</button>
+            </div>
+        </mat-card-actions>
+      </mat-card>

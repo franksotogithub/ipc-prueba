@@ -6,9 +6,10 @@ import {MaterialModule} from './../material/material.module';
 import { HeaderToolbarComponent } from './components/header-toolbar/header-toolbar.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { ArticuloComponent } from './components/articulo/articulo.component';
 
 @NgModule({
-  declarations: [MenuComponent, HeaderToolbarComponent, LoaderComponent, NotificationComponent],
+  declarations: [MenuComponent, HeaderToolbarComponent, LoaderComponent, NotificationComponent, ArticuloComponent],
   imports: [
     CommonModule,
     MaterialModule

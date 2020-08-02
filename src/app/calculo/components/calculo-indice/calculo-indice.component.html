@@ -1,0 +1,56 @@
+
+
+    <mat-card>
+      
+        <mat-card-header>
+        <mat-card-title>Calculo del Indice Lima y Ciudades</mat-card-title>
+            
+        </mat-card-header>
+
+        <mat-card-content >
+
+            <div class="row col-md-12">
+
+                <div class="col-md-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Año:</mat-label>
+                        <input  placeholder="Año" value="2020"   readonly  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Mes:</mat-label>
+                        <input  placeholder="Mes" value="Agosto"   readonly  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Semana:</mat-label>
+                        <!--[(ngModel)]=""-->
+                        <mat-select >
+                            <mat-option *ngFor="let c of semanas" [value]="c">{{c}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <button mat-raised-button color="primary" (click)="procesarCalculo()" ><mat-icon>autorenew</mat-icon></button>
+                </div>
+                <div class="col-md-12 form-group">
+                    <app-loader></app-loader>
+                    <app-notification [message]="message"></app-notification>
+                </div>
+            </div>
+      
+        </mat-card-content>
+   
+
+
+    <mat-card-actions>
+    
+    </mat-card-actions>
+  </mat-card>
+
+

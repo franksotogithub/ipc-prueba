@@ -1,0 +1,88 @@
+
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title>Directorio IPC</mat-card-title>
+  
+        </mat-card-header>
+  
+        <mat-card-content>
+            
+          
+          <div class="row">
+            <div class="col-md-12 form-group " *ngIf="dataSource">
+              <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
+      
+                <ng-container matColumnDef="cod_info">
+                  <mat-header-cell *matHeaderCellDef> Secuencia </mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Secuencia"> 
+                    <!--<span class="mobile-label">RUC:</span>-->
+                    {{element.cod_info}} 
+                  </mat-cell>
+                </ng-container>
+      
+                <ng-container matColumnDef="dist_nombre">
+                  <mat-header-cell *matHeaderCellDef> Distrito </mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Distrito"> 
+                    <!--<span class="mobile-label">Establecimiento:</span>-->
+                    {{element.dist_nombre}} 
+                  </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="razon_social">
+                    <mat-header-cell *matHeaderCellDef> Razon Social </mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Razon Social"> 
+                      <!--<span class="mobile-label">Direccion:</span>-->
+                      {{element.nombre_comercial}} 
+                    </mat-cell>
+                  </ng-container>
+  
+
+                  <ng-container matColumnDef="direccion">
+                    <mat-header-cell *matHeaderCellDef> Direccion </mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="direccion"> 
+                      <!--<span class="mobile-label">Giro:</span>-->
+                      {{element.direccion}} 
+  
+                    </mat-cell>
+                  </ng-container>
+
+  
+              
+                    <ng-container matColumnDef="estado">
+                        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="estado"> 
+                          <!--<span class="mobile-label">Estado:</span>-->
+                          {{element.estado}} 
+                        </mat-cell>
+                    </ng-container>
+  
+                    <ng-container   matColumnDef="accion">
+                        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="accion"> 
+                          <button mat-raised-button color="primary" [routerLink]="['edit', element.id_directorio_ipc]"><mat-icon>edit</mat-icon></button>
+                          <button mat-raised-button color="warn" ><mat-icon>delete</mat-icon></button>
+
+                        </mat-cell>
+                    </ng-container>
+  
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+  
+            </div>
+  
+          </div>
+          
+  
+  
+  
+        </mat-card-content>
+        
+        
+        
+        <mat-card-actions>
+        
+        </mat-card-actions>
+      </mat-card>
+  
+  
