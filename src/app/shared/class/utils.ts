@@ -10,7 +10,7 @@ export class  Utils {
           return e.id === id
           });
          
-        if(array.length==0)  {
+        if(array.length==0 ||array.length==1 )  {
           idPreview=id;idNext=id
         }
     

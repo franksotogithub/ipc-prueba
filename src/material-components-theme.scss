@@ -1,0 +1,76 @@
+
+@mixin sidenav-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+    
+    /*.mat-sidenav{
+      background-color: mat-color($primary,400);
+      color: mat-color($background, app-bar);
+
+      .mat-nav-list .mat-list-item{
+    
+        color: mat-color($background, app-bar);
+        
+      }
+    }*/
+  }
+
+
+  
+@mixin table-component-theme($theme){
+    $primary : map-get($theme,primary);
+    $accent : map-get($theme,accent);
+
+        .mat-header-row{
+            background-color: mat-color($primary);
+            
+        }
+    
+        .mat-header-cell{
+          text-align: center;
+            color: $primary-color-text;
+        }
+        .mat-row {
+          border: 1px solid mat-color($primary);
+         
+        }
+        /*
+        mat-header-cell {
+          display:flex;
+          justify-content:center;
+        }
+        
+mat-cell{
+  display:flex !important;
+  justify-content:center!important;
+  
+}*/
+      
+}
+
+
+@mixin mat-option-theme($theme){
+  $primary : map-get($theme,primary);
+  $accent : map-get($theme,accent);
+
+  .mat-option:hover {
+    background-color:mat-color($primary,100)!important;
+  }
+  .mat-active {
+    background-color:mat-color($primary,200)!important;
+  }
+  .mat-option.mat-selected:not(.mat-active):not(:hover):not(.mat-option-disabled) {
+    color:$primary-color-dark!important;
+    font-weight: bold;
+}
+}
+
+
+@mixin components-theme($theme){
+      @include sidenav-component-theme($theme);
+      @include mat-option-theme($theme);
+      @include table-component-theme($theme);
+}

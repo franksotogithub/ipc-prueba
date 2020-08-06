@@ -1,4 +1,4 @@
-
+/*@import  './../../../../main-theme.scss';*/
   .mat-column-orden {
     flex: 0 0 100px !important;
     white-space: unset !important;
@@ -9,8 +9,15 @@
     white-space: unset !important;
   }
   .mat-column-precio {
+    flex: 0 0 100px !important;
+    margin: 0px 5px;
+
+  }
+  .mat-column-ce {
     margin: 0px 5px;
   }
-  
-
+  /*
+  md-select-menu md-option:focus:not([selected]) {
+    background: rgb(238,238,238);
+  }*/
 

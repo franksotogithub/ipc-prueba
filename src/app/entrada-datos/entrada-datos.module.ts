@@ -14,7 +14,7 @@ import { MercadosListComponent } from './components/mercados-list/mercados-list.
 import { ComercialesListComponent } from './components/comerciales-list/comerciales-list.component';
 
 import {ProductoEditComponent,CameraDialogComponent} from './components/producto-edit/producto-edit.component';
-
+import {AuthModule} from './../auth/auth.module';
 
 @NgModule({
   declarations: [MercadosComponent, 
@@ -33,7 +33,8 @@ import {ProductoEditComponent,CameraDialogComponent} from './components/producto
     SharedModule,   
     FormsModule,
     ReactiveFormsModule,
-    WebcamModule
+    WebcamModule,
+    AuthModule
   ],
   entryComponents: [
     CameraDialogComponent

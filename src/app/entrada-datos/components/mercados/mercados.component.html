@@ -2,10 +2,12 @@
     <mat-card>
       
       <mat-card-header>
-      <mat-card-title>Mercados</mat-card-title>
-          <div class="col-md-2 form-group">
-              <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>reply</mat-icon>Regresar</button>
-          </div>
+        <mat-card-title> 
+            <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon>
+            </button>
+            Mercados
+        </mat-card-title>
+        
       </mat-card-header>
 
       <mat-card-content >
@@ -40,12 +42,13 @@
                   <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.establecimiento"  readonly matInput>
               </mat-form-field>
           </div>
+          <!--
           <div class="col-md-4 form-group">
           
                   <mat-slide-toggle [(ngModel)]="isChecked">Reportar local como cerrado </mat-slide-toggle>
 
           
-          </div>
+          </div>-->
   
           <div class="col-md-12 form-group">
               <mat-form-field class="full-width" appearance="fill">
@@ -60,130 +63,100 @@
                   <input  placeholder="Giro"    [(ngModel)]="informante.giro"  readonly matInput >
               </mat-form-field>
           </div>
-
+<!--
           <div class="col-md-6 form-group">
               <mat-form-field class="full-width" appearance="fill">
                   <mat-label>Avance:</mat-label>
                   <input  placeholder="Avance"   [(ngModel)]="informante.avance" readonly  matInput >
               </mat-form-field>
           </div>
+-->
+
+<div class="col-md-12">
+    
+    <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
+    
+  
+        <ng-container matColumnDef="orden">
+            <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
+            <mat-cell *matCellDef="let element"  data-label="Orden" > 
+                {{element.orden}} 
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="art_id">
+        <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Codigo"> 
+            
+            {{element.art_id}} 
+        </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="art_desc">
+            <mat-header-cell *matHeaderCellDef>Producto/articulo</mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
+           <!--{{element.art_desc}} /{{element.presentacion}} /{{element.cap}} /{{element.marca}} -->
+            {{element.art_desc}} 
+            </mat-cell>
+        </ng-container>
+
+       
+
+    <ng-container matColumnDef="precio">
+        <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Presentacion"> 
+            <mat-form-field class="full-width" appearance="outline">
+            <input type="number"   [(ngModel)]="element.precio" (change)="changeProducto(element,true)"  matInput>    
+        </mat-form-field>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ce">
+        <mat-header-cell *matHeaderCellDef>CE.</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="ce" > 
+            <mat-form-field class="full-width" appearance="outline">
+
+                <mat-select [(ngModel)]="element.ce" (change)="changeProducto(element,false)">
+                    <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="observacion">
+        <mat-header-cell *matHeaderCellDef>Observacion</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="observacion"> 
+            <mat-form-field class="full-width" appearance="outline">
+                <input type="text"  [(ngModel)]="element.observacion" (change)="changeProducto(element,false)" matInput >   
+            </mat-form-field>
+            
+        </mat-cell>
+    </ng-container>
+    
+            <ng-container  matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>Accion </mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="accion"> 
+                
+                <button mat-raised-button color="primary" [routerLink]="['producto/', element.id]"><mat-icon>edit</mat-icon></button>
+                
+                <!--<button mat-raised-button color="primary" (click)= "detalle(element.id)"><mat-icon>edit</mat-icon></button>-->
+                </mat-cell>
+            </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    
+
+</div>
 
       </div>
 
 
-          <div class="row">
-              <div class="col-md-12 form-group ">
-              <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
-              
-                  <!--
-                  <ng-container matColumnDef="orden">
-                  <mat-header-cell *matHeaderCellDef> Orden  </mat-header-cell>
-                  <mat-cell *matCellDef="let element" data-label="Orden"> 
-                      
-                      {{element.orden}} 
-                  </mat-cell>
-                  </ng-container>
-      -->
-                  <ng-container matColumnDef="orden">
-                      <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
-                      <mat-cell *matCellDef="let element"  data-label="Orden" > 
-                          {{element.orden}} 
-                      </mat-cell>
-                  </ng-container>
-
-                  <ng-container matColumnDef="art_id">
-                  <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
-                  <mat-cell *matCellDef="let element" data-label="Codigo"> 
-                      
-                      {{element.art_id}} 
-                  </mat-cell>
-                  </ng-container>
-                  
-                  <ng-container matColumnDef="art_desc">
-                      <mat-header-cell *matHeaderCellDef>Producto/articulo</mat-header-cell>
-                      <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
-                     <!--{{element.art_desc}} /{{element.presentacion}} /{{element.cap}} /{{element.marca}} -->
-                      {{element.art_desc}} 
-                      </mat-cell>
-                  </ng-container>
-
-                  <!--
-                  <ng-container matColumnDef="marca">
-                      <mat-header-cell *matHeaderCellDef> Marca/modelo </mat-header-cell>
-                      <mat-cell *matCellDef="let element" data-label="Marca/modelo"> 
-                      
-                      {{element.marca}} 
-  
-                      </mat-cell>
-                  </ng-container>
-  
-                  <ng-container matColumnDef="cap">
-                      <mat-header-cell *matHeaderCellDef>Cap/tam </mat-header-cell>
-                      <mat-cell *matCellDef="let element" data-label="Cap/tam"> 
-                      
-                      {{element.cap}} 
-                      </mat-cell>
-                  </ng-container>
-                      
-                      <ng-container matColumnDef="presentacion">
-                          <mat-header-cell *matHeaderCellDef>Presentacion </mat-header-cell>
-                          <mat-cell *matCellDef="let element" data-label="Presentacion"> 
-                          
-                          {{element.presentacion}} 
-                          </mat-cell>
-                      </ng-container>
-  -->
-
-              <ng-container matColumnDef="precio">
-                  <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
-                  <mat-cell *matCellDef="let element" data-label="Presentacion"> 
-                      <mat-form-field class="full-width" appearance="outline">
-                      <input type="number"   [(ngModel)]="element.precio" (change)="changeProducto(element)"  matInput>    
-                  </mat-form-field>
-                  </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="ce">
-                  <mat-header-cell *matHeaderCellDef>CE.</mat-header-cell>
-                  <mat-cell *matCellDef="let element" data-label="ce" > 
-                      <mat-form-field class="full-width" appearance="outline">
-
-                          <mat-select [(ngModel)]="element.ce" (change)="changeProducto(element)">
-                              <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
-                          </mat-select>
-                      </mat-form-field>
-
-                      
-                  </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="observacion">
-                  <mat-header-cell *matHeaderCellDef>Observacion</mat-header-cell>
-                  <mat-cell *matCellDef="let element" data-label="observacion"> 
-                      <mat-form-field class="full-width" appearance="outline">
-                          <input type="text"  [(ngModel)]="element.observacion" (change)="changeProducto(element)" matInput >   
-                      </mat-form-field>
-                      
-                  </mat-cell>
-              </ng-container>
-              
-                      <ng-container  matColumnDef="id">
-                          <mat-header-cell *matHeaderCellDef>Accion </mat-header-cell>
-                          <mat-cell *matCellDef="let element" data-label="accion"> 
-                          
-                          <button mat-raised-button color="primary" [routerLink]="['producto/', element.id]"><mat-icon>edit</mat-icon></button>
-                          
-                          <!--<button mat-raised-button color="primary" (click)= "detalle(element.id)"><mat-icon>edit</mat-icon></button>-->
-                          </mat-cell>
-                      </ng-container>
-  
-                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-              </mat-table>
-  
-              </div>
-  
-          </div>
+          
       
       </div>
       </mat-card-content>

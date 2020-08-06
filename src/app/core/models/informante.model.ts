@@ -11,6 +11,6 @@ export interface Informante {
   encuesta_id : string;
   encuesta_desc: string;
   cant_articulos: number;
-  
-
+  latitud: number;
+  longitud: number;
 }

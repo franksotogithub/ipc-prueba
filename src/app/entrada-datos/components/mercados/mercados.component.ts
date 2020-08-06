@@ -90,7 +90,17 @@ export class MercadosComponent implements OnInit {
 
   }
 
-  changeProducto(producto:Producto) {
+  changeProducto(producto:Producto,precio:boolean) {
+    
+    if(precio){
+     
+
+      let num = parseFloat(producto.precio);
+      num = num/100.0;
+      let n = num.toFixed(2);
+      producto.precio= String(n);
+
+    }
     this.idbService.producto$.next(producto);
 
   }

@@ -1,27 +1,14 @@
+
 import { Component, OnInit ,ChangeDetectorRef} from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
-
+import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
-  selector: 'app-menu-inicial',
-  templateUrl: './menu-inicial.component.html',
-  styleUrls: ['./menu-inicial.component.scss']
+  selector: 'app-nav',
+  templateUrl: './nav.component.html',
+  styleUrls: ['./nav.component.scss']
 })
-export class MenuInicialComponent implements OnInit {
-/*
-  constructor( private router : Router, private authService : AuthService) { }
-
-  ngOnInit() {
-  }
-
-
-
-  logout(){
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }*/
-
+export class NavComponent implements OnInit {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   
@@ -43,4 +30,5 @@ export class MenuInicialComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
 }

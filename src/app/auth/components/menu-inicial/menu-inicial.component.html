@@ -1,30 +1,69 @@
-<div  class="example-container"   >
-    <mat-toolbar  color="primary" class="example-toolbar">
-     <mat-toolbar-row class="">
 
-         
-         <!--<button  (click)="logout()" mat-raised-button color ="accent">Salir</button>-->
-      
-     </mat-toolbar-row>
-   </mat-toolbar>
- 
-   <mat-sidenav-container class="example-sidenav-container"
-                          >
 
- 
-     <mat-sidenav-content>
-        <mat-nav-list >
-            <mat-list-item routerLink="/entrada-datos"> <mat-icon>edit</mat-icon><span>Entrada de Datos</span></mat-list-item> 
-            <mat-list-item routerLink="/tablas-maestras"><mat-icon>table_chart</mat-icon><span>Tablas Maestras</span></mat-list-item>
-            <mat-list-item routerLink="/monitoreo"><mat-icon>desktop_windows</mat-icon><span>Monitoreo</span></mat-list-item>
-            <mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon><span>Salir</span></mat-list-item>
-            
-          </mat-nav-list>
-       
-        
- 
-     </mat-sidenav-content>
-   </mat-sidenav-container> 
- 
- </div>
+<div  class="example-container" [class.example-is-mobile]="mobileQuery.matches"  >
+  <mat-toolbar  color="primary" class="example-toolbar">
+   <mat-toolbar-row>
+     <button mat-icon-button (click)="snav.toggle()">          
+       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+       <span>MENU</span></button>
+       <span class="spacer"></span>
+       <button  (click)="logout()" mat-raised-button color ="accent">Salir</button>
+    
+   </mat-toolbar-row>
+ </mat-toolbar>
+
+ <mat-sidenav-container class="example-sidenav-container"
+                        [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+   <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+
+               
+                <mat-nav-list >
+                 <mat-list-item routerLink="/entrada-datos"><mat-icon>edit</mat-icon><span>Entrada de Datos</span></mat-list-item> 
+                 
+                    <mat-list-item routerLink="/entrada-datos/comerciales" [ngStyle]="{'padding-left':'32px'}">Casas Comerciales</mat-list-item> 
+                    <mat-list-item routerLink="/entrada-datos/mercados"  [ngStyle]="{'padding-left':'32px'}">Mercados</mat-list-item> 
+                    <mat-list-item routerLink="/entrada-datos/datos"  [ngStyle]="{'padding-left':'32px'}">Datos</mat-list-item> 
+                
+   
+
+                 <mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon><span>Salir</span></mat-list-item> 
+               </mat-nav-list>
+
+
+
+              
+             <!-- 
+              <ul>
+                <li><a routerLink="../entrada-datos"> <mat-icon>edit</mat-icon><span>Entrada de Datos</span></a>
+                  <ul>
+                    <li>
+                    <a routerLink="../entrada-datos/comerciales"> <span>Casas Comerciales</span></a>
+                    </li>
+                    <li>
+                      <a routerLink="../entrada-datos/mercados"> <span>Mercados</span></a>
+                    </li>
+                    
+                  </ul>
+                </li>
+                
+                <li>
+                  <a (click)="logout()"><mat-icon>exit_to_app</mat-icon><span>Salir</span></a>
+                </li>
+                
+              </ul>
+     -->
+   </mat-sidenav>
+
+   <mat-sidenav-content>
+
+     <router-outlet>
+
+
+     </router-outlet>
+
+   </mat-sidenav-content>
+ </mat-sidenav-container> 
+
+</div>
 

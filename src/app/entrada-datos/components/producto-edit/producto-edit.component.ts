@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild, ElementRef ,Inject} from '@angular/core';
+import { Component, OnInit ,ViewChild, ElementRef ,Inject, HostListener} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Producto} from './../../../core/models/producto.model';
 import { Informante } from 'src/app/core/models/informante.model';
@@ -74,7 +74,7 @@ export class ProductoEditComponent implements OnInit {
 
   openCamera() {
     const dialogRef = this.dialog.open(CameraDialogComponent,{
-      /*width: '400px',*/
+      width: '90%',
       data: {idProducto: this.idProducto}
     });
 
@@ -103,7 +103,15 @@ export class ProductoEditComponent implements OnInit {
   styleUrls: ['./camera-dialog.scss']
 })
 export class CameraDialogComponent implements OnInit{
+   width: number;
+   height: number;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event?: Event) {
+    const win = !!event ? (event.target as Window) : window;
+    this.width = win.innerWidth;
+    this.height = win.innerHeight;
+  }
   /*
   @ViewChild("video",{'static':true})
   public video: ElementRef;
@@ -206,7 +214,7 @@ export class CameraDialogComponent implements OnInit{
   ) {
 
    
-
+    this.onResize();
       /*this.data=  this.matDialogData.data ;
       this.action=this.matDialogData.action;
       this.actionItemSelect=this.actionItems.find(x=>x.action==this.action);*/

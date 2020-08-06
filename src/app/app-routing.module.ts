@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule,PreloadAllModules } from '@angular/router';
 
 import {AuthGuard} from './core/guard/auth.guard';
 import {LoginComponent} from './auth/components/login/login.component';
@@ -28,6 +28,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./tablas-maestras/tablas-maestras.module').then(m => m.TablasMaestrasModule)
   },
+
+  
+  {
+    path:'monitoreo',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./monitoreo/monitoreo.module').then(m => m.MonitoreoModule)
+  },
+
   {
     path: 'menu-inicial',
     canActivate: [AuthGuard],
@@ -40,17 +48,14 @@ const routes: Routes = [
 
   },
 
-  /*{
-    path: 'auth',
-    loadChildren:()=> import('./auth/auth.module').then(m=> m.AuthModule)
 
-  },*/
-  
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

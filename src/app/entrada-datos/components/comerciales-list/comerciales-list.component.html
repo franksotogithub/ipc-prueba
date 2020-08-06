@@ -50,11 +50,7 @@
                     <input  placeholder="Ubicacion"   [(ngModel)]="datos.ubicacion" readonly  matInput >
                 </mat-form-field>
             </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col-md-12 form-group ">
+            <div class="col-md-12 ">
               <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
                
       
@@ -90,19 +86,19 @@
 
                     </mat-cell>
                   </ng-container>
-
+                  <!--
                   <ng-container matColumnDef="avance">
                     <mat-header-cell *matHeaderCellDef> Avance </mat-header-cell>
                     <mat-cell *matCellDef="let element" data-label="avance"> 
-                      <!--<span class="mobile-label">Avance:</span>-->
+                      
                       {{element.avance}} 
                     </mat-cell>
                   </ng-container>
+                -->
                     
                     <ng-container matColumnDef="estado">
                         <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
                         <mat-cell *matCellDef="let element" data-label="estado"> 
-                          <!--<span class="mobile-label">Estado:</span>-->
                           {{element.estado}} 
                         </mat-cell>
                     </ng-container>
@@ -120,9 +116,9 @@
               </mat-table>
   
             </div>
-  
           </div>
-          
+
+       
   
   
 

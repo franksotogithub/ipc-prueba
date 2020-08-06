@@ -95,26 +95,11 @@ export class IdbService   {
     
 
 
-    /*this.producto$.subscribe(p=>);*/
-
-    /*await db.put(storeName, value, key);*/
     this.producto$.subscribe(async(p)=>{
-      /*console.log('actualizando>>',p);*/
-      /*await this._db.delete('productos', key);*/
-      console.log('producto>>>',p);
-      console.log('p.id>>>',p.id);
        await this._db.put('productos',p,p.id);
 
-      
-        /*const tx = this._db.transaction('productos', 'readwrite');
-
-        const store = tx.objectStore('productos');
-        await store.put(p, p.id);
-     
-        await tx.done;*/
-      
-
     });
+
     
   }
 
@@ -226,6 +211,12 @@ export class IdbService   {
     
   }
 
+  async limpiandoDatos(){
+    this._db.clear('programacion_ruta');
+    this._db.clear('productos');
+    this.programacionRutas$.next(null);
+    this.productos$.next(null);
+  }
   async cargandoDatos(target){
     let productos=await this._db.getAll('productos');
     this.programacionRutaService.updateProductos(productos).subscribe(res=>{
@@ -242,4 +233,5 @@ export class IdbService   {
     */
 
   }
+
 }

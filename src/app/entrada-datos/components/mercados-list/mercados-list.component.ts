@@ -24,7 +24,7 @@ export class MercadosListComponent implements OnInit {
   
   dataSource=[];
   
-  displayedColumns = ['ruc','establecimiento','direccion','giro','avance','estado','id'];
+  displayedColumns = ['ruc','establecimiento','direccion','giro','estado','id'];
 
   codComerciales='11';
   informantes :Informante[];

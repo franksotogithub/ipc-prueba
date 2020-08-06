@@ -33,15 +33,18 @@ export class ComercialesComponent implements OnInit {
     {id:"S" ,name:" Supervisado en el mes 'n' "},
     {id:"T" ,name: "Temporal dato que se repite"}
    
-
   ];
+
+  filterValue:Array<any>;
   constructor(
     private idbService:IdbService,
     private router: Router,
     private activatedRoute: ActivatedRoute,  
     private breakpointObserver: BreakpointObserver,
     
-    ) { }
+    ) {
+      this.filterValue =[...this.ces];
+     }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -90,9 +93,54 @@ export class ComercialesComponent implements OnInit {
 
   }
 
-  changeProducto(producto:Producto) {
+  changeProducto(producto:Producto,precio:boolean) {
+
+
+    if(precio){
+     
+
+      let num = parseFloat(producto.precio);
+      num = num/100.0;
+      let n = num.toFixed(2);
+      producto.precio= String(n);
+
+    }
+
     this.idbService.producto$.next(producto);
 
   }
 
+  ceSearch(event:any){
+    let value =event.target.value;
+    const filterValue = value.toLowerCase();
+    if(value!=='')
+      this.filterValue = this.ces.filter(option => option.name.toLowerCase().includes(filterValue));
+    else
+      this.filterValue =[...this.ces];
+
+  }
+
+  displayCE(ce: any): string {
+    return ce ? ce.name : ce;
+  }
+  focusCE(){
+    this.filterValue =[...this.ces];
+  }
+
+/*(focus)="focusFunction()"*/
+  ceSelected(producto:Producto,event$){
+    if(producto.ce!=event$.option.value.id){
+      console.log("producto>>",producto);
+      producto.ce= event$.option.value.id;
+      producto.ce_name= event$.option.value.name;
+      this.idbService.producto$.next(producto);  
+    }
+    
+    
+
+    
+    /*this.form.get('mercado').setValue(event$.option.value.id);
+    this.mercadoSelect = event$.option.value.nombre;*/
+
+  }
 }

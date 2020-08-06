@@ -16,9 +16,10 @@ export interface Producto {
   grupo_desc: string;
   division_id: number;
   division_desc: string;
-  precio: number;
+  precio: string;
   observacion:string;
   ce: string;
+  ce_name:string;
   id: number;
   informante_id:number;
   imgUrl:string;
