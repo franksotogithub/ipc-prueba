@@ -16,18 +16,29 @@ export class NotificationComponent implements OnInit {
 */
 
 @Input() message="cargado";
+@Input() message_error="error";
+
 isNotification: Subject<boolean> = this.loaderService.isNotification;
+isNotificationError: Subject<boolean> = this.loaderService.isNotificationError;
 
 constructor(private loaderService: LoaderService,private _snackBar: MatSnackBar
   ) { 
     
     this.isNotification.subscribe((n)=>{
-      console.log('holasss');
+      
       this._snackBar.open(this.message, '', {
         duration: 2000,
       });
     });
-    
+
+    this.isNotificationError.subscribe((n)=>{
+      
+      this._snackBar.open(this.message_error,'cerrar', {
+        duration: 10000,
+        /*panelClass: ['mat-toolbar', 'mat-']*/
+      
+      });
+    });
 }
 
 ngOnInit() {

@@ -9,14 +9,23 @@ import { Producto} from './../models/producto.model';
 })
 export class ProductoService {
   
-  ulr_api = `${environment.url_api}/api/shared`;
-
+  ulr_api = `${environment.url_api}/api/v1`;
+  
   constructor( private http: HttpClient) { 
 
   }
   
   getAllProductos() {
-    return this.http.get<Producto[]>(`${this.ulr_api}/producto`);
+    return this.http.get<Producto[]>(`${this.ulr_api}/producto?page_size=10`);
   }
+
+  getProductos(query:string) {
+    return this.http.get<Producto[]>(`${this.ulr_api}/producto?page_size=10&?q=${query}`);
+  }
+  
+  getProducto(id) {
+    return this.http.get<Producto>(`${this.ulr_api}/producto/${id}`);
+  }
+
 
 }

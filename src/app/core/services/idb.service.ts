@@ -15,6 +15,7 @@ import { InformanteService } from './informante.service';
 import { Informante } from '../models/informante.model';
 import { ProgramacionRuta} from '../models/programacionRuta.model';
 import {ProgramacionRutaService} from './programacion-ruta.service';
+import { async } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,10 @@ export class IdbService   {
   public investigadores$ = new BehaviorSubject<any>([]);
   public movMercadoCab$ =new BehaviorSubject<any>([]);
   public informantes$ =new BehaviorSubject<Informante[]>([]);
+  public informante$ = new BehaviorSubject<Informante>(null);
   public programacionRutas$ = new BehaviorSubject<ProgramacionRuta[]>([]);
   public producto$ = new BehaviorSubject<Producto>(null);
-
+  
   constructor(
     /*private directorioService:DirectorioService,
     private productoService : ProductoService,
@@ -43,7 +45,7 @@ export class IdbService   {
 
   async connectToIDB() {
     
-    this._db = await openDB('ipc-local-database-1',10, {
+    this._db = await openDB('ipc-local-database-3',12, {
       upgrade(db){
 
         /*let tables = ['investigador','informante','ruta'];*/
@@ -58,7 +60,7 @@ export class IdbService   {
         });
         
 
-        let tables2 = ['productos'];
+        let tables2 = ['productos','informantes'];
 
 
         tables2.forEach((table)=>{
@@ -81,7 +83,8 @@ export class IdbService   {
 
     this.programacionRutas$.next(await this._db.getAllFromIndex('programacion_ruta', 'id'));
     this.productos$.next(await this._db.getAll('productos'));
-
+    this.informantes$.next(await this._db.getAll('informantes'));
+    
     
     /*
     this.informantes$.next(await this._db.getAllFromIndex('informante', 'id'));
@@ -100,6 +103,10 @@ export class IdbService   {
 
     });
 
+    this.informante$.subscribe(async(p)=>{
+      await this._db.put('informantes',p,p.id_directorio_ipc);
+    })
+
     
   }
 
@@ -114,22 +121,36 @@ export class IdbService   {
   }
 
   deleteAllData(target){
-
+    this._db.clear(target);
   }
 
-  async descargandoDatos(){
+  getItem(target,key){
+    return this._db.get(target,key);
+  }
+
+  updateItem(target,value,key){
+    this._db.put(target,value,key);
+  }
+
+   /*async descargandoDatos(resolve,reject){*/
+    async descargandoDatos(){
     this._db.clear('programacion_ruta');
     this._db.clear('productos');
-
-    this.programacionRutaService.getProgramacionRuta().subscribe(( data:any )=>{
+    this._db.clear('informantes');
+    let message="";
+    this.programacionRutaService.descargarProgramacionRuta().subscribe(( data:any )=>{
       let results:ProgramacionRuta[] = data['results'];
       let idInformantes =[];
       let list_articulos:Producto[] = [];
-
+      let list_informantes:Informante[] = [];
       results.forEach((r)=>{
         this._db.add('programacion_ruta',r);
-        Object.keys(r.informantes).map((key, index)=> {
+        Object.keys(r.informantes).map(async(key, index)=> {
+          const informante:Informante = r.informantes[key];
+          await this._db.put('informantes',informante,informante.id_directorio_ipc);
+          list_informantes.push(informante);
           const articulos = r.informantes[key].articulos;
+
           Object.keys(articulos).map(async (key2, index)=> { 
               let art:Producto=articulos[key2];
 
@@ -137,77 +158,23 @@ export class IdbService   {
               list_articulos.push(art);
           });
         });
-
-
+        this.programacionRutas$.next(results);
+        this.productos$.next(list_articulos);
+        this.informantes$.next(list_informantes);
+        /*message = 'Datos descargados';
+        resolve(message);*/
+        
       });
-
-      this.programacionRutas$.next(results);
-      this.productos$.next(list_articulos);
-
-
-
-    });
-
+    },
+    /*(error)=>{
+      message = 'Error al descargar datos';
+      reject(message);
     
-
-    /*this._db.clear('informante');
-
-    this.informanteService.getInformantesByUser().subscribe((datos:any)=>{
-      let results =  datos['results'][0];
+    }*/
     
-      let informantes = Object.keys(results["informantes"]).map((key) => results["informantes"][key]);
-      console.log(informantes);
-      informantes.forEach(item=>{this._db.add('informante',item);});
-      this.informantes$.next(informantes);
-      
-
-    });*/
-
+    );
     
-    /*this.directorioService.getAllDirectorioIPC().subscribe((datos :DirectorioIPC[])=>{
-      datos.forEach(item=>{this._db.add('mercados',item);});
-      this.mercados$.next(datos);
-
-    });*/
-
-
-    /*
-    this._db.clear('mercados');
-    this.directorioService.getAllDirectorioIPC().subscribe((datos :DirectorioIPC[])=>{
-      datos.forEach(item=>{this._db.add('mercados',item);});
-      this.mercados$.next(datos);
-
-    });*/
-
-
-
-
-/*
-    this._db.clear('mercados');
-    this.directorioService.getAllDirectorioIPC().subscribe((datos :DirectorioIPC[])=>{
-      datos.forEach(item=>{this._db.add('mercados',item);});
-      this.mercados$.next(datos);
-
-    });
     
-    this._db.clear('productos');
-    this.productoService.getAllProductos().subscribe((datos:Producto[])=>{
-      
-      datos.forEach(item=>{
-        this._db.add('productos',item);
-      });
-      this.productos$.next(datos);
-      
-    });
-
-    this._db.clear('investigadores');
-    this.investigadorService.getAllInvestigadores().subscribe((datos:Investigador[])=>{
-      datos.forEach(item=>{
-        this._db.add('investigadores',item);
-      });
-      this.investigadores$.next(datos);
-    });
-*/
     
   }
 
@@ -218,8 +185,16 @@ export class IdbService   {
     this.productos$.next(null);
   }
   async cargandoDatos(target){
-    let productos=await this._db.getAll('productos');
-    this.programacionRutaService.updateProductos(productos).subscribe(res=>{
+    let informantes=await this._db.getAll('informantes');
+    let articulos=await this._db.getAll('productos');
+    let data ={};
+
+    informantes.forEach((v)=>{delete v.articulos; delete v.giro; });
+    data['informantes'] = informantes;
+
+    data['articulos'] = articulos;
+    
+    this.programacionRutaService.cargarProgramacionRuta(data).subscribe(res=>{
       
     })
       /*let movMercadosCab=await this._db.getAllFromIndex('mov_mercados_cab', 'id');

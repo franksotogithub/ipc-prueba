@@ -28,7 +28,7 @@ export class ComercialesListComponent implements OnInit {
   
   dataSource=[];
   
-  displayedColumns = ['ruc','establecimiento','direccion','giro','estado','id'];
+  displayedColumns = ['ruc','establecimiento','direccion','giro','estado','id_directorio_ipc'];
 
   codComerciales='00';
   informantes :Informante[];

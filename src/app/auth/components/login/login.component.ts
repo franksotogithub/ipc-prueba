@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
   login(event){
     event.preventDefault();
     if(this.form.valid){
-      const value = this.form.value;
+      let value = this.form.value;
+      let username =value.username.toLowerCase();
 
-
-      this.authService.login(value.username,value.password)
+      this.authService.login(username,value.password)
       .pipe(first())
        .subscribe(
         data => {

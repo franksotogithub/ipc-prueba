@@ -7,6 +7,13 @@
                     <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon>
                     </button>
                     Casa Comercial
+
+                  
+                    <button mat-raised-button color="primary"  (click)="getCurrentLocation()" >
+                        <mat-icon>location_on</mat-icon>
+                    </button>
+
+                   
                 </mat-card-title>
                 
                    
@@ -22,7 +29,7 @@
                         <button mat-icon-button matPrefix  [routerLink]="['../', preview]" >
                             <mat-icon>keyboard_arrow_left</mat-icon>
                         </button>
-                        <input  type="text" placeholder="ID"  [(ngModel)]="informante.id"  readonly  matInput>
+                        <input  type="text" placeholder="ID"  [(ngModel)]="informante.id_directorio_ipc"  readonly  matInput>
                         <button mat-icon-button matSuffix  [routerLink]="['../', next]" >
                             <mat-icon>keyboard_arrow_right</mat-icon>
                         </button>
@@ -38,16 +45,20 @@
 
             
 
-                <div class="col-md-8 form-group">
+                <div class="col-12 form-group">
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Establecimiento:</mat-label>
                         <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.establecimiento"  readonly matInput>
                     </mat-form-field>
                 </div>
+                
+    
+
+              
                 <!--
                 <div class="col-md-4 form-group">
                 
-                        <mat-slide-toggle [(ngModel)]="isChecked">Reportar local como cerrado </mat-slide-toggle>
+                    <mat-slide-toggle [(ngModel)]="isChecked">Finalizar </mat-slide-toggle>
 
                 
                 </div>
@@ -64,6 +75,25 @@
                         <mat-label>Giro:</mat-label>
                         <input  placeholder="Giro"    [(ngModel)]="informante.giro"  readonly matInput >
                     </mat-form-field>
+                </div>
+
+
+                <div class="col-2 form-group">
+                   
+                    
+                    <button mat-raised-button color="primary"   >
+                        <mat-icon>stop</mat-icon>
+                    </button>
+                   
+                   
+                        <!--<button mat-icon-button   >
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                        </button>-->
+                        <!--
+                        <mat-label>Establecimiento:</mat-label>
+                        <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.establecimiento"  readonly matInput>
+                        -->
+                       
                 </div>
 <!--
                 <div class="col-md-6 form-group">

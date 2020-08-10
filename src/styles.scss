@@ -105,3 +105,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 button:focus{
   outline: 0px;
 }
+
+
+.warning-snackbar {
+    /*background-color: mat-color($warn,500);*/
+    background-color: mat-color($warn,500);
+    /*color: mat-color($accent,200);*/
+    /*color: $accent*/
+    /*background: mat-color($accent,300) /*$accent-color;*/
+  }
+

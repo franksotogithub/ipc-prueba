@@ -24,6 +24,7 @@ export class DirectorioService {
   updateDirectorioIPC(id:number,directorio :DirectorioIPC){
     return this.http.put(`${this.ulr_api}/directorio/${id}/`,directorio);
   }
+  
 
 
 }

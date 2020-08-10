@@ -50,6 +50,7 @@ export class ComercialesComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.id = parseInt(params.id);
 
+      /*
       this.idbService.programacionRutas$.subscribe((datos:Array<ProgramacionRuta> )=>{
         
         if (datos.length>0){
@@ -73,11 +74,23 @@ export class ComercialesComponent implements OnInit {
           
           }
 
-      }); 
+      }); */
+
+      /*console.log('this.id>>>',this.id);*/
+
+      /*this.informante=this.idbService.getItem('informantes',this.id);*/
+
+    this.idbService.informantes$.subscribe( (informantes:Informante[])=>{
+        
+        
+        this.informante=informantes.find(e=>e.id_directorio_ipc==this.id);
+
+        [this.preview,this.next] = Utils.getIdsNextPreview(informantes,this.id,'id_directorio_ipc');
+      });
+
 
       this.idbService.productos$.subscribe( (productos:Producto[])=>{
         
-       
         this.dataSource=productos.filter((p)=>{ return p.informante_id==this.id});
        
       });
@@ -93,22 +106,24 @@ export class ComercialesComponent implements OnInit {
 
   }
 
-  changeProducto(producto:Producto,precio:boolean) {
+  changeInformante(){
+    this.idbService.updateItem('informantes',this.informante,this.informante.id_directorio_ipc);
+  }
 
+  changeProducto(producto: Producto, precio: boolean) {
 
     if(precio){
-     
-
       let num = parseFloat(producto.precio);
-      num = num/100.0;
+      num = num / 100.0;
       let n = num.toFixed(2);
-      producto.precio= String(n);
-
+      producto.precio = String(n);
     }
 
-    this.idbService.producto$.next(producto);
+    /*this.idbService.producto$.next(producto);*/
+    this.idbService.updateItem('productos',producto,producto.id);
 
   }
+
 
   ceSearch(event:any){
     let value =event.target.value;
@@ -143,4 +158,19 @@ export class ComercialesComponent implements OnInit {
     this.mercadoSelect = event$.option.value.nombre;*/
 
   }
+
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+
+        this.informante.latitud = position.coords.latitude;
+        this.informante.longitud = position.coords.longitude;
+        this.idbService.informante$.next(this.informante);
+      });
+    }
+    else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
 }

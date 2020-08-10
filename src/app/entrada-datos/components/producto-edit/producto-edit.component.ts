@@ -51,7 +51,7 @@ export class ProductoEditComponent implements OnInit {
           .map(i => programacionRuta.informantes[i])
           
           this.informante = informantes.find((e:Informante)=>{
-            return e.id === this.id
+            return e.id_directorio_ipc === this.id
             });
           }
       }); 
@@ -60,7 +60,7 @@ export class ProductoEditComponent implements OnInit {
       this.idbService.productos$.subscribe((productos:Producto[])=>{
         productos = productos.filter((p)=>p.informante_id==this.id);
         this.producto= productos.find((p)=>p.id==this.idProducto);     
-        [this.preview,this.next] = Utils.getIdsNextPreview(productos,this.idProducto);
+        [this.preview,this.next] = Utils.getIdsNextPreview(productos,this.idProducto,'id_directorio_ipc');
 
       });
       

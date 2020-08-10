@@ -2,6 +2,7 @@ import { Component, OnInit,Inject } from '@angular/core';
 import { Producto } from 'src/app/core/models/producto.model';
 import { ArticuloService} from './../../../core/services/articulo.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ProductoService } from 'src/app/core/services/producto.service';
 
 @Component({
   selector: 'app-articulo',
@@ -28,7 +29,7 @@ export class ArticuloComponent implements OnInit {
   dataSource;
 
   constructor(
-    private articuloService: ArticuloService,    
+    private articuloService: ProductoService,    
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public matDialogData: any
 
@@ -38,12 +39,12 @@ export class ArticuloComponent implements OnInit {
       return x.data;
     });
 
-    this.articuloService.getArticulos().subscribe((datos:Array<Producto>)=>{
-
+    this.articuloService.getAllProductos().subscribe((datos:Array<Producto>)=>{
         this.dataSource=datos;
     });    
    }
 
+   
   ngOnInit() {
   }
   

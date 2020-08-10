@@ -1,6 +1,6 @@
 export interface Informante {
-  id: number;
-  codigo_ipc: string;
+  id_directorio_ipc: number;
+  codigo_info: string;
   ruc: string;
   establecimiento: string;
   direccion: string;

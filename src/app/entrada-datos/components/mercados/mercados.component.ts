@@ -26,7 +26,7 @@ export class MercadosComponent implements OnInit {
   informantes :Informante[];
   codComerciales ='11';
   /*displayedColumns = ['orden','codigo','producto','marca','cap','presentacion','id'];*/
-  displayedColumns = ['orden','art_id','art_desc','precio','ce','observacion','id'];
+  displayedColumns = ['orden','art_id','art_desc','precio','ce','observacion','id_directorio_ipc'];
   ces =[
     {id:"N" ,name:"Dato normal"},
     {id:"O" ,name:"Precio estacional "},
@@ -63,10 +63,10 @@ export class MercadosComponent implements OnInit {
 
           
           this.informante =  this.informantes.find((e:Informante)=>{
-            return e.id === this.id
+            return e.id_directorio_ipc === this.id
             });
 
-            [this.preview,this.next] = Utils.getIdsNextPreview(this.informantes,this.id);
+            [this.preview,this.next] = Utils.getIdsNextPreview(this.informantes,this.id,'id_directorio_ipc');
           
           }
 
