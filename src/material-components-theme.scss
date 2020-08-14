@@ -6,8 +6,8 @@
     $foreground: map-get($theme, foreground);
     $background: map-get($theme, background);
     
-    /*.mat-sidenav{
-      background-color: mat-color($primary,400);
+    .mat-sidenav{
+      background-color: $dark-color;
       color: mat-color($background, app-bar);
 
       .mat-nav-list .mat-list-item{
@@ -15,7 +15,7 @@
         color: mat-color($background, app-bar);
         
       }
-    }*/
+    }
   }
 
 
@@ -31,7 +31,7 @@
     
         .mat-header-cell{
           text-align: center;
-            color: $primary-color-text;
+            color: $primary-color-text-light;
         }
         .mat-row {
           border: 1px solid mat-color($primary);

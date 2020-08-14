@@ -1,7 +1,16 @@
 <h1 mat-dialog-title> Articulos</h1>
 <div mat-dialog-contet>
     <div class="row">
-        <div class="col-md-12 form-group full-width " *ngIf="dataSource">
+
+
+        <div class="col-md-12 form-group full-width ">
+          <mat-form-field class="full-width" >
+            <mat-label>Buscar:</mat-label>
+           
+            <input  type="text"   [(ngModel)]="busqueda"   (input)="changeBusqueda($event)"  matInput>
+        
+          </mat-form-field>
+
           <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
   
             <ng-container [matColumnDef]="column.data" *ngFor="let column of columns" >
@@ -11,12 +20,16 @@
              
                   {{element[column.data]}}
                 </mat-cell>
-              </ng-container>
+            </ng-container>
 
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row  (click)="selectArticulo(row,$event)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-row  (click)="selectArticulo(row,$event)" [ngClass]="{'highlight': selectedRowIndex == row.id}" *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
+
+          
+          <mat-paginator [length]="length" [pageSize]="pageSize"
+          [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
 
         </div>
 

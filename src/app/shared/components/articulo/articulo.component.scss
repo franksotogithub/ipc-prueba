@@ -2,7 +2,7 @@
 mat-table{
     //width: 100%;
     position: relative;
-    height: 450px;
+    height: auto;
     overflow: auto;
   }
 
@@ -11,7 +11,10 @@ mat-table{
     cursor: pointer;
   }
 
+  .highlight{
+    background : mat-color($primary,400);
 
+  }
   
 .mat-header-row{
   
@@ -21,7 +24,7 @@ mat-table{
   }
   
   .mat-header-cell{
-    color: $primary-color-text;
+    color: $primary-color-text-light;
   }
   
   .mat-row {
@@ -29,8 +32,10 @@ mat-table{
     cursor: pointer;
   }
   
-  
-  .mat-row:hover{
+  /*
+  :not(.mat-active):not(:hover):not(.mat-option-disabled) 
+  */
+  .mat-row:hover:not(.highlight){
     background : mat-color($primary,100) ;
   }
   

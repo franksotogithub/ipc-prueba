@@ -4,7 +4,7 @@ import {WebcamModule} from 'ngx-webcam';
 import { EntradaDatosRoutingModule } from './entrada-datos-routing.module';
 import { MercadosComponent } from './components/mercados/mercados.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NavComponent } from './components/nav/nav.component';
+
 import {MaterialModule} from './../material/material.module';
 import {SharedModule} from './../shared/shared.module';
 import { ComercialesComponent } from './components/comerciales/comerciales.component';
@@ -18,7 +18,7 @@ import {AuthModule} from './../auth/auth.module';
 
 @NgModule({
   declarations: [MercadosComponent, 
-    NavComponent, 
+    
     ComercialesComponent, 
     DatosComponent,
      MercadosListComponent, 

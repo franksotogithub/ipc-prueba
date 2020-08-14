@@ -1,16 +1,28 @@
 
 <form [formGroup]="form" (ngSubmit)="login($event)" class="content" >
-    <mat-card >
-<mat-card-header>
-    <mat-card-title>Login</mat-card-title>
+<mat-card class="col-md-6">
+<mat-card-header > 
+    
+    <mat-card-title  style="text-align: center!important;">
+       
+       
+    </mat-card-title>
 
 </mat-card-header>
 <mat-card-content >
 
 <div class="row">
-    <div class="col-md-12">
-    
+    <div class="col-12" style="text-align: center!important">
+        <img src="./../../../../assets/logos/logo_inei.png" style="cursor:pointer;width:172px;height:114px;float:center;">
+    </div>
+    <div class="col-12" style="text-align: center!important">
+        <h2>Iniciar Sesion</h2>
+    </div>
+    <div class="col-12">
+      
+     
         <mat-form-field appearance="fill">
+
             <mat-label>
                 Usuario
             </mat-label>
@@ -24,15 +36,6 @@
             </mat-error>
     
         </mat-form-field>
-
-        <app-loader></app-loader>
-    </div>
-   
-
-</div>
-<div class="row">
-    <div class="col-md-12">
-    
         <mat-form-field appearance="fill">
             <mat-label>
                 Contraseña
@@ -45,12 +48,6 @@
                 La contraseña debe tener mas de 5 caracteres
             </mat-error>
         </mat-form-field>
-
-        
-
-    </div>
-</div>
-
 <mat-error > {{error_message}}</mat-error>
 
     <div class="row ">
@@ -62,8 +59,24 @@
         </div>
      
     </div>
+        <app-loader></app-loader>
+    </div>
+   
+
+</div>
+
+
+
 </mat-card-content>
 
 </mat-card>
+
+<div  class="col-md-6 ipc">
+    <img src="./../../../../assets/img/login_ipc.jpg" style="width:100%;height:100%;">
+<div>
+  
+</div>
+</div>
+
     
 </form>

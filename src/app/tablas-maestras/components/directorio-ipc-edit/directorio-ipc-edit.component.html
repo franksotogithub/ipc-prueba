@@ -2,16 +2,20 @@
 <mat-card>
       
     <mat-card-header>
-        <div class="col-md-2 form-group">
-            <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon></button>
-        </div>
-    <mat-card-title>Directorio</mat-card-title>
+        
+          
+     
+    <mat-card-title>
+        <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon></button>
+        Directorio
+    
+    </mat-card-title>
   
     </mat-card-header>
 
     <mat-card-content >
     <div *ngIf="directorio">
-    <div class="row col-md-12">
+    <div class="row ">
 
         <div class="col-md-12 form-group">
             <mat-form-field class="full-width" appearance="fill">
@@ -55,47 +59,31 @@
 
         <div class="col-md-12 full-width">
 
-            
-
-            <mat-table  [dataSource]="dataSource"  class="mat-elevation-z8" >
-                    <ng-container matColumnDef="orden">
-                        <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
-                        <mat-cell *matCellDef="let element"  data-label="Orden" > 
-                            {{element.orden}} 
-                        </mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="art_id">
-                    <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
-                    <mat-cell *matCellDef="let element" data-label="Codigo"> 
-                        
-                        {{element.art_id}} 
-                    </mat-cell>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="art_desc">
-                        <mat-header-cell *matHeaderCellDef>Producto/articulo</mat-header-cell>
-                        <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
-                       <!--{{element.art_desc}} /{{element.presentacion}} /{{element.cap}} /{{element.marca}} -->
-                        {{element.art_desc}} 
-                        </mat-cell>
-                    </ng-container>
-
-             
-                
-                        <ng-container  matColumnDef="accion">
-                            <mat-header-cell *matHeaderCellDef>Accion </mat-header-cell>
-                            <mat-cell *matCellDef="let element" data-label="accion"> 
-                            
-                            <button mat-raised-button color="primary" ><mat-icon>edit</mat-icon></button>
-                            
-                            <!--<button mat-raised-button color="primary" (click)= "detalle(element.id)"><mat-icon>edit</mat-icon></button>-->
-                            </mat-cell>
-                        </ng-container>
+            <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
+  
+                <ng-container [matColumnDef]="column.data" *ngFor="let column of columns" >
+                    <mat-header-cell *matHeaderCellDef  > {{column.label}} </mat-header-cell>
     
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
+                    <mat-cell *matCellDef="let element"  >
+                       <div *ngIf="column.data=='accion'; else columna ">
+                        <button mat-raised-button color="primary" [routerLink]="['articulo', element.id]"><mat-icon>edit</mat-icon></button>
+                        <button mat-raised-button color="warn" (click)="eliminarArticulo( element.id)" ><mat-icon>delete</mat-icon></button>
+                       </div>
+                       <ng-template #columna>
+                        {{element[column.data]}}
+                       </ng-template>
+
+
+                      
+                      
+                    </mat-cell>
+                </ng-container>
+    
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row   *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+
     
         </div>
 

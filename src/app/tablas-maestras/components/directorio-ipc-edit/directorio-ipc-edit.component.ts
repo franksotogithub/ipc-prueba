@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {DirectorioService} from './../../../core/services/directorio.service';
 import { DirectorioIPC } from 'src/app/core/models/directorio.model';
-import { RutaDetalleProducto } from 'src/app/core/models/rutaDetalleProducto.model';
+import { ArticuloDirectorio} from './../../../core/models/articuloDirectorio.model';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {DeleteMessageComponent} from './../../../shared/components/delete-message/delete-message.component';
+import { ArticuloDirectorioService } from 'src/app/core/services/articulo-directorio.service';
+
 @Component({
   selector: 'app-directorio-ipc-edit',
   templateUrl: './directorio-ipc-edit.component.html',
@@ -11,14 +15,24 @@ import { RutaDetalleProducto } from 'src/app/core/models/rutaDetalleProducto.mod
 export class DirectorioIpcEditComponent implements OnInit {
   id: number;
   directorio:DirectorioIPC;
-  dataSource: Array<RutaDetalleProducto>;  
-  displayedColumns =['orden','art_id','art_desc','accion'];
+  dataSource: Array<ArticuloDirectorio>;  
+  /*displayedColumns =['orden','art_id','art_desc','accion'];*/
+  columns=[
+    
+    {label:'ORDEN',data:'orden_articulo'},
+    {label:'PRODUCTO/ARTICULO',data:'articulo_desc'},
+    {label:'ACCION',data:'accion'},
+  ]
+  
+  displayedColumns =[];
   constructor(    
     private router: Router,
     private activatedRoute: ActivatedRoute, 
     private directorioService:DirectorioService,
-  
+    private articuloDirectorioService: ArticuloDirectorioService,
+    public dialog: MatDialog
     ) { 
+      this.displayedColumns = this.columns.map((c)=>{return c.data});
 
       this.activatedRoute.params.subscribe((params: Params) => {
         this.id = parseInt(params.id);
@@ -42,5 +56,39 @@ export class DirectorioIpcEditComponent implements OnInit {
     })
   }
 
+  eliminarArticulo(id:number){
+    let title = "Eliminar Articulo";
+    let message = "¿Desea eliminar el articulo?";
+
+    const dialogRef = this.dialog.open(DeleteMessageComponent, {
+      width: '250px',
+      data: {title: title, message: message}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      let opc = result.opc;
+      (opc)?this.articuloDirectorioService.delete(id).subscribe((res)=>{
+        console.log('res',res);
+      }):false;
+
+    });
+
+    /*dialogRef.afterClosed().subscribe(result => {
+      
+      
+    });*/
+
+    /*
+    
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {name: this.name, animal: this.animal}
+    });
+    
+    */
+  }
+
+  /*data: {name: this.name, animal: this.animal}*/
 
 }

@@ -7,12 +7,16 @@ import { HeaderToolbarComponent } from './components/header-toolbar/header-toolb
 import { LoaderComponent } from './components/loader/loader.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ArticuloComponent } from './components/articulo/articulo.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessageComponent } from './components/message/message.component';
+import { DeleteMessageComponent } from './components/delete-message/delete-message.component';
 @NgModule({
-  declarations: [MenuComponent, HeaderToolbarComponent, LoaderComponent, NotificationComponent, ArticuloComponent],
+  declarations: [MenuComponent, HeaderToolbarComponent, LoaderComponent, NotificationComponent, ArticuloComponent, MessageComponent, DeleteMessageComponent],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[MenuComponent,LoaderComponent,NotificationComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {NavComponent} from './components/nav/nav.component';
 import {RutasComponent} from './components/rutas/rutas.component';
 import {AuthGuard} from './../core/guard/auth.guard';
-
+import {MenuInicialComponent} from './../auth/components/menu-inicial/menu-inicial.component';
 const routes: Routes = [
   {
     path:'',
-    component : NavComponent,
+    component : MenuInicialComponent,
     children: [
   
       {path:'',

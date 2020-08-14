@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {NavComponent} from './components/nav/nav.component';
+
+
 import {MercadosComponent} from './components/mercados/mercados.component';
 import {ComercialesComponent} from './components/comerciales/comerciales.component';
 import {DatosComponent} from './components/datos/datos.component';
 import {MercadosListComponent} from './components/mercados-list/mercados-list.component';
 import {ComercialesListComponent} from './components/comerciales-list/comerciales-list.component';
 import {ProductoEditComponent} from './components/producto-edit/producto-edit.component';
-
+import {MenuInicialComponent} from './../auth/components/menu-inicial/menu-inicial.component';
 import {AuthGuard} from '../core/guard/auth.guard';
 
 const routes: Routes = [
   {
     path:'',
-    component : NavComponent,
+    component : MenuInicialComponent,
     children: [
 
       {path:'',

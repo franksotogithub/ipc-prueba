@@ -5,15 +5,16 @@ import { CalculoRoutingModule } from './calculo-routing.module';
 import { CalculoIndiceComponent } from './components/calculo-indice/calculo-indice.component';
 import {MaterialModule} from './../material/material.module';
 import {SharedModule} from './../shared/shared.module';
-import { NavComponent } from './components/nav/nav.component';
+import {AuthModule} from './../auth/auth.module';
 
 @NgModule({
-  declarations: [CalculoIndiceComponent, NavComponent],
+  declarations: [CalculoIndiceComponent],
   imports: [
     CommonModule,
     CalculoRoutingModule,
     MaterialModule,
-    SharedModule,  
+    SharedModule, 
+    AuthModule 
   ]
 })
 export class CalculoModule { }

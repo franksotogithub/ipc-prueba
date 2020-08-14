@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {NavComponent} from './components/nav/nav.component';
 import {DirectorioIpcComponent} from './components/directorio-ipc/directorio-ipc.component';
 import {DirectorioIpcEditComponent} from './components/directorio-ipc-edit/directorio-ipc-edit.component';
-import {RutaDetalleProdEditComponent} from './components/ruta-detalle-prod-edit/ruta-detalle-prod-edit.component';
-import {RutaDetalleProdCreateComponent} from './components/ruta-detalle-prod-create/ruta-detalle-prod-create.component';
+import {ArticuloDirectorioCreateComponent} from './components/articulo-directorio-create/articulo-directorio-create.component';
+import {ArticuloDirectorioEditComponent} from './components/articulo-directorio-edit/articulo-directorio-edit.component';
 import {AuthGuard} from '../core/guard/auth.guard';
+import {MenuInicialComponent} from './../auth/components/menu-inicial/menu-inicial.component';
 
 const routes: Routes = [
   {
     path:'',
-    component : NavComponent,
+    component : MenuInicialComponent,
     children: [
   
       {path:'',
@@ -34,16 +34,14 @@ const routes: Routes = [
 
       {
         path: 'directorio-ipc/edit/:id/articulo',
-        component: RutaDetalleProdCreateComponent,
-        canActivate: [AuthGuard]
-   
+        component: ArticuloDirectorioCreateComponent,
+        canActivate: [AuthGuard]   
       },
 
       {
         path: 'directorio-ipc/edit/:id/articulo/:idArticulo',
-        component: RutaDetalleProdEditComponent,
+        component: ArticuloDirectorioEditComponent,
         canActivate: [AuthGuard]
-   
       },
 
 

@@ -1,0 +1,48 @@
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon>
+                </button>
+                Editar Orden
+                
+            
+            </mat-card-title>
+             
+
+        </mat-card-header>
+
+        <mat-card-content >
+   
+         
+
+            <div class="row ">
+                
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Codigo Articulo:</mat-label>
+                        <input  placeholder="Codigo"    [(ngModel)]="articuloDirectorio.articulo"   matInput >
+                        <button mat-icon-button matSuffix  (click)="openDialogArticulos()" >
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Articulo:</mat-label>
+                        <input  placeholder="Codigo"    [(ngModel)]="articuloDirectorio.articulo_desc" readonly  matInput >
+                    </mat-form-field>
+                </div>
+   
+           
+        </div>
+  
+        </mat-card-content>
+        
+        <mat-card-actions>
+            <div class="col-md-2 form-group">
+                <button mat-raised-button color="primary" (click)="guardarOrden()" ><mat-icon>save</mat-icon>Guardar</button>
+            </div>
+        </mat-card-actions>
+      </mat-card>

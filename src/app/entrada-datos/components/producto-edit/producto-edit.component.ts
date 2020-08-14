@@ -60,7 +60,7 @@ export class ProductoEditComponent implements OnInit {
       this.idbService.productos$.subscribe((productos:Producto[])=>{
         productos = productos.filter((p)=>p.informante_id==this.id);
         this.producto= productos.find((p)=>p.id==this.idProducto);     
-        [this.preview,this.next] = Utils.getIdsNextPreview(productos,this.idProducto,'id_directorio_ipc');
+        [this.preview,this.next] = Utils.getIdsNextPreview(productos,this.idProducto,'id');
 
       });
       

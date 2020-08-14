@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {NavComponent} from './components/nav/nav.component';
-import { CalculoIndiceComponent} from './components/calculo-indice/calculo-indice.component';
 
+import { CalculoIndiceComponent} from './components/calculo-indice/calculo-indice.component';
+import {MenuInicialComponent} from './../auth/components/menu-inicial/menu-inicial.component';
 
 const routes: Routes = [
 {
   path:'',
-  component : NavComponent,
+  component : MenuInicialComponent,
   children: [
 
     {path:'',

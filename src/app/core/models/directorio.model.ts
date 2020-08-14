@@ -1,6 +1,7 @@
 import { Ciudad} from './ciudad.model';
 import { Giro} from './giro.model';
-import { RutaDetalleProducto} from './rutaDetalleProducto.model';
+import { ArticuloDirectorio} from './articuloDirectorio.model';
+
 
 export interface DirectorioIPC {
   id_directorio_ipc: number;
@@ -27,6 +28,6 @@ export interface DirectorioIPC {
   estado: string;
   ciudad: Ciudad;
   giro: Giro;
-  productos: Array<RutaDetalleProducto>;
+  productos: Array<ArticuloDirectorio>;
 }
 
