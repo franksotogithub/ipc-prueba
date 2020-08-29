@@ -29,6 +29,10 @@
                     <mat-list-item routerLink="/monitoreo/rutas"  > <mat-icon>monitor</mat-icon> Monitoreo</mat-list-item>    
                 
                     <mat-list-item routerLink="/tablas-maestras/directorio-ipc"  > <mat-icon>table</mat-icon> Tablas Maestras</mat-list-item>  
+                    <!--cambios-->
+                    <mat-list-item routerLink="/programacion-circuitos"><mat-icon>streetview</mat-icon><span>Circuito</span></mat-list-item>
+                    <mat-list-item routerLink="/programacion-circuitos/circuito" [ngStyle]="{'padding-left':'32px'}" > Circuito</mat-list-item> 
+                    <mat-list-item routerLink="/programacion-circuitos/programacion-circuito" [ngStyle]="{'padding-left':'32px'}" > Programación Circuito</mat-list-item> 
 
                  <mat-list-item (click)="logout()"><mat-icon>exit_to_app</mat-icon><span>Salir</span></mat-list-item> 
                </mat-nav-list>

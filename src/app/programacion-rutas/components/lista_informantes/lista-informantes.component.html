@@ -1,0 +1,144 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Lista Informantes <br></mat-card-title>
+  </mat-card-header> 
+  
+  <mat-card-content>
+    <div class="overlay"  *ngIf="ver1">
+      <div class="center">
+        <mat-progress-spinner mode="indeterminate" style="margin:0 auto;"></mat-progress-spinner>
+      </div>
+    </div>
+
+    <!--div class="row">
+        <div class="col-md-2 form-group"></div>
+        <div class="col-md-8 form-group">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Filtrar Giro o Dirección:</mat-label>
+            <input matInput (keyup.enter)="filtrar($event)" placeholder="buscar">
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-3 form-group">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Ciudad:</mat-label>       
+            <mat-select matNativeControl>
+                <mat-option *ngFor="let summary of dataSource3" value={{summary.codigo}}>
+                    {{summary.nombre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+
+        <div class="col-md-3 form-group">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Giro:</mat-label>       
+            <mat-select matNativeControl>
+              <mat-option *ngFor="let summary of dataSource4" value={{summary.codigo}}>
+                {{summary.nombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 form-group"></div>
+    </div-->
+
+    <div class="row">
+      <div class="col-md-12 form-group " *ngIf="dataSource">
+        
+        <mat-table  [dataSource]="dataSource"  class="mat-elevation-z8">
+          
+                 
+          <ng-container  matColumnDef="nro">
+            <mat-header-cell *matHeaderCellDef> Nro. </mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index;" data-label="nro"> 
+              {{(i+1)+(pag*dataSource1)}}    
+            </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="anio_base">
+            <mat-header-cell *matHeaderCellDef> Año Base</mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="anio_base"> 
+              {{element.anio_base}} 
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="cod_info">
+            <mat-header-cell *matHeaderCellDef> Código Info </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="cod_info"> 
+              {{element.cod_info}} 
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="cod_ipc">
+            <mat-header-cell *matHeaderCellDef> Código IPC </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="cod_ipc"> 
+              {{element.cod_info_ipc}} 
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="razon_social">
+            <mat-header-cell *matHeaderCellDef> Razón Social </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="razon_social"> 
+              {{element.razon_social}} 
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="giro">
+            <mat-header-cell *matHeaderCellDef> Giro </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="giro"> 
+              {{element.giro.nombre}} 
+            </mat-cell>
+          </ng-container>
+
+            <ng-container matColumnDef="ciudad">
+              <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="ciudad"> 
+               {{element.ciudad.nombre}} 
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="direccion">
+              <mat-header-cell *matHeaderCellDef> Dirección </mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="direccion"> 
+               {{element.direccion}} 
+              </mat-cell>
+            </ng-container>
+          
+            
+
+             <ng-container matColumnDef="checked">
+              <mat-header-cell *matHeaderCellDef> Acción</mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="checked"> 
+
+                  <label class="container">Seleccionar
+                    
+                    <input type="checkbox" [(ngModel)]="element.checked" name="element.id"  (click)="agregar(element.id_directorio_ipc,element.cod_info_ipc,element.nombre_comercial,element.giro.nombre)" 
+                   
+                   >
+                    <span class="checkmark"></span>
+                  </label>
+                 
+               </mat-cell>
+              </ng-container>
+          
+
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table> 
+
+
+
+            <mat-paginator [length]="dataSource2"
+              [pageSize]="dataSource1" (page)="getPaginatorData($event)" >
+            </mat-paginator>
+          
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose="cancel" color="primary">Cancelar</button>
+      <button mat-raised-button matDialogClose="confirm" color="warn" (click)="enviarData()">OK</button>
+    </mat-dialog-actions>
+    
+
+  </mat-card-content>
+</mat-card>

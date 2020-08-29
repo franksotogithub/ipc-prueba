@@ -25,6 +25,15 @@ export class DirectorioService {
     return this.http.put(`${this.ulr_api}/directorio/${id}/`,directorio);
   }
   
+  getDirectorioPag(pag:number){
+
+    if (pag==0)
+    {
+      return this.getAllDirectorioIPC();
+    }
+    
+    return this.http.get<any>(`${this.ulr_api}/directorio/?page=${pag}`);
+  }
 
 
 }

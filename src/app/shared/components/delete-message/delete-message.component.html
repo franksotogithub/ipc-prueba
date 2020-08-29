@@ -1,21 +1,11 @@
-<h1 mat-dialog-title> {{title}}</h1>
-<div mat-dialog-contet>
-    <div class="row">
 
 
-        <div class="col-md-12 form-group full-width ">
-            {{message}}
-
-        </div>
-
-      </div>
-      
-
-</div>
-
-<div mat-dialod-actions>  
-  <button mat-button (click)="closeDialog(true)" mat-flat-button color="primary">OK</button>
-  <button mat-button (click)="closeDialog(false)" mat-flat-button color="warn">Cerrar</button>
-</div>
-
-
+<h2 matDialogTitle>{{title}}</h2>
+<mat-dialog-content>
+  <p> {{message}}
+</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button matDialogClose="cancel" color="primary">Cancelar</button>
+  <button mat-raised-button matDialogClose="confirm" color="warn">Eliminar</button>
+</mat-dialog-actions>

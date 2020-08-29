@@ -1,0 +1,171 @@
+
+<mat-card>
+      
+    <mat-card-header>
+    <mat-card-title>
+        <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon></button>
+        Edicion de Circuito 
+    </mat-card-title>
+    </mat-card-header>
+
+    
+
+    <mat-card-content >
+        
+        <div class="overlay"  *ngIf="ver1">
+            <div class="center">
+              <mat-progress-spinner mode="indeterminate" style="margin:0 auto;"></mat-progress-spinner>
+            </div>
+        </div>
+      
+      <div *ngIf="ruta">
+                <div class="row">
+
+                <div class="col-md-6 form-group">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Código:</mat-label>
+                    <input  type="text" readonly placeholder="Código"    [(ngModel)]="ruta.circuito.id" matInput>
+                </mat-form-field>
+                </div>
+
+                <div class="col-md-6 form-group">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Nombre Circuito:</mat-label>
+                    <input  type="text" placeholder="Nombre Circuito"    [(ngModel)]="ruta.nombre" matInput>
+                </mat-form-field>
+                </div>
+
+                <div class="col-md-12 form-group">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Descripción:</mat-label>
+                    <textarea  type="text" placeholder="Descripción"    [(ngModel)]="ruta.descripcion" matInput></textarea>
+                </mat-form-field>
+                </div>
+
+                <div class="col-md-4 form-group">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Ciudad:</mat-label>
+                    <mat-select matNativeControl  [(ngModel)]="ruta.ciudad">
+                        <mat-option *ngFor="let summary of dataSource" value={{summary.codigo}}>
+                            {{summary.nombre}}</mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+                </div>
+            
+                <div class="col-md-4 form-group">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Año Base:</mat-label>
+                    <mat-select matNativeControl  [(ngModel)]="ruta.anio_base">
+                      <mat-option *ngFor="let summary of dataSource4" value={{summary.codigo}}>
+                          {{summary.codigo}}</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+                </div>
+
+                <div class="col-md-4 form-group">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label> Cant. Informantes:</mat-label>
+                    <input  type="text" readonly placeholder="Cant. Informantes" [(ngModel)]="ruta.nro_informantes" matInput>
+                </mat-form-field>
+                </div>
+
+                <!--div class="col-md-3 form-group">
+                  <mat-form-field class="full-width" appearance="fill">
+                      <mat-label> Estado:</mat-label>
+                      <mat-select matNativeControl  [(ngModel)]="ruta.estado">
+                        <mat-option value="HABILITADO" >HABILITADO</mat-option>
+                        <mat-option value="DESHABILITADO">DESHABILITADO</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </div-->
+        
+              
+               </div>
+      
+              <div class="row">
+              <div class="col-md-12 form-group">
+                <button mat-raised-button color="primary" style="float:right;" (click)="listaInformante()"><mat-icon>add</mat-icon> Agregar</button>
+              </div>
+              </div>
+
+              <div class="row">
+              <div class="col-md-12 full-width" *ngIf="dataSource2">
+                <mat-table id="tabla1"  [dataSource]="dataSource2"  class="mat-elevation-z8"  >
+                    <ng-container  matColumnDef="nro" >
+                        <mat-header-cell *matHeaderCellDef> Nro. </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;" data-label="nro" > 
+                          {{ (i+1)}}    
+                        </mat-cell>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="informante">
+                        <mat-header-cell *matHeaderCellDef> Informante </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="informante" > 
+                          {{element.informante.codigo_ipc}} &nbsp;
+                        
+                        </mat-cell>
+                    </ng-container>
+                      
+                    <ng-container matColumnDef="direccion">
+                        <mat-header-cell *matHeaderCellDef> Nombre Comercial </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="direccion"> 
+                          {{element.informante.nombre_comercial}} 
+                        </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="giro">
+                        <mat-header-cell *matHeaderCellDef> Giro </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="giro"> 
+                          {{element.informante.giro}} 
+                        </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="tipo_encuesta">
+                          <mat-header-cell *matHeaderCellDef> Tipo de Encuesta </mat-header-cell>
+                          <mat-cell *matCellDef="let element" data-label="tipo_encuesta"> 
+                            <mat-form-field class="full-width" appearance="outline">
+                            <mat-select matNativeControl [(ngModel)]="element.tipo_encuesta_id" matInput>
+                              <mat-option value="">Seleccionar</mat-option>
+                              <mat-option *ngFor="let summary of dataSource3" value={{summary.codigo}}>
+                                {{summary.descripcion}}</mat-option>
+                            </mat-select></mat-form-field>
+                          </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="observacion">
+                          <mat-header-cell *matHeaderCellDef> Observación </mat-header-cell>
+                          <mat-cell *matCellDef="let element" data-label="observacion"  style="padding-left: 0.3em;" > 
+                            <mat-form-field  appearance="outline">
+                            <textarea  type="text" [(ngModel)]="element.observacion" placeholder="Observación..."  matInput>{{element.observacion}} </textarea></mat-form-field>
+                          </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="accion">
+                            <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="accion" style="padding-left: 2rem;"> 
+                              <button  mat-raised-button color="warn" title="Eliminar" (click)="eliminarInformante(element.id)"><mat-icon>delete</mat-icon></button>
+                            </mat-cell>
+                    </ng-container>                      
+                  <mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></mat-header-row>
+                  <mat-row   *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+              </div>            
+              </div> 
+          
+              <div class="row"></div>
+
+              <div class="row">
+                 <div class="col-md-4 form-group"></div>
+                  <div class="col-md-3 form-group">
+                    <button mat-raised-button color="warn" color="warn" title="Cancelar" [routerLink]="['../../']" ><mat-icon>cancel</mat-icon>Cancelar</button>
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <button mat-raised-button color="primary" title="Guardar Cambios" (click)="EditarRutaDetalle(ruta.id)" ><mat-icon>save</mat-icon>Guardar</button>
+                  </div>
+              </div>
+
+      </div>
+    </mat-card-content>
+</mat-card>

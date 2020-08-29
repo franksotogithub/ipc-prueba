@@ -1,0 +1,130 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Lista Circuitos</mat-card-title>
+  </mat-card-header> 
+  
+  <mat-card-content>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Buscar:</mat-label>
+          <input matInput (keyup.enter)="filtrar($event)" placeholder="buscar">
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4 form-group">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Ciudad:</mat-label>       
+          <mat-select matNativeControl (selectionChange)="changeRuta($event)">
+              <mat-option *ngFor="let summary of dataSource3" value={{summary.codigo}}>
+                  {{summary.nombre}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      </div>
+
+      <div class="col-md-2 form-group " *ngIf="dataSource">
+      <button mat-raised-button color="primary" title="Agregar Circuito" [routerLink]="['create']" style="float: right;">
+          <mat-icon>add</mat-icon> Agregar
+      </button>
+      </div>
+    </div>
+
+    <div class="overlay"  *ngIf="ver">
+      <div class="center">
+        <mat-progress-spinner mode="indeterminate" style="margin:0 auto;"></mat-progress-spinner>
+        </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12 form-group " *ngIf="dataSource">
+        <mat-table  [dataSource]="dataSource"  class="mat-elevation-z8"  >
+                 
+          <ng-container  matColumnDef="nro">
+            <mat-header-cell *matHeaderCellDef> Nro. </mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index;" data-label="nro" > 
+              {{ (i+1)+(pag*dataSource1)}}    
+            </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="anio_base">
+            <mat-header-cell *matHeaderCellDef> Año Base</mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="anio_base"> 
+              {{element.anio_base}} 
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="circuito">
+            <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="circuito"> 
+              {{element.circuito}} 
+            </mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="nombre_circuito">
+            <mat-header-cell *matHeaderCellDef> Nombres </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="nombre_circuito"> 
+              {{element.nombre}} 
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ciudad_nombre">
+            <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
+            <mat-cell *matCellDef="let element" data-label="ciudad_nombre"> 
+              {{element.ciudad_nombre}} 
+            </mat-cell>
+          </ng-container>
+
+            <ng-container matColumnDef="descripcion">
+              <mat-header-cell *matHeaderCellDef> Descripcion </mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="descripcion"> 
+               {{element.descripcion}} 
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="fecha_inicio">
+              <mat-header-cell *matHeaderCellDef> Fecha Inicio </mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="fecha_inicio"> 
+               {{element.fecha_inicio}} 
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nro_informantes">
+              <mat-header-cell *matHeaderCellDef> Cant. Informantes </mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="nro_informantes"> 
+                {{element.nro_informantes}} 
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+              <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="estado"> 
+                {{element.estado}} 
+              </mat-cell>
+            </ng-container>
+
+             <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="acciones"> 
+                  <button mat-raised-button color="primary" title="Editar" [routerLink]="['edit', element.id]"><mat-icon>edit</mat-icon></button>&nbsp;
+                  <button mat-raised-button color="warn" title="Eliminar"  (click)="eliminarCircuito( element.id)"><mat-icon>delete</mat-icon></button>
+                
+                </mat-cell>
+              </ng-container>
+          
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+         
+            <mat-paginator [length]="dataSource2"
+              [pageSize]="dataSource1" (page)="getPaginatorData($event)" >
+            </mat-paginator>
+
+      </div>
+    </div>
+  </mat-card-content>
+
+
+</mat-card>

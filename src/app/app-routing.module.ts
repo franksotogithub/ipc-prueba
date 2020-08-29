@@ -29,6 +29,12 @@ const routes: Routes = [
     loadChildren: () => import('./tablas-maestras/tablas-maestras.module').then(m => m.TablasMaestrasModule)
   },
 
+  {
+    path:'programacion-circuitos',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./programacion-rutas/programacion-rutas.module').then(m => m.ProgramacionRutasModule)
+  },
+
   
   {
     path:'monitoreo',

@@ -23,6 +23,6 @@ export class DeleteMessageComponent implements OnInit {
   }
   
   closeDialog(opc: boolean){
-    this.dialogRef.close({ opc:opc});
+    this.dialogRef.close({opc:opc});
   }
 }
