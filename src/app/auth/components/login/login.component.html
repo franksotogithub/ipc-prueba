@@ -1,82 +1,72 @@
 
-<form [formGroup]="form" (ngSubmit)="login($event)" class="content" >
-<mat-card class="col-md-6">
-<mat-card-header > 
-    
+<form [formGroup]="form" (ngSubmit)="login($event)" class="content login-content" >
+<mat-card class="mat-elevation-z8">
+<mat-card-header >
+
     <mat-card-title  style="text-align: center!important;">
-       
-       
+
+
     </mat-card-title>
 
 </mat-card-header>
 <mat-card-content >
 
 <div class="row">
-    <div class="col-12" style="text-align: center!important">
-        <img src="./../../../../assets/logos/logo_inei.png" style="cursor:pointer;width:172px;height:114px;float:center;">
+    <div class="col-12 text-center mb-4">
+        <img class="w-50" src="./../../../../assets/logos/logo_inei.png">
     </div>
     <div class="col-12" style="text-align: center!important">
-        <h2>Iniciar Sesion</h2>
+        <h3 class="mb-4">Iniciar Sesion</h3>
     </div>
     <div class="col-12">
-      
-     
-        <mat-form-field appearance="fill">
 
+
+        <mat-form-field appearance="outline">
+            <mat-icon matSuffix>login</mat-icon>
             <mat-label>
                 Usuario
             </mat-label>
-            <input   placeholder="Escriba el usuario" formControlName="username" matInput type="text">
-        
+            <input class="input-login" placeholder="Escriba el usuario" formControlName="username" matInput type="text">
+
             <mat-error *ngIf="getUsername().hasError('required') && (getUsername().dirty || getUsername().touched)">
                 Este campo es requerido
             </mat-error>
             <mat-error *ngIf="getUsername().hasError('pattern') && (getUsername().dirty || getUsername().touched)">
                 No es un email valido
             </mat-error>
-    
+
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
+            <mat-icon matSuffix>lock</mat-icon>
             <mat-label>
                 Contraseña
             </mat-label>
-            <input  placeholder="Escriba la contraseña" formControlName="password" matInput type="password">
-            <mat-error *ngIf=" getPassword().hasError('required') && (getPassword().dirty || getPassword().touched)">
+            <input class="input-login" placeholder="Escriba la contraseña" formControlName="password" matInput type="password">
+            <mat-error class="pb-1" *ngIf=" getPassword().hasError('required') && (getPassword().dirty || getPassword().touched)">
                 Este campo es requerido
             </mat-error>
-            <mat-error *ngIf="getPassword().hasError('minlength') && (getPassword().dirty || getPassword().touched)">
+            <mat-error class="pb-1" *ngIf="getPassword().hasError('minlength') && (getPassword().dirty || getPassword().touched)">
                 La contraseña debe tener mas de 5 caracteres
             </mat-error>
         </mat-form-field>
 <mat-error > {{error_message}}</mat-error>
 
     <div class="row ">
-        <div class="col-md-6">
-            <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit" >Ingresar </button>
+        <div class="col-12 mb-2">
+            <button  mat-raised-button color="primary" type="submit" >Ingresar </button>
         </div>
-        <div class="col-md-6">
-            <a routerLink="../register" mat-raised-button color="warn"> Registro</a>
+        <div class="col-12">
+          <a class="stroked-button w-100" routerLink="../register"  mat-stroked-button color="primary" >Registro </a>
+
         </div>
-     
+
     </div>
         <app-loader></app-loader>
     </div>
-   
+
 
 </div>
-
-
 
 </mat-card-content>
-
 </mat-card>
-
-<div  class="col-md-6 ipc">
-    <img src="./../../../../assets/img/login_ipc.jpg" style="width:100%;height:100%;">
-<div>
-  
-</div>
-</div>
-
-    
 </form>
