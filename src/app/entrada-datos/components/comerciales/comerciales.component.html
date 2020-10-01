@@ -1,225 +1,324 @@
-
-    <mat-card>
+<mat-card>
       
-            <mat-card-header>
-                
-                <mat-card-title> 
+    <mat-card-header>
+        
+        <mat-card-title> 
+            
+          
+          
+
+         
+          
+ 
+        </mat-card-title>
+        
+           
+    </mat-card-header>
+
+    <mat-card-content >
+
+
+
+    <div *ngIf="informante">
+        <div class="row ">
+            <div class="col-md-6  header">
+               
                     <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon>
+                       
                     </button>
-                    Casa Comercial
-
-                  
-                    <button mat-raised-button color="primary"  (click)="getCurrentLocation()" >
-                        <mat-icon>location_on</mat-icon>
-                    </button>
-
-                   
-                </mat-card-title>
+                    
+                    <mat-slide-toggle
+                    class="example-margin"
+                    [(ngModel)]="cerrar"
+                    (ngModelChange)="confirmarCerrarInformante($event)"
+                    >
+                  Cerrar
+                </mat-slide-toggle>
+                    
                 
-                   
-            </mat-card-header>
-    
-            <mat-card-content >
-            <div *ngIf="informante">
-            <div class="row ">
-
-                <div class="col-md-6 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>ID:</mat-label>
-                        <button mat-icon-button matPrefix  [routerLink]="['../', preview]" >
-                            <mat-icon>keyboard_arrow_left</mat-icon>
-                        </button>
-                        <input  type="text" placeholder="ID"  [(ngModel)]="informante.id_directorio_ipc"  readonly  matInput>
-                        <button mat-icon-button matSuffix  [routerLink]="['../', next]" >
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                        </button>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-md-6 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>RUC:</mat-label>
-                        <input  type="text" placeholder="RUC"    [(ngModel)]="informante.ruc" readonly matInput>
-                    </mat-form-field>
-                </div>
-
-            
-
-                <div class="col-12 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Establecimiento:</mat-label>
-                        <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.establecimiento"  readonly matInput>
-                    </mat-form-field>
-                </div>
+               
+            </div>
+            <br>
+  
+            <div class="col-md-6 ">
                 
-    
-
-              
+                <button mat-raised-button [ngClass]="{
+                    'estado-finalizado': informante.estado === ESTADO.FINALIZADO,
+                    'estado-cerrado': informante.estado === ESTADO.CERRADO ,
+                    'estado-temporal': informante.estado === ESTADO.TEMPORAL ,
+                    'estado-proceso': (informante.estado === ESTADO.PROCESO || informante.estado === ESTADO.PENDIENTE),
+                    
+                    'full-width':true
+                }"  > 
                 <!--
-                <div class="col-md-4 form-group">
-                
-                    <mat-slide-toggle [(ngModel)]="isChecked">Finalizar </mat-slide-toggle>
-
-                
-                </div>
-        -->
-                <div class="col-md-12 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Direccion:</mat-label>
-                        <input  placeholder="Direccion"   [(ngModel)]="informante.direccion"  readonly matInput>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-md-6 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Giro:</mat-label>
-                        <input  placeholder="Giro"    [(ngModel)]="informante.giro"  readonly matInput >
-                    </mat-form-field>
-                </div>
-
-
-                <div class="col-2 form-group">
-                   
-                    
-                    <button mat-raised-button color="primary"   >
-                        <mat-icon>stop</mat-icon>
-                    </button>
-                   
-                   
-                        <!--<button mat-icon-button   >
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                        </button>-->
-                        <!--
-                        <mat-label>Establecimiento:</mat-label>
-                        <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.establecimiento"  readonly matInput>
-                        -->
-                       
-                </div>
-<!--
-                <div class="col-md-6 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Avance:</mat-label>
-                        <input  placeholder="Avance"   [(ngModel)]="informante.avance" readonly  matInput >
-                    </mat-form-field>
-                </div>
--->
-                <div class="col-md-12">
-                   
-                    <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
-                    
-                       
-                        <ng-container matColumnDef="orden">
-                            <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
-                            <mat-cell *matCellDef="let element"  data-label="Orden" > 
-                                {{element.orden}} 
-                            </mat-cell>
-                        </ng-container>
-
-                        <ng-container matColumnDef="art_id">
-                        <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
-                        <mat-cell *matCellDef="let element" data-label="Codigo"> 
-                            
-                            {{element.art_id}} 
-                        </mat-cell>
-                        </ng-container>
-                        
-                        <ng-container matColumnDef="art_desc">
-                            <mat-header-cell *matHeaderCellDef>Producto/articulo</mat-header-cell>
-                            <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
-                           
-                            {{element.art_desc}} 
-                            </mat-cell>
-                        </ng-container>
-
-                        
-                    <ng-container matColumnDef="precio">
-                        <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
-                        <mat-cell *matCellDef="let element" data-label="Presentacion"> 
-                            <mat-form-field class="full-width" appearance="outline">
-                            <input type="number"   [(ngModel)]="element.precio"  (change)="changeProducto(element,true)"  matInput>    
-                            
-                        </mat-form-field>
-                        </mat-cell>
+                    <ng-container *ngIf="informante.estado === ESTADO.FINALIZADO;else html">
+                        Informante Completado 
                     </ng-container>
+                    <ng-template #html>
+                        <ng-container *ngIf="informante.estado === ESTADO.CERRADO;else html22">
+                                Informante Cerrado !
+                        </ng-container>
+                        <ng-template #html22>
+                            Informante Incompleto !
+                        </ng-template>
+                    -->
+                    {{labelInformante }}
                     
-
-                    <ng-container matColumnDef="ce">
-                        <mat-header-cell *matHeaderCellDef>CE.</mat-header-cell>
-                        <!--
-                        <mat-cell *matCellDef="let element" data-label="ce" > 
-                         
-                        
-                            <mat-form-field class="full-width" appearance="outline">
-                                <input type="text"
-                                placeholder="ce"                                
-                                matInput           
-                                [matAutocomplete]="auto"  (input)="ceSearch($event)"  (focus)="focusCE()" value="{{element.ce_name}}" >
-                                <mat-autocomplete  [displayWith]="displayCE" #auto="matAutocomplete"   (optionSelected)="ceSelected(element,$event)"   >
-                                <mat-option *ngFor="let option of filterValue" [value]="option"  >
-                                    {{option.name}}
-                                </mat-option>
-                                </mat-autocomplete>
-
-                            </mat-form-field>
-                        </mat-cell>
--->
-
-                    
-                        <mat-cell *matCellDef="let element" data-label="ce" > 
-                            <mat-form-field class="full-width" appearance="outline">
-                                 
-                                <mat-select [(ngModel)]="element.ce" (change)="changeProducto(element,false)">
-                                    <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
-                                </mat-select>
-
-                                   
-                            </mat-form-field>
-
-                            
-                        </mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="observacion">
-                        <mat-header-cell *matHeaderCellDef>Observacion</mat-header-cell>
-                        <mat-cell *matCellDef="let element" data-label="observacion"> 
-                            <mat-form-field class="full-width" appearance="outline">
-                                <input type="text"  [(ngModel)]="element.observacion" (change)="changeProducto(element,false)" matInput >   
-                            </mat-form-field>
-                            
-                        </mat-cell>
-                    </ng-container>
-                    
-                            <ng-container  matColumnDef="id">
-                                <mat-header-cell *matHeaderCellDef>Accion </mat-header-cell>
-                                <mat-cell *matCellDef="let element" data-label="accion"> 
-                                
-                                <button mat-raised-button color="primary" [routerLink]="['producto/', element.id]"><mat-icon>edit</mat-icon></button>
-                                
-                                
-                                </mat-cell>
-                            </ng-container>
-        
-                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                    </mat-table>
-        
-        
-                </div>
-
-            </div>
-
+                </button>
               
-            
             </div>
-            </mat-card-content>
-       
+        </div>
+        <br>
+    <div class="row ">
+        <div class="col-6 form-group">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Orden:</mat-label>
+                <button mat-icon-button matPrefix  [routerLink]="['../', preview]" >
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+                <input  type="text" placeholder="ID"  [(ngModel)]="informante.orden"   matInput>
+                <button mat-icon-button matSuffix  [routerLink]="['../', next]" >
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="col-6 form-group">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Fecha programada:</mat-label>
+                <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.fecha_inicio"  [disabled]="true" matInput>
+            </mat-form-field>
+        </div>
+        <!--
+        <div class="col-md-6 form-group">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>RUC:</mat-label>
+                <input  type="text" placeholder="RUC"    [(ngModel)]="informante.ruc" readonly matInput>
+            </mat-form-field>
+        </div>
+-->
+    
+<div class="col-6 form-group">
+    <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Circuito:</mat-label>
+        <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.circuito_nombre" [disabled]="true" matInput>
+    </mat-form-field>
+</div>
 
-
-        <mat-card-actions>
+<div class="col-6 form-group">
+    <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Investigador:</mat-label>
+        <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.investigador_nombre"  [disabled]="true" matInput>
+    </mat-form-field>
+</div>
+        <div class="col-12 form-group">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Establecimiento:</mat-label>
+                <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.informante_nombre"  [disabled]="true" matInput>
+            </mat-form-field>
+        </div>
         
-        </mat-card-actions>
-      </mat-card>
-  
-  
-  
-  
+
+
+      
+        <!--
+        <div class="col-md-4 form-group">
+        
+            <mat-slide-toggle [(ngModel)]="isChecked">Finalizar </mat-slide-toggle>
+
+        
+        </div>
+-->
+        <div class="col-md-12 form-group">
+            <mat-form-field class="full-width"  appearance="outline">
+                <mat-label>Direccion:</mat-label>
+                <input  placeholder="Direccion"   [(ngModel)]="informante.informante_direccion"  [disabled]="true" matInput>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-12 form-group">
+            <mat-form-field class="full-width"  appearance="outline">
+                <mat-label>Giro:</mat-label>
+                <input  placeholder="Giro"    [(ngModel)]="informante.informante_giro"  [disabled]="true" matInput >
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-12 ">
+           
+                <mat-label>Avance: {{avance}} de {{total}}</mat-label>
+              
+           
+        </div>
+       
+           
+     
+               
+        <div class="col-md-12">
+            <mat-form-field>
+              <mat-select placeholder=" Estados" [formControl]="estados" multiple (selectionChange)="filterEstados(estados)">
+                <mat-select-trigger>
+                  {{estados.value ? estados.value[0] : ''}}
+                  <span *ngIf="estados.value?.length > 1" class="example-additional-selection">
+                    (+{{estados.value.length - 1}} {{estados.value?.length === 2 ? 'other' : 'others'}})
+                  </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let estado of estadosList" [value]="estado">{{estado}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+        </div>
+
+
+
+
+        <div class="col-md-12">
+           
+            <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
+            <!--
+
+  id: number;
+  det_ejecucion: number;
+  orden:number;
+  precio:string;
+  precio_anterior:number;
+  cc:number;
+  ce:number;
+  ce_anterior:number;
+  peso_gr:number;
+  perso_kl:number;
+  fecha_registro:string;
+  fecha_sube_dato:string;
+  estado:string;
+  variedad_nombre:string;
+  cod_mvariedad:string;
+  tipo_usuario:string;
+
+  lote: string;
+  anio: string;
+  mes: string;
+  nro_semana: number;
+  valor: number;
+  precio_compra: number;
+  peso_gr_mercado: number;
+  variedad:VariedadModel;
+
+            -->
+               
+                <ng-container matColumnDef="orden">
+                    <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
+                    <mat-cell *matCellDef="let element"  data-label="Orden" > 
+                        {{element.orden}} 
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="cod_mvariedad">
+                <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="Codigo"> 
+                    
+                    {{element.cod_mvariedad}} 
+                </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="variedad_nombre">
+                    <mat-header-cell *matHeaderCellDef>Producto/articulo/variedad</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
+                        {{element.variedad.clasificacion.producto_desc}} /
+                        {{element.variedad.clasificacion.articulo_desc }} /{{element.variedad.nombre }} 
+                    </mat-cell>
+                </ng-container>
+
+                
+            <ng-container matColumnDef="precio">
+                <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="Presentacion"> 
+                    <mat-form-field class="full-width" appearance="outline">
+                       
+                    <input appOnlyNumber type="text"   [(ngModel)]="element.precio"  (change)="changeMovMercadoCasasModel(element,true)"  [disabled]="disabled" matInput>    
+                    
+                </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            
+
+            <ng-container matColumnDef="ce">
+                <mat-header-cell *matHeaderCellDef>CE.</mat-header-cell>
+                <!--
+                <mat-cell *matCellDef="let element" data-label="ce" > 
+                 
+                
+                    <mat-form-field class="full-width" appearance="outline">
+                        <input type="text"
+                        placeholder="ce"                                
+                        matInput           
+                        [matAutocomplete]="auto"  (input)="ceSearch($event)"  (focus)="focusCE()" value="{{element.ce_name}}" >
+                        <mat-autocomplete  [displayWith]="displayCE" #auto="matAutocomplete"   (optionSelected)="ceSelected(element,$event)"   >
+                        <mat-option *ngFor="let option of filterValue" [value]="option"  >
+                            {{option.name}}
+                        </mat-option>
+                        </mat-autocomplete>
+
+                    </mat-form-field>
+                </mat-cell>
+-->
+
+            
+                <mat-cell *matCellDef="let element" data-label="ce" > 
+                    <mat-form-field class="full-width" appearance="outline">
+                         
+                        <mat-select [(ngModel)]="element.ce" (ngModelChange)="changeMovMercadoCasasModel(element,false)" [disabled]="disabled">
+                            <mat-option *ngFor="let c of ces" [value]="c.id">{{c.id}}</mat-option>
+                        </mat-select>
+
+                           
+                    </mat-form-field>
+
+                    
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="observacion">
+                <mat-header-cell *matHeaderCellDef>Observacion</mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="observacion"> 
+                    <mat-form-field class="full-width" appearance="outline">
+                        <input type="text"  [(ngModel)]="element.observacion" (change)="changeMovMercadoCasasModel(element,false)" [disabled]="disabled" matInput  >   
+                    </mat-form-field>
+                    
+                </mat-cell>
+            </ng-container>
+            
+                    <ng-container  matColumnDef="accion">
+                        <mat-header-cell *matHeaderCellDef>Accion </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="accion"> 
+                        
+                        <button mat-button color="primary" [routerLink]="['producto/', element.orden]" [disabled]="disabled"><mat-icon>edit</mat-icon></button>
+                        
+                        
+                        </mat-cell>
+                    </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let element; columns: displayedColumns;"  [ngClass]="{
+                    'estado-finalizado': element.estado === ESTADO.FINALIZADO,
+                    'estado-cerrado': element.estado === ESTADO.CERRADO,
+                    'estado-temporal': element.estado === ESTADO.TEMPORAL ,
+                    'estado-proceso': (element.estado === ESTADO.PROCESO || element.estado === ESTADO.PENDIENTE)
+                     
+                  }"
+                   ></mat-row>
+            </mat-table>
+
+
+        </div>
+
+    </div>
+
+      
+    
+    </div>
+    </mat-card-content>
+
+
+
+<mat-card-actions>
+
+</mat-card-actions>
+</mat-card>

@@ -31,5 +31,5 @@ export class  Utils {
         return [idPreview,idNext];
     
       }
-    
+
 }

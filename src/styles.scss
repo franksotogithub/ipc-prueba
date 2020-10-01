@@ -115,10 +115,11 @@ button:focus{
     /*color: $accent*/
     /*background: mat-color($accent,300) /*$accent-color;*/
   }
-
+/*
   .form-group {
-    margin-bottom: 0.5rem; 
-}
+    margin-bottom: 0.1rem; 
+  
+}*/
 
 .mat-table {
   margin-bottom: 0.5rem; 
@@ -130,4 +131,62 @@ button:focus{
 
 .mat-form-field-appearance-fill .mat-form-field-infix {
   padding: 0.25em 0 0.25em 0;
+}
+/*
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.5em 0 0.5em 0;
+}*/
+/*
+.mat-form-field-appearance-outline:focus{
+  outline:none;
+}*/
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.mat-form-field-outline:focus {
+  color: white!important;
+}
+
+.mat-form-field-outline:hover {
+  color: white!important;
+}
+
+
+.mat-footer-row, .mat-row {
+  min-height: 0px;
+}
+
+.form-group {
+  margin-bottom: -0.5rem;
+}
+
+
+.estado-finalizado{
+  background: lightgreen;
+  font-weight: bold;
+  color: darkgreen;
+}
+
+.estado-proceso{
+  background-color: mat-color($warn,100);
+  font-weight: bold;
+  color: mat-color($warn,900);
+}
+.estado-cerrado{
+  background-color: rgb(203, 190, 230);
+  font-weight: bold;
+  color: darkviolet;
+}
+
+.estado-temporal{
+  background-color: palegoldenrod;
+  font-weight: bold;
+  color: darkorange;
 }

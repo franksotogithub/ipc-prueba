@@ -6,24 +6,44 @@
       </mat-card-header>
 
       <mat-card-content>
-        <div class="row align-items-center ">
-          <div class="col-md-4 form-group">
-             <button  mat-raised-button class="form-control"  color ="primary" (click)="descargando()" ><mat-icon>cloud_download</mat-icon>Descargando Datos</button>
-          </div>
-          <div class="col-md-4 form-group">
-            <button  mat-raised-button  class="form-control" color ="primary" (click)="cargando()" ><mat-icon>cloud_upload </mat-icon>Subiendo Datos</button>
-          </div>
-          <div class="col-md-4 form-group">
-            <button  mat-raised-button class="form-control"  color ="primary" (click)="limpiarDatos()" ><mat-icon>clear_all</mat-icon>Limpiando Datos</button>
+        <!--
+        <div class="example-button-row">
+          <button mat-raised-button>Basic</button>
+          <button mat-raised-button color="primary">fgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgdfgfdg</button>
+          <button mat-raised-button color="accent">Accent</button>
+          <button mat-raised-button color="warn">Warn</button>
+          <button mat-raised-button disabled>Disabled</button>
+          <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
+        </div>
+      -->
+        <div class="row ">
+         <div class="col-md-6">
+          <button  mat-raised-button  class="full-width" color ="primary" (click)="descargando()" ><mat-icon>cloud_download</mat-icon>Descargando Datos</button>
          </div>
+
+         <div class="col-md-6">
+          <button  mat-raised-button  class="full-width" color ="primary" (click)="cargando()" ><mat-icon>cloud_upload </mat-icon>Subiendo Datos</button>
+        </div>
+
+           <!--  <button  mat-raised-button  class="full-width" color ="primary" (click)="descargando()" ><mat-icon>cloud_download</mat-icon>Descargando Datos</button>
+         
+        
+            <button  mat-raised-button  class="full-width" color ="primary" (click)="cargando()" ><mat-icon>cloud_upload </mat-icon>Subiendo Datos</button>
+         
+         
+            <button  mat-raised-button class="full-width" color ="primary" (click)="limpiarDatos()" ><mat-icon>clear_all</mat-icon>Limpiando Datos</button>
        
-          <div class="col-md-12 form-group">
+       
+       
+            
+           -->
+           <div class="col-md-12">
             <app-loader></app-loader>
          
             <app-notification [message]="message" [message_error]="messageError"></app-notification>
-            
-            
-          </div>
+
+           </div>
+           
           
         </div>
        

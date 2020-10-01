@@ -15,7 +15,11 @@ import { ComercialesListComponent } from './components/comerciales-list/comercia
 
 import {ProductoEditComponent,CameraDialogComponent} from './components/producto-edit/producto-edit.component';
 import {AuthModule} from './../auth/auth.module';
+/*import { InformanteConfirmDialogComponent } from './components/informante-confirm-dialog/informante-confirm-dialog.component';*/
 
+import {ConfirmDialogComponent} from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { MoneyDialogComponent } from 'src/app/shared/components/money-dialog/money-dialog.component';
+import { AudioDialogComponent } from 'src/app/shared/components/audio-dialog/audio-dialog.component';
 @NgModule({
   declarations: [MercadosComponent, 
     
@@ -25,6 +29,7 @@ import {AuthModule} from './../auth/auth.module';
      ComercialesListComponent, 
      ProductoEditComponent,
      CameraDialogComponent,
+     
     ],
   imports: [
     CommonModule,
@@ -37,7 +42,11 @@ import {AuthModule} from './../auth/auth.module';
     AuthModule
   ],
   entryComponents: [
-    CameraDialogComponent
+    CameraDialogComponent,
+    ConfirmDialogComponent,
+    MoneyDialogComponent,
+    AudioDialogComponent,
+
  ]
   /*providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },    

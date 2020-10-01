@@ -20,13 +20,13 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatTableResponsiveModule } from './../shared/directive/mat-table-responsive/mat-table-responsive.module';
+
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [],
   imports: [
@@ -50,12 +50,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatStepperModule,
     MatAutocompleteModule,
-    MatTableResponsiveModule,
+    
     MatSlideToggleModule,
     MatDialogModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DragDropModule,
   ],
   exports: [
     MatButtonModule,
@@ -77,12 +78,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatStepperModule,
     MatAutocompleteModule,
-    MatTableResponsiveModule,
+    
     MatSlideToggleModule,
     MatDialogModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DragDropModule
   ]
 })
 export class MaterialModule { }

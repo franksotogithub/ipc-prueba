@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Audio</h1>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="col-sm-4">
+      <button mat-raised-button  color="primary" (click)="initiateRecording()"  *ngIf="!recording">  <mat-icon>not_started</mat-icon> Start Recording </button>
+      <button mat-raised-button  color="warn" (click)="stopRecording()"  *ngIf="recording"> <mat-icon>stop</mat-icon> Stop Recording </button>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="recording">
+        <button mat-icon-button aria-label="grabando">
+          <mat-icon>keyboard_voice</mat-icon> {{display}}
+        </button>
+      </div>
+
+      <div *ngIf="!recording">
+        <audio controls="audio" class="full-width" *ngIf="url">
+          <source [src]="sanitize(url)" type="audio/wav">
+      </audio>
+      </div>
+     
+    </div>
+  </div>
+    
+    
+  
+  
+  
+  
+  
+  
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button  color="warn" (click)="confirmar(false)">Cerrar</button>
+  <button mat-raised-button color="primary" (click)="confirmar(true)">Guardar</button>
+</div>

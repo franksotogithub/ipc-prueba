@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from './../../../environments/environment';
-import { Articulo} from './../models/articulo.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArticuloService {
-  ulr_api = `${environment.url_api}/api/v1`;
+export class TestService {
+  ulr_api = `http://localhost:3000`;
   constructor(private http: HttpClient) { }
 
-  getAllArticulos(pageSize: number,pageIndex :number,query:string) {
-    return this.http.get<any>(`${this.ulr_api}/articulo/?page_size=${pageSize}&page=${pageIndex}&q=${query}`);
+  testInit() {
+    let body ={
+      'document_number' : "75402332",
+      'document_type': 1,
+      'phone' : "941923262" 
+    }
+    return this.http.post<any>(`${this.ulr_api}/api/employees/register`,body);
   }
   
-  getArticulo(id:number) {
-    return this.http.get<Articulo>(`${this.ulr_api}/articulo/${id}`);
-  }
+  
 }

@@ -3,35 +3,59 @@
 
   
     <div class="wrapper" (window:resize)="onResize($event)">
-      <webcam  [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
-              [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
-              [videoOptions]="videoOptions"
-              [imageQuality]="1"
-              (cameraSwitched)="cameraWasSwitched($event)"
-              (initError)="handleInitError($event)"
-      ></webcam>
-      <!--
-      <br/>
 
-      <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
-      <button class="actionBtn" (click)="toggleWebcam();">Toggle Webcam</button>
-      <br/>
-      <button class="actionBtn" (click)="showNextWebcam(true);" [disabled]="!multipleWebcamsAvailable">Next Webcam</button>
-      <input id="cameraSwitchCheckbox" type="checkbox" [(ngModel)]="allowCameraSwitch"><label for="cameraSwitchCheckbox">Allow Camera Switch</label>
-      <br/>
-     
-      <button class="actionBtn" (click)="guardar();">Guardar</button>
-      -->
-    </div>
+      <ng-container *ngIf="camera;else html">
+
+                  <webcam  [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                  [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                  [videoOptions]="videoOptions"
+                  [imageQuality]="1"
+                  (cameraSwitched)="cameraWasSwitched($event)"
+                  (initError)="handleInitError($event)"
+          ></webcam>
+
+
+          <div class ='tools'>
+
+            <div class="item">
+              <button mat-raised-button (click)="guardar()" ><mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon></button>
+              
+            </div>
+            <div class="item">
+              <span class="dot" (click)="triggerSnapshot();"></span>
+            </div>
+
+            
+            <div class="snapshot item" (click)="openPhoto()" > 
+              <ng-container *ngIf="imageAsDataUrl;else html1">
+                <img [src]="imageAsDataUrl"/>
+              </ng-container>
+              <ng-template #html1>
+                <img src='assets/img/img-default.jpg'/>
+              </ng-template>  
+            </div>
+
+            
+          </div>
+
+      </ng-container>
+
+      <ng-template #html>
+          <div class="wrapper" (window:resize)="onResize($event)">
+            <img [src]="imageAsDataUrl"/>
+          </div>
+          <div class ='tools'>
+
+            <div class="item">
+              <button mat-raised-button (click)="back()" ><mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon></button>
+              
+            </div>
+           
+
+            
+          </div>
+
+
+      </ng-template>
+ 
   </div>
-  <!--
-  <div class="snapshot" *ngIf="webcamImage">
-    <h2>Foto tomada</h2>
-    <img [src]="webcamImage.imageAsDataUrl"/>
-  </div>
-  
-  <h4 *ngIf="errors.length > 0">Messages:</h4>
-  <ul *ngFor="let error of errors">
-    <li>{{error | json}}</li>
-  </ul>
-  -->

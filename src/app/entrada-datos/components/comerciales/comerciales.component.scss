@@ -1,10 +1,10 @@
-/*@import  './../../../../main-theme.scss';*/
+@import  './../../../../main-theme.scss';
   .mat-column-orden {
-    flex: 0 0 100px !important;
+    flex: 0 0 50px !important;
     white-space: unset !important;
 
   }
-  .mat-column-art_id {
+  .mat-column-cod_mvariedad {
     flex: 0 0 100px;
     white-space: unset !important;
   }
@@ -14,10 +14,17 @@
 
   }
   .mat-column-ce {
+    flex: 0 0 50px !important;
     margin: 0px 5px;
   }
-  /*
-  md-select-menu md-option:focus:not([selected]) {
-    background: rgb(238,238,238);
-  }*/
 
+
+
+
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.mat-button-base {
+  margin: 8px 8px 8px 0;
+}

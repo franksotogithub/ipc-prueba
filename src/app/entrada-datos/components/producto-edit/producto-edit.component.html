@@ -2,9 +2,8 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title> 
-                <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon>
-                </button>
-                Casa Comercial
+               
+
             </mat-card-title>
             
             
@@ -12,20 +11,155 @@
         </mat-card-header>
 
         <mat-card-content >
-            <div *ngIf="informante && producto">
-            <div class="row ">
+            <div *ngIf="informante && movMercadoCasas">
+           
 
-                
-
-                <div class="col-md-4 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
+                <div class="row ">
+                    <div class="col-2 ">
+                       
+                        <button mat-raised-button color="primary" [routerLink]="['../../']" ><mat-icon>keyboard_backspace</mat-icon>
+                        </button>
+                            
+                        
+                       
+                    </div>
+                    
+          
+                    <div class="col-10 ">
+                        
+                                
+                <button mat-raised-button class="full-width" [ngClass]="{
+                    'estado-finalizado': movMercadoCasas.estado === ESTADO.FINALIZADO,
+                    'estado-temporal': movMercadoCasas.estado === ESTADO.TEMPORAL,
+                    'estado-cerrar': movMercadoCasas.estado === ESTADO.CERRADO,
+                    'estado-proceso': (movMercadoCasas.estado === ESTADO.PROCESO || movMercadoCasas.estado === ESTADO.PENDIENTE)
+                  }"  *ngIf="movMercadoCasas"> 
+                  {{labelEstado}}
+              
+                </button >
+                      
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                <div class="col-6 form-group">
+                    <mat-form-field class="full-width" appearance="outline">
 
                         <button mat-icon-button matPrefix  [routerLink]="['../', preview]" >
                             <mat-icon>keyboard_arrow_left</mat-icon>
                         </button>
 
                         <mat-label>Orden:</mat-label>
-                        <input  placeholder="Orden"   [(ngModel)]="producto.orden"  readonly matInput>
+                        <input  placeholder="Orden"   [(ngModel)]="movMercadoCasas.orden"   matInput>
+                        <button mat-icon-button matSuffix  [routerLink]="['../', next]" >
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                        </button>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-3 form-group">
+                    
+                    <button mat-raised-button  class="full-width" (click)="openCamera()" color="primary"> <mat-icon>photo</mat-icon></button>
+                
+            </div>
+              
+            <div class="col-3 form-group">
+                    
+                <button mat-raised-button  class="full-width" (click)="openAudio()" color="primary"> <mat-icon>audiotrack</mat-icon></button>
+            
+        </div>
+                <div class="col-12 form-group">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Codigo:</mat-label>
+                        <input  placeholder="Codigo"    [(ngModel)]="movMercadoCasas.cod_mvariedad"  [disabled]="true" matInput >
+                    </mat-form-field>
+                </div>
+
+           
+
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Producto:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.variedad.clasificacion.producto_desc" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Articulo:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.variedad.clasificacion.articulo_desc" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Variedad Esp.:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.variedad_nombre" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Marca:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.variedad_nombre" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+                
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Modelo:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_modelo" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Capacidad/Tam:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_capacidad" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Presentacion:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_presentacion" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Origen:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_origen" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 form-group">
+                    <mat-form-field  class="full-width" appearance="outline">
+                        <mat-label>Otros detalles:</mat-label>
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_otros_detalles" [disabled]="true"  matInput >
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Precio:</mat-label>
+                        <input appOnlyNumber type="text" placeholder="Precio"  
+                        (change)="changeMovMercadoCasasModel(movMercadoCasas,true)" 
+                         [(ngModel)]="movMercadoCasas.precio"   matInput>
+                         
+                         <button mat-icon-button matSuffix  (click)="convertMoneda()" >
+                            <mat-icon>attach_money</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+
+                <!--
+
+           <div class="col-6 form-group">
+                    <mat-form-field class="full-width" appearance="outline">
+
+                        <button mat-icon-button matPrefix  [routerLink]="['../', preview]" >
+                            <mat-icon>keyboard_arrow_left</mat-icon>
+                        </button>
+
+                        <mat-label>Orden:</mat-label>
+                        <input  placeholder="Orden"   [(ngModel)]="movMercadoCasas.orden"   matInput>
                         <button mat-icon-button matSuffix  [routerLink]="['../', next]" >
                             <mat-icon>keyboard_arrow_right</mat-icon>
                         </button>
@@ -33,74 +167,25 @@
                     </mat-form-field>
                 </div>
 
-              
-                <div class="col-md-4 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Codigo:</mat-label>
-                        <input  placeholder="Codigo"    [(ngModel)]="producto.art_id"  readonly matInput >
-                    </mat-form-field>
-                </div>
 
-                <div class="col-md-4 form-group">
-                    
-                        <button mat-raised-button (click)="openCamera()" color="primary"> <mat-icon>photo</mat-icon></button>
-                    
-                </div>
-
-                <div class="col-md-12 form-group">
-                    <mat-form-field  class="full-width" appearance="fill">
-                        <mat-label>Producto:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="producto.art_desc" readonly  matInput >
-                    </mat-form-field>
-                </div>
-                <!--
-                <div class="col-12 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Marca:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="producto.marca" readonly  matInput >
-                    </mat-form-field>
-                </div>
-
-                <div class="col-12 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Cap/tam:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="producto.cap" readonly  matInput >
-                    </mat-form-field>
-                </div>
-
-                <div class="col-12 form-group">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Presentacion:</mat-label>
-                        <input  placeholder="Presentacion"   [(ngModel)]="producto.presentacion" readonly  matInput >
-                    </mat-form-field>
-                </div>
--->
-                <div class="col-md-12 form-group">
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Precio:</mat-label>
-                        <input  type="number" placeholder="Precio"  (change)="change(producto)"  [(ngModel)]="producto.precio"  matInput>
-                    </mat-form-field>
-                </div>
+                -->
 
                 <div class="col-md-12 form-group">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>CE:</mat-label>
-                        <!--<input  placeholder="CE" [(ngModel)]="producto.ce"  matInput>-->
-
-                        <mat-select [(ngModel)]="producto.ce" (change)="change(producto)">
-                            <mat-option *ngFor="let c of ces" [value]="c.id">{{c.name}}</mat-option>
+                        <mat-select [(ngModel)]="movMercadoCasas.ce" (ngModelChange)="changeMovMercadoCasasModel(movMercadoCasas)">
+                            <mat-option *ngFor="let c of ces" [value]="c.id">{{c.id}}: {{c.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
-
                 
                 <div class="col-md-12 form-group">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Observacion:</mat-label>
-                        <textarea matInput  [(ngModel)]="producto.observacion" (change)="change(producto)" ></textarea>
+                        <textarea matInput  [(ngModel)]="movMercadoCasas.observacion" (change)="changeMovMercadoCasasModel(movMercadoCasas)" ></textarea>
                     </mat-form-field>
                 </div>
-
+            
       
             </div>
 

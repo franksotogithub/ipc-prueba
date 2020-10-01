@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Convertir Moneda</h1>
+<div mat-dialog-content>
+  <!--<div class="row">
+    <div class="col-12">
+     
+     
+            <mat-label>Dolar estadounidense :</mat-label>
+            <input  type="text" appOnlyNumber placeholder="Precio"  
+            [(ngModel)]="monedaExtranjera"
+            (change)="changePrecio()" 
+           matInput>
+             
+           
+     
+          <mat-label>Tipo de cambio:</mat-label>
+          <input  type="text"  appOnlyNumber placeholder="Precio" 
+          [(ngModel)]="tipoCambio" 
+          (ngModelChange)="changePrecio()" 
+             matInput>
+    
+        <mat-form-field  >
+          <mat-label>Sol Peruano:</mat-label>
+          <input  type="text"  appOnlyNumber placeholder="Precio"  
+        
+           [(ngModel)]="monedaNacional"   matInput>
+          
+      </mat-form-field>
+
+    
+    </div>
+
+  </div>-->
+
+  
+  <div class="row mb-1">
+    
+      <label class="col-6 ">Dolar estadounidense</label>
+      <div class="col-6">
+        <input appOnlyNumber type="text"  class="form-control"     [(ngModel)]="monedaExtranjera"
+        (change)="changePrecio()"  >
+      </div>
+   
+  </div>
+   <div class="row mb-1" >
+      <label  class="col-6 ">Tipo de cambio</label>
+      <div class="col-6">
+        <input appOnlyNumber type="text" class="form-control"    [(ngModel)]="tipoCambio" 
+        (ngModelChange)="changePrecio()"   >
+      </div>
+    </div>
+    <div class="row mb-1" >
+      <label  class="col-6 ">Sol Peruano:</label>
+      <div class="col-6">
+        <input appOnlyNumber type="text" class="form-control"     [(ngModel)]="monedaNacional"
+         >
+      </div>
+    </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button  color="warn" (click)="confirmar(false)">No </button>
+  <button mat-raised-button color="primary" (click)="confirmar(true)">OK</button>
+</div>

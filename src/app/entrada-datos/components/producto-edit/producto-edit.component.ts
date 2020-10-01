@@ -2,13 +2,25 @@ import { Component, OnInit ,ViewChild, ElementRef ,Inject, HostListener} from '@
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Producto} from './../../../core/models/producto.model';
 import { Informante } from 'src/app/core/models/informante.model';
-import { IdbService } from 'src/app/core/services/idb.service';
+import { IdbService } from 'src/app/core/services/idb/idb.service';
 import { ProgramacionRuta} from './../../../core/models/programacionRuta.model';
 import {MatDialog} from '@angular/material/dialog';
 import {Subject, Observable} from 'rxjs';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Utils} from './../../../shared/class/utils';
+import { DetEjecucionCircuitoResquest } from 'src/app/core/models/det-ejecucion-circuito/det-ejecucion-circuito.request';
+import { TipoEncuesta } from 'src/app/shared/enum/tipo-encuesta.enum';
+import { DetEjecucionCircuitoModel } from 'src/app/core/models/det-ejecucion-circuito/det-ejecucion-circuito.model';
+import { MovMercadoCasasModel } from 'src/app/core/models/mov_mercado_casas/mov-mercado-casas.model';
+import { UtilHelper } from 'src/app/util/util.helper';
+import { MovMercadoCasasRequest } from 'src/app/core/models/mov_mercado_casas/mov_mercado_casas.request';
+import { TablesDB } from 'src/app/shared/enum/tables-db.enum';
+import { LatLong } from 'src/app/core/models/generic/lat-long';
+import { Estado } from 'src/app/shared/enum/estado.enum';
+import { OnDestroy } from '@angular/core';
+import { MoneyDialogComponent } from 'src/app/shared/components/money-dialog/money-dialog.component';
+import { AudioDialogComponent } from 'src/app/shared/components/audio-dialog/audio-dialog.component';
 
 @Component({
   selector: 'app-producto-edit',
@@ -17,18 +29,38 @@ import { Utils} from './../../../shared/class/utils';
 })
 export class ProductoEditComponent implements OnInit {
   id
-  idProducto;
-  producto:Producto;
-  informante:Informante;
+  ordenProducto;
+  movMercadoCasas:MovMercadoCasasModel=new MovMercadoCasasModel();
+  movMercadoCasasModelList : MovMercadoCasasModel[];
+  informante:DetEjecucionCircuitoModel;
   preview;
   next;
-  ces =[
-    {id:"N" ,name:"Dato normal"},
-    {id:"O" ,name:"Precio estacional "},
-    {id:"S" ,name:" Supervisado en el mes 'n' "},
-    {id:"T" ,name: "Temporal dato que se repite"}  
-
+  ces = [
+    { id: 'N', name: 'Dato normal' },
+    { id: 'T', name: 'Temporal dato que se repite' },
+    { id: 'S', name: 'Supervisado en el mes' },
+    { id: 'O', name: 'Precio estacional' },
+    { id: 'F', name: 'Cerrado' },
   ];
+  ESTADO=Estado;
+  total:number=0;
+  avance:number=0;
+  cerrar:boolean=false;
+  disabled=false;
+
+
+  listEstado = [
+    { estado: Estado.FINALIZADO, label: 'Orden Finalizada' },
+    { estado: Estado.PENDIENTE, label: 'Orden Pendiente' },
+    { estado: Estado.TEMPORAL, label: 'Orden Temporal' },
+    { estado: Estado.CERRADO, label: 'Orden Cerrada' },
+  ];
+  labelEstado = '';
+
+  estadosList: string[] = this.listEstado.map((e) => {
+    return e.estado;
+  });
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private idbService:IdbService,
@@ -39,62 +71,268 @@ export class ProductoEditComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
       this.id = parseInt(params.id);
-      this.idProducto = parseInt(params.idProducto);
-
-
-      this.idbService.programacionRutas$.subscribe((datos:Array<ProgramacionRuta> )=>{
-        
-        if (datos.length>0){
-          let programacionRuta=datos[0];
-
-          let informantes = Object.keys(programacionRuta.informantes)
-          .map(i => programacionRuta.informantes[i])
-          
-          this.informante = informantes.find((e:Informante)=>{
-            return e.id_directorio_ipc === this.id
-            });
-          }
-      }); 
-
-
-      this.idbService.productos$.subscribe((productos:Producto[])=>{
-        productos = productos.filter((p)=>p.informante_id==this.id);
-        this.producto= productos.find((p)=>p.id==this.idProducto);     
-        [this.preview,this.next] = Utils.getIdsNextPreview(productos,this.idProducto,'id');
-
-      });
+      this.ordenProducto = params.idProducto;
+      this.getInformantesCasasComerciales();     
       
     });
 
    }
 
   ngOnInit() {
+
   }
 
 
+  getInformantesCasasComerciales() {
+  
+    
+    this.idbService
+    .getAllData(TablesDB.DET_EJEC_CIRCUITO)
+    .then((values: DetEjecucionCircuitoResquest[]) => {
+      
+      let informantes = values
+        .filter((i) => {
+          return i.tipo_encuesta === TipoEncuesta.CASAS_COMERCIALES;
+        })
+        .map((e) => {
+          return new DetEjecucionCircuitoModel(e);
+        })
+
+
+      this.informante = informantes.find((e) => {
+        return e.orden == this.id;
+      });
+
+
+      this.getMovMercadoCasas();
+    });
+
+
+  }
+
+  getMovMercadoCasas(){
+
+    this.idbService
+    .getAllData(TablesDB.MOV_MERC_CASAS)
+    .then((values: MovMercadoCasasRequest[]) => {
+      this.movMercadoCasasModelList = values
+        .filter((p) => {
+          return p.det_ejecucion == this.informante.id;
+        })
+        .map((p) => {
+          return new MovMercadoCasasModel(p);
+        })
+        .sort((a, b) => {
+          if (a.orden > b.orden) {
+            return 1;
+          }
+          if (a.orden < b.orden) {
+            return -1;
+          }
+
+          return 0;
+        });
+
+      this.movMercadoCasas= this.movMercadoCasasModelList.find((p)=>p.orden==this.ordenProducto);
+      [this.preview, this.next]=UtilHelper.getIdsNextPreview(this.movMercadoCasasModelList,this.ordenProducto,'orden');
+
+      this.getEstadoMovCasas();
+
+    });
+  }
+
+
+  changeEstadoInformante() {
+    this.avance = this.movMercadoCasasModelList.filter((e) => {
+      return e.estado === Estado.FINALIZADO || e.estado === Estado.TEMPORAL;
+    }).length;
+    this.total = this.movMercadoCasasModelList.length;
+    let cantTemp = this.movMercadoCasasModelList.filter((e) => {
+      return e.estado === Estado.TEMPORAL;
+    }).length;
+
+    if (this.avance == this.total && cantTemp == 0) {
+      this.informante.estado = Estado.FINALIZADO;
+      this.cerrar = false;
+      this.disabled = false;
+    } else if (this.avance == this.total && cantTemp > 0) {
+      this.informante.estado = Estado.TEMPORAL;
+      this.cerrar = false;
+      this.disabled = false;
+    } else if (this.avance !== this.total || this.informante.estado == null) {
+      this.informante.estado = Estado.PENDIENTE;
+      this.cerrar = false;
+      this.disabled = false;
+    }
+
+
+
+  }
+  
+
   openCamera() {
+    console.log('this.movMercadoCasas Inicial>>>',this.movMercadoCasas);
     const dialogRef = this.dialog.open(CameraDialogComponent,{
       width: '90%',
-      data: {idProducto: this.idProducto}
+      data: {idProducto: this.ordenProducto ,imgUrl:this.movMercadoCasas.imgUrl},
+      
+      disableClose: true
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+     
       if(result){
         if (result.imgUrl)
         { 
-          this.producto.imgUrl=result.imgUrl;          
-          this.idbService.producto$.next(this.producto);
+          
+          this.movMercadoCasas.imgUrl=`${result.imgUrl}`;          
+          /*this.idbService.movMercadoCasas.next(this.movMercadoCasas);
+          console.log('this.movMercadoCasas Final>>>',this.movMercadoCasas);*/
+          this.changeMovMercadoCasas(this.movMercadoCasas);
+
         }
       }
     });
   }
 
-  change(producto:Producto){
-    this.idbService.producto$.next(producto);
+  openAudio(){
+    const dialogRef = this.dialog.open(AudioDialogComponent,{
+      width: '90%',
+      data: {idProducto: this.ordenProducto ,audioUrl:this.movMercadoCasas.audioUrl},
+      disableClose: true
+      
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+      if(result){
+        if (result.audioUrl)
+        { 
+          
+
+          this.movMercadoCasas.audioUrl = `${result.audioUrl}`;          
+          /*this.idbService.movMercadoCasas.next(this.movMercadoCasas);*/
+          this.changeMovMercadoCasas(this.movMercadoCasas);
+        }
+      }
+    });
+  }
+
+
+
+  changeMovMercadoCasasModel(
+    m: MovMercadoCasasModel,
+    precio?: boolean
+  ) {
+   
+
+    let today = new Date();
+
+    m.fecha_registro = `${today.toISOString()}`;
+    if (precio) {
+      m.precio = UtilHelper.formatPrecio(m.precio);
+      if (m.precio == null || m.precio === 'NaN') {
+        m.precio = UtilHelper.formatPrecio(0);
+      }
+    } 
+ 
+    if (m.ce == 'T') {
+      m.estado = Estado.TEMPORAL;
+      m.precio = m.precio_anterior
+      ? UtilHelper.formatPrecio(m.precio_anterior)
+      : UtilHelper.formatPrecio(0);
+    } 
+    else if(m.ce=='F'){
+      m.estado = Estado.CERRADO;
+      m.precio = m.precio_anterior
+      ? UtilHelper.formatPrecio(m.precio_anterior)
+      : UtilHelper.formatPrecio(0);
+    }
+    else {
+      if (
+        m.precio !== null &&
+        m.precio !== 'NaN' &&
+        parseFloat(m.precio) !== 0.0 &&
+        m.ce !== null
+      ) {
+        m.estado = m.ce == 'T' ? m.estado : Estado.FINALIZADO;
+      } else {
+        m.estado = Estado.PENDIENTE;
+      }
+    }
+
+    this.labelEstado = this.listEstado.find((e)=> { return e.estado == this.movMercadoCasas.estado}).label;
+
+
+    this.getCurrentLocation();
+    this.changeEstadoInformante();
+    this.changeMovMercadoCasas(m);
+    
+  }
+
+
+
+  getEstadoMovCasas(){
+   
+    
+    if( this.movMercadoCasas.estado==Estado.TEMPORAL){
+      this.disabled=true;
+      this.cerrar=false;
+    }
+    if(this.movMercadoCasas.estado==Estado.CERRADO)
+    {
+      this.cerrar=true;
+      this.disabled = true;
+    }
+    this.labelEstado = this.listEstado.find((e)=> { return e.estado == this.movMercadoCasas.estado}).label;
+  }
+
+
+  changeMovMercadoCasas(movMercadoCasas: MovMercadoCasasModel){
+    this.idbService.updateItem(TablesDB.MOV_MERC_CASAS,movMercadoCasas,movMercadoCasas.id);
+  }
+
+  changeInformante(informante : DetEjecucionCircuitoModel) {
+    this.idbService.updateItem(TablesDB.DET_EJEC_CIRCUITO,informante,informante.id);
+  }
+
+  async getCurrentLocation() {
+    if (
+      this.informante.latitud == null ||
+      this.informante.latitud == '0' ||
+      this.informante.longitud == null ||
+      this.informante.longitud == '0'
+    ) {
+      let coords = await UtilHelper.getPosition();
+
+      this.informante.latitud = coords['latitude'];
+      this.informante.longitud = coords['longitude'];
+    }
+  }
+  convertMoneda(){
+
+    const dialogRef = this.dialog.open(MoneyDialogComponent,{   
+      width: '70%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     
+      if(result){
+        if (result.confirm)
+        { 
+          this.movMercadoCasas.precio= result.precio;
+
+
+        }
+      }
+    });
+
   }
 
 }
+
+
 
 
 @Component({
@@ -102,9 +340,10 @@ export class ProductoEditComponent implements OnInit {
   templateUrl: './camera-dialog.html',
   styleUrls: ['./camera-dialog.scss']
 })
-export class CameraDialogComponent implements OnInit{
+export class CameraDialogComponent implements OnInit , OnDestroy{
    width: number;
    height: number;
+   camera:boolean=true;
 
   @HostListener('window:resize', ['$event'])
   onResize(event?: Event) {
@@ -112,39 +351,7 @@ export class CameraDialogComponent implements OnInit{
     this.width = win.innerWidth;
     this.height = win.innerHeight;
   }
-  /*
-  @ViewChild("video",{'static':true})
-  public video: ElementRef;
 
-  @ViewChild("canvas",{'static':true})
-  public canvas: ElementRef;
-
-  public captures: Array<any>;
-  public c: any;
-  public constructor(private idbService:IdbService) {
-      this.captures = [];
-  }
-
-  public ngOnInit() { }
-
-  public ngAfterViewInit() {
-      if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-          navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-              this.video.nativeElement.srcObject=stream; 
-              this.video.nativeElement.play();
-          });
-      }
-  }
-
-
-  public capture() {
-      var context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 480, 480);
-      this.c=this.canvas.nativeElement.toDataURL("image/png");
-      console.log('this.c>>>',this.c);
-  }*/
-
-
-  // toggle webcam on/off
   public showWebcam = true;
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
@@ -158,6 +365,8 @@ export class CameraDialogComponent implements OnInit{
   // latest snapshot
   public webcamImage: WebcamImage = null;
 
+  public imageAsDataUrl:string;
+
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
@@ -169,6 +378,7 @@ export class CameraDialogComponent implements OnInit{
         this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
       });
   }
+
 
   public triggerSnapshot(): void {
     this.trigger.next();
@@ -191,7 +401,9 @@ export class CameraDialogComponent implements OnInit{
 
   public handleImage(webcamImage: WebcamImage): void {
     console.info('received webcam image', webcamImage.imageAsDataUrl);
+
     this.webcamImage = webcamImage;
+    this.imageAsDataUrl = webcamImage.imageAsDataUrl;
 
   }
 
@@ -215,13 +427,35 @@ export class CameraDialogComponent implements OnInit{
 
    
     this.onResize();
-      /*this.data=  this.matDialogData.data ;
-      this.action=this.matDialogData.action;
-      this.actionItemSelect=this.actionItems.find(x=>x.action==this.action);*/
-   }
+    console.log('this.matDialogData>>>',this.matDialogData);
+  
+    if(this.matDialogData.imgUrl){
 
+      this.imageAsDataUrl = this.matDialogData.imgUrl;
+
+
+    }
+    
+
+
+   }
+  ngOnDestroy(): void {
+    /*throw new Error('Method not implemented.');*/
+    this.dialogRef.close({ imgUrl:this.imageAsDataUrl});
+  }
+
+   openPhoto(){
+    this.camera=false;
+   }
+   back(){
+    this.camera=true;
+   }
    guardar(){
+    this.dialogRef.close({ imgUrl:this.imageAsDataUrl});
+    /*
     (this.webcamImage)?(this.webcamImage.imageAsDataUrl)?this.dialogRef.close({ imgUrl:this.webcamImage.imageAsDataUrl}):false:false;
+
+  */
    }
    
 }
