@@ -40,25 +40,3 @@ $custom-typography: mat-typography-config(
 );
 @include angular-material-typography($custom-typography);
 
-.estado-finalizado{
-  background: lightgreen;
-  font-weight: bold;
-  color: darkgreen;
-}
-
-.estado-proceso{
-  background-color: mat-color($warn,100);
-  font-weight: bold;
-  color: mat-color($warn,900);
-}
-.estado-cerrado{
-  background-color: rgb(203, 190, 230);
-  font-weight: bold;
-  color: darkviolet;
-}
-
-.estado-temporal{
-  background-color: palegoldenrod;
-  font-weight: bold;
-  color: darkorange;
-}

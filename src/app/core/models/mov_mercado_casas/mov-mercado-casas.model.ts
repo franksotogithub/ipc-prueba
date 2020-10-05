@@ -28,7 +28,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
   valor: number;
   precio_compra: number;
   peso_gr_mercado: number;
-  variedad:VariedadModel;
+  /*variedad:VariedadModel;*/
   observacion: string;
   imgUrl:string;
   var_marca : string;
@@ -40,6 +40,10 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
   var_caracteristicas : string;
   var_otros_detalles: string; 
   audioUrl:string;
+  articulo :string;
+  cod_articulo :string;
+  producto :string;
+  cod_producto :string;
   constructor(m?: MovMercadoCasasRequest)
   {
     this.id = m?m.id:null;
@@ -63,7 +67,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
     this.valor=m?m.valor:null;
     this.precio_compra=m?m.precio_compra:null;
     this.peso_gr_mercado=m?m.peso_gr_mercado:null;
-    this.variedad=m?new VariedadModel(m.variedad):null;
+    /*this.variedad=m?new VariedadModel(m.variedad):null;*/
     this.observacion = m?m.observacion:null;
     this.imgUrl =m?m.imgUrl:null;
     this.audioUrl = m?m.audioUrl:null;
@@ -75,6 +79,10 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
     this.var_origen = m?m.var_origen:null;
     this.var_caracteristicas = m?m.var_caracteristicas:null;
     this.var_otros_detalles = m?m.var_otros_detalles:null;
+    this.articulo = m?m.articulo:null;
+    this.cod_articulo = m?m.cod_articulo:null;
+    this.producto  = m?m.producto:null;
+    this.cod_producto = m?m.cod_producto:null;
     
   }
 

@@ -154,8 +154,14 @@ export class ComercialesComponent implements OnInit {
           .filter((p) => {
             return p.det_ejecucion == this.informante.id;
           })
-          .map((p) => {
-            return new MovMercadoCasasModel(p);
+          .map((p,index) => {
+            let m = new MovMercadoCasasModel(p); 
+            m.orden = index+1;
+            this.changeMovMercadoCasas(m);
+            
+            return m;
+
+            
           })
           .sort((a, b) => {
             if (a.orden > b.orden) {

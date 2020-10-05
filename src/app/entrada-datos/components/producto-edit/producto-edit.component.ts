@@ -187,8 +187,7 @@ export class ProductoEditComponent implements OnInit {
         { 
           
           this.movMercadoCasas.imgUrl=`${result.imgUrl}`;          
-          /*this.idbService.movMercadoCasas.next(this.movMercadoCasas);
-          console.log('this.movMercadoCasas Final>>>',this.movMercadoCasas);*/
+
           this.changeMovMercadoCasas(this.movMercadoCasas);
 
         }

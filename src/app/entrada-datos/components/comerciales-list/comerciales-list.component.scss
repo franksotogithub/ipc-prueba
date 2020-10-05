@@ -1,4 +1,4 @@
-@import  './../../../../main-theme.scss';
+
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
@@ -27,3 +27,25 @@
 }
 
 
+
+.mat-column-orden {
+  flex: 0 0 50px !important;
+  /*white-space: unset !important;*/
+
+}
+.mat-column-informante_cod {
+  flex: 0 0 100px;
+  /*white-space: unset !important;*/
+}
+.mat-column-circuito {
+  flex: 0 0 100px !important;
+  
+
+}
+.mat-column-investigador_nombre {
+  flex: 0 0 200px !important;
+
+}
+/*
+'informante_cod','circuito_cod','investigador_nombre','informante_nombre', 'informante_direccion','informante_giro','id'
+*/

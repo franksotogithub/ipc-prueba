@@ -80,14 +80,14 @@
                 <div class="col-md-4 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Producto:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.variedad.clasificacion.producto_desc" [disabled]="true"  matInput >
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.producto" [disabled]="true"  matInput >
                     </mat-form-field>
                 </div>
 
                 <div class="col-md-4 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Articulo:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.variedad.clasificacion.articulo_desc" [disabled]="true"  matInput >
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.articulo" [disabled]="true"  matInput >
                     </mat-form-field>
                 </div>
                 <div class="col-md-4 form-group">
@@ -144,7 +144,7 @@
                          [(ngModel)]="movMercadoCasas.precio"   matInput>
                          
                          <button mat-icon-button matSuffix  (click)="convertMoneda()" >
-                            <mat-icon>attach_money</mat-icon>
+                            <mat-icon>calculate</mat-icon>
                         </button>
                     </mat-form-field>
                 </div>

@@ -21,6 +21,8 @@ import {ConfirmDialogComponent} from 'src/app/shared/components/confirm-dialog/c
 import { MoneyDialogComponent } from 'src/app/shared/components/money-dialog/money-dialog.component';
 import { AudioDialogComponent } from 'src/app/shared/components/audio-dialog/audio-dialog.component';
 import { DescargarDatosDialogComponent } from './components/descargar-datos-dialog/descargar-datos-dialog.component';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import {AppDateAdapter, APP_DATE_FORMATS } from 'src/app/util/format-datepicker';
 
 @NgModule({
   declarations: [MercadosComponent, 
@@ -51,9 +53,14 @@ import { DescargarDatosDialogComponent } from './components/descargar-datos-dial
     AudioDialogComponent,
     DescargarDatosDialogComponent,
 
- ]
+ ],
   /*providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },    
   ],*/
+
+    providers: [
+      {provide: DateAdapter, useClass: AppDateAdapter},
+      {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ],
 })
 export class EntradaDatosModule { }

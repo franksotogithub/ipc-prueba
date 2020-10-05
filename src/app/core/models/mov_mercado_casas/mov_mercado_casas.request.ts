@@ -27,7 +27,8 @@ export interface MovMercadoCasasRequest{
   peso_gr_mercado: number;
   
   
-  variedad: VariedadModel;
+  /*variedad: VariedadModel;*/
+
   observacion: string;
   imgUrl:string;
   audioUrl:string;
@@ -40,5 +41,10 @@ export interface MovMercadoCasasRequest{
   var_origen: string;
   var_caracteristicas : string;
   var_otros_detalles: string; 
+  articulo :string;
+  cod_articulo :string;
+  producto :string;
+  cod_producto :string;
+  
   
 }

@@ -221,8 +221,10 @@
                 <ng-container matColumnDef="variedad_nombre">
                     <mat-header-cell *matHeaderCellDef>Producto/articulo/variedad</mat-header-cell>
                     <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
-                        {{element.variedad.clasificacion.producto_desc}} /
-                        {{element.variedad.clasificacion.articulo_desc }} /{{element.variedad.nombre }} 
+                        <!--{{element.variedad.clasificacion.producto_desc}} /
+                        {{element.variedad.clasificacion.articulo_desc }} /{{element.variedad.nombre }} -->
+
+                        {{element.producto}}/{{element.articulo}}/{{element.variedad_nombre}}
                     </mat-cell>
                 </ng-container>
 

@@ -168,17 +168,22 @@ export class IdbService {
         await this._db.put(TablesDB.MOV_MERC_CASAS, p, p.id);
       });
 
-      /*this.movMercadoCasasList.next(datos.mov_mercado_casas);
-      this.detEjecCircuitoList.next(datos.det_ejecucion_circuito);
-      */
-
+  
 
 
     });
   }
 
   async limpiandoDatos() {
- 
+    this._db =await openDB(this.dataBaseName, this.version);
+    this.tables.map((table) => {
+      this._db.clear(table);
+
+
+    });
+  
+  
+
   }
   async cargandoDatos(target) {
 
@@ -189,24 +194,12 @@ export class IdbService {
     this.datosService.cargarDatos(datos).subscribe(res=>{
       if(res.result){
         console.log('carga completada');
+        this.limpiandoDatos();
       }
     });
     
 
-    /*
-    let informantes=await this._db.getAll('informantes');
-    let articulos=await this._db.getAll('productos');
-    let data ={};
 
-    informantes.forEach((v)=>{delete v.articulos; delete v.giro; });
-    data['informantes'] = informantes;
-
-    data['articulos'] = articulos;
-    
-    this.programacionRutaService.cargarProgramacionRuta(data).subscribe(res=>{
-      
-    })
-     */
   }
 
 

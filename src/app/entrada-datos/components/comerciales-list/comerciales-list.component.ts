@@ -129,7 +129,8 @@ export class ComercialesListComponent implements OnInit
       
       let i = (index+1);
       e.orden =i;
-      this.idbService.detEjecCircuito.next(e);
+      /*this.idbService.detEjecCircuito.next(e);*/
+      this.idbService.updateItem(TablesDB.DET_EJEC_CIRCUITO,e,e.id);
       return e;
     }
     

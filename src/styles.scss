@@ -168,6 +168,40 @@ button:focus{
 }
 
 
+
+/*
+input[type=text]:disabled {
+  color: black;
+}*/
+.mat-input-element:disabled {
+  color:rgba(0, 0, 0, 0.7)!important;
+}
+
+
+
+.estado-finalizado{
+  background: lightgreen;
+  font-weight: bold;
+  color: darkgreen;
+}
+
+.estado-proceso{
+  background-color: mat-color($warn,100);
+  font-weight: bold;
+  color: mat-color($warn,900);
+}
+.estado-cerrado{
+  background-color: rgb(203, 190, 230);
+  font-weight: bold;
+  color: darkviolet;
+}
+
+.estado-temporal{
+  background-color: palegoldenrod;
+  font-weight: bold;
+  color: darkorange;
+}
+
 .estado-finalizado{
   background: lightgreen;
   font-weight: bold;

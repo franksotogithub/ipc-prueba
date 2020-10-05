@@ -13,7 +13,7 @@
     <div class="col-12 form-group">
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Fecha Fin:</mat-label>
-            <input matInput [matDatepicker]="picker2" [(ngModel)]="date_end">
+            <input  matInput [matDatepicker]="picker2" [(ngModel)]="date_end"  [min]="date_start" [max]="maxDate" >
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
