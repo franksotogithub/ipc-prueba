@@ -20,12 +20,12 @@ export class AudioDialogComponent implements OnInit {
 
   
    //Lets initiate Record OBJ
-   private record;
+    record;
    //Will use this flag for detect recording
-   private recording = false;
+    recording = false;
    //Url of Blob
-   private url;
-   private error;
+    url;
+    error;
    constructor(private domSanitizer: DomSanitizer,public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public matDialogData: any) {
 
