@@ -16,6 +16,7 @@ import {ButtonLoadingDirective} from './directive/button-loading.directive';
 import { AudioDialogComponent } from './components/audio-dialog/audio-dialog.component';
 import { VariedadTemporalFormDialogComponent } from './components/variedad-temporal-form-dialog/variedad-temporal-form-dialog.component';
 
+
 @NgModule({
   declarations: [
     MenuComponent, 

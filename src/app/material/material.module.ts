@@ -27,6 +27,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [],
   imports: [
@@ -57,6 +59,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     DragDropModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatButtonModule,
@@ -84,7 +88,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatDividerModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    DragDropModule
+    DragDropModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

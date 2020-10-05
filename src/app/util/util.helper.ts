@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
 import {  LatLong } from '../core/models/generic/lat-long';
-
+import * as momentTimezone from 'moment-timezone';
 
 export class UtilHelper {
 
@@ -75,4 +75,16 @@ export class UtilHelper {
 
   public static zeroPad = (num, places) => String(num).padStart(places, '0')
 
+
+
+  public static parseCutomUTCDateToString(date: Date,format?:string): string {
+    let valueConverted: string = null;
+    if (momentTimezone(date).isValid()) {
+      // date = momentTimezone(date).subtract('hours', UtilHelper.getClientTimeZone()).toDate();
+      date = momentTimezone(date).subtract('hours', 0).toDate();
+      // valueConverted = momentTimezone(date).tz(this.timezone).toISOString();
+      valueConverted = momentTimezone(date).format(format);
+    }
+    return valueConverted;
+  }
 }

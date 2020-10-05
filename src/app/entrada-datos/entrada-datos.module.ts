@@ -20,6 +20,8 @@ import {AuthModule} from './../auth/auth.module';
 import {ConfirmDialogComponent} from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { MoneyDialogComponent } from 'src/app/shared/components/money-dialog/money-dialog.component';
 import { AudioDialogComponent } from 'src/app/shared/components/audio-dialog/audio-dialog.component';
+import { DescargarDatosDialogComponent } from './components/descargar-datos-dialog/descargar-datos-dialog.component';
+
 @NgModule({
   declarations: [MercadosComponent, 
     
@@ -29,6 +31,7 @@ import { AudioDialogComponent } from 'src/app/shared/components/audio-dialog/aud
      ComercialesListComponent, 
      ProductoEditComponent,
      CameraDialogComponent,
+     DescargarDatosDialogComponent,
      
     ],
   imports: [
@@ -46,6 +49,7 @@ import { AudioDialogComponent } from 'src/app/shared/components/audio-dialog/aud
     ConfirmDialogComponent,
     MoneyDialogComponent,
     AudioDialogComponent,
+    DescargarDatosDialogComponent,
 
  ]
   /*providers: [

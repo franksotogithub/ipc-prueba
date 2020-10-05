@@ -18,6 +18,7 @@ import {TablesDB} from 'src/app/shared/enum/tables-db.enum';
 import { DetEjecucionCircuitoModel } from '../../models/det-ejecucion-circuito/det-ejecucion-circuito.model';
 import { MovMercadoCasasModel } from '../../models/mov_mercado_casas/mov-mercado-casas.model';
 import { DatosModel } from '../../models/datos/datos.model';
+import { DatosSearch } from '../../models/datos/datos.search';
 
 
 @Injectable({
@@ -141,12 +142,12 @@ export class IdbService {
     this._db.put(target, value, key);
   }
 
-  async descargandoDatos() {
+  async descargandoDatos(datosSearch:DatosSearch) {
     this.tables.map((table) => {
       this._db.clear(table);
     });
 
-    this.datosService.descargarDatos().subscribe((datos: DatosResquest) => {
+    this.datosService.descargarDatos(datosSearch).subscribe((datos: DatosResquest) => {
 
       this.detEjecCircuitoList.next(datos.det_ejecucion_circuito);
       this.movMercadoCasasList.next(datos.mov_mercado_casas);

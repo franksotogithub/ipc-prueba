@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import { EndPoints} from 'src/app/global/end-points';
 import { Observable } from 'rxjs';
 import { DatosResquest } from '../../models/datos/datos.request';
+import { DatosSearch } from '../../models/datos/datos.search';
+import { UtilHelper } from 'src/app/util/util.helper';
 
 
 @Injectable({
@@ -17,8 +19,26 @@ export class DatosService {
   }
 
   
-  descargarDatos():Observable<DatosResquest>{
-    return this.http.get<DatosResquest>(`${environment.url_api}${EndPoints.DESCARGAR_DATOS}`);
+  descargarDatos(datosSearch: DatosSearch):Observable<DatosResquest>{
+
+    let params = new HttpParams();
+    
+    
+    if (datosSearch.date_start) {
+      params = params.append('date_start', UtilHelper.parseCutomUTCDateToString(datosSearch.date_start));
+    }
+
+    if (datosSearch.date_end) {
+      params = params.append('date_end',UtilHelper.parseCutomUTCDateToString(datosSearch.date_end));
+    }
+
+
+    if (datosSearch.user_id) {
+      params = params.append('user_id',`${datosSearch.user_id}`);
+    }
+
+
+    return this.http.get<DatosResquest>(`${environment.url_api}${EndPoints.DESCARGAR_DATOS}`,{params});
   }
 
   cargarDatos(data): Observable<any>{
