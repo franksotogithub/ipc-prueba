@@ -56,7 +56,7 @@ export class DatosComponent implements OnInit {
           
           this.messageError = 'Error al descargar datos';
           this.idbService.descargandoDatos(this.datosSearch).then( (datos)=>{
-
+            
             this.message = 'Datos descargados';
            
           });
