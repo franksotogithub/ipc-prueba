@@ -145,12 +145,35 @@ export class IdbService {
   async descargandoDatos(datosSearch:DatosSearch) {
     this.tables.map((table) => {
       this._db.clear(table);
+
+
     });
+
+  
+
 
     this.datosService.descargarDatos(datosSearch).subscribe((datos: DatosResquest) => {
 
+      
+      let array1=datos.det_ejecucion_circuito;
+      let array2=datos.mov_mercado_casas;
+
+      array1.map(async (p) => {
+        
+        await this._db.put(TablesDB.MOV_MERC_CASAS, p, p.id);
+      });
+
+
+      array2.map(async (p) => {        
+        await this._db.put(TablesDB.DET_EJEC_CIRCUITO, p, p.id);
+      });
+
+      /*this.movMercadoCasasList.next(datos.mov_mercado_casas);
       this.detEjecCircuitoList.next(datos.det_ejecucion_circuito);
-      this.movMercadoCasasList.next(datos.mov_mercado_casas);
+      */
+
+
+
     });
   }
 

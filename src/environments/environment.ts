@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   url_api: 'http://127.0.0.1:8000',
-  name_database_local:'ipc-local-database-1'
+  name_database_local:'ipc-local-database-2'
 };
 
 /*
