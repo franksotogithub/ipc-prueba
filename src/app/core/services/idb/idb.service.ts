@@ -160,12 +160,12 @@ export class IdbService {
 
       array1.map(async (p) => {
         
-        await this._db.put(TablesDB.MOV_MERC_CASAS, p, p.id);
+        await this._db.put(TablesDB.DET_EJEC_CIRCUITO, p, p.id);
       });
 
 
       array2.map(async (p) => {        
-        await this._db.put(TablesDB.DET_EJEC_CIRCUITO, p, p.id);
+        await this._db.put(TablesDB.MOV_MERC_CASAS, p, p.id);
       });
 
       /*this.movMercadoCasasList.next(datos.mov_mercado_casas);

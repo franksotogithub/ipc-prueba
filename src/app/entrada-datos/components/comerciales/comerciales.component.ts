@@ -112,6 +112,8 @@ export class ComercialesComponent implements OnInit {
     this.idbService
       .getAllData(TablesDB.DET_EJEC_CIRCUITO)
       .then((values: DetEjecucionCircuitoResquest[]) => {
+
+        console.log('values>>>',values);
         this.informantes = values
           .filter((i) => {
             return i.tipo_encuesta === TipoEncuesta.CASAS_COMERCIALES;
