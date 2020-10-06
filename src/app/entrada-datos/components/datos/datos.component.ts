@@ -66,8 +66,11 @@ export class DatosComponent implements OnInit {
             });
 
           }
+          else{
+            this.desc(result);
+          }
 
-           this.desc(result);
+           
           });
 
 

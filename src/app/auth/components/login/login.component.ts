@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import {Usuario} from './../../../core/models/usuario.model';
-import { BehaviorSubject } from 'rxjs';
 import { first } from 'rxjs/operators';
-import {TestService} from 'src/app/core/services/test';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,18 +13,16 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   errorAuth: false;
   error_message= "";
- // private currentUserSubject: BehaviorSubject<Usuario>;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private testService: TestService
+    
   ) { 
     
-    this.testService.testInit().subscribe((res)=>{
-      console.log('res>>>',res);
-    }) ;
+  
 
     this.buildForm();
   }
