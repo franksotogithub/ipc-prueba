@@ -234,7 +234,7 @@
                 <mat-cell *matCellDef="let element" data-label="Presentacion"> 
                     <mat-form-field class="full-width" appearance="outline">
                        
-                    <input appOnlyNumber type="text"   [(ngModel)]="element.precio"  (change)="changeMovMercadoCasasModel(element,true)"  [disabled]="disabled" matInput>    
+                    <input appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.precio"  (change)="changeMovMercadoCasasModel(element,true)"  [disabled]="disabled" matInput>    
                     
                 </mat-form-field>
                 </mat-cell>
@@ -281,7 +281,7 @@
                 <mat-header-cell *matHeaderCellDef>Observacion</mat-header-cell>
                 <mat-cell *matCellDef="let element" data-label="observacion"> 
                     <mat-form-field class="full-width" appearance="outline">
-                        <input type="text"  [(ngModel)]="element.observacion" (change)="changeMovMercadoCasasModel(element,false)" [disabled]="disabled" matInput  >   
+                        <input type="text" autocomplete="off"  [(ngModel)]="element.observacion" (change)="changeMovMercadoCasasModel(element,false)" [disabled]="disabled" matInput  >   
                     </mat-form-field>
                     
                 </mat-cell>

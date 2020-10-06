@@ -54,14 +54,11 @@ export class DatosComponent implements OnInit {
             });
 
             dialogConfirm.afterClosed().subscribe((result2) => {
-              if (result2) {
-                if (result2.confirm) {
+              if (result2 && result2.confirm) {
+                
                
                   this.desc(result);
-                } else {
-                 
-                  
-                }
+               
               }
             });
 
@@ -118,7 +115,24 @@ export class DatosComponent implements OnInit {
   cargando() {
     this.message = 'Datos cargados';
     this.messageError = 'Error al cargar datos';
-    this.idbService.cargandoDatos(TablesDB.MOV_MERC_CASAS);
+    
+    
+    
+    const dialogConfirm = this.dialog.open(ConfirmDialogComponent,{   
+      width: '70%',
+      data: { title: "Cargando", message: "Seguro que quiere cargar los datos?Despues de la carga los datos locales se borraran." }
+    });
+
+    dialogConfirm.afterClosed().subscribe((result2) => {
+      if (result2 &&result2.confirm ) {
+        
+          this.idbService.cargandoDatos(TablesDB.MOV_MERC_CASAS);
+        
+      }
+    });
+
+
+    
   }
 
   limpiarDatos() {

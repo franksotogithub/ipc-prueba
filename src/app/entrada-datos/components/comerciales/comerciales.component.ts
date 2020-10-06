@@ -319,11 +319,13 @@ export class ComercialesComponent implements OnInit {
     this.filterValue = [...this.ces];
   }
 
+
   ceSelected(m: MovMercadoCasasModel, event$) {
     if (m.ce != event$.option.value.id) {
       m.ce = event$.option.value.id;
 
-      this.idbService.movMercadoCasas.next(m);
+      /*this.idbService.movMercadoCasas.next(m);*/
+      /*this.changeMovMercadoCasas(m);*/
     }
   }
 
@@ -335,20 +337,23 @@ export class ComercialesComponent implements OnInit {
         ? UtilHelper.formatPrecio(m.precio_anterior)
         : UtilHelper.formatPrecio(0);
       m.estado = Estado.CERRADO;
-      this.idbService.movMercadoCasas.next(m);
+      this.changeMovMercadoCasas(m);
+      /*this.idbService.movMercadoCasas.next(m);*/
     });
    this.changeInformante(this.informante);
+   this.getEstadoInformante();
   }
 
   abrirInformante() {
-    this.informante.estado = Estado.PROCESO;
+    this.informante.estado = Estado.PENDIENTE;
     this.movMercadoCasasModelList.map((m) => {
       m.ce = null;
       m.precio = UtilHelper.formatPrecio(0);
-      m.estado = Estado.PROCESO;
-      this.idbService.movMercadoCasas.next(m);
+      m.estado = Estado.PENDIENTE;
+      this.changeMovMercadoCasas(m);
     });
     this.changeInformante(this.informante);
+    this.getEstadoInformante();
   }
 
   confirmarCerrarInformante(event) {

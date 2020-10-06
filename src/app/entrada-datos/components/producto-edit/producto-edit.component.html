@@ -139,7 +139,7 @@
                 <div class="col-md-12 form-group">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Precio:</mat-label>
-                        <input appOnlyNumber type="text" placeholder="Precio"  
+                        <input appOnlyNumber type="text" autocomplete="off"  placeholder="Precio"  
                         (change)="changeMovMercadoCasasModel(movMercadoCasas,true)" 
                          [(ngModel)]="movMercadoCasas.precio"   matInput>
                          
@@ -182,7 +182,7 @@
                 <div class="col-md-12 form-group">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Observacion:</mat-label>
-                        <textarea matInput  [(ngModel)]="movMercadoCasas.observacion" (change)="changeMovMercadoCasasModel(movMercadoCasas)" ></textarea>
+                        <textarea matInput  autocomplete="off"  [(ngModel)]="movMercadoCasas.observacion" (change)="changeMovMercadoCasasModel(movMercadoCasas)" ></textarea>
                     </mat-form-field>
                 </div>
             
