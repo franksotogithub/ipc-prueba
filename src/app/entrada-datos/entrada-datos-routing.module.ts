@@ -10,6 +10,8 @@ import {ComercialesListComponent} from './components/comerciales-list/comerciale
 import {ProductoEditComponent} from './components/producto-edit/producto-edit.component';
 import {MenuInicialComponent} from './../auth/components/menu-inicial/menu-inicial.component';
 import {AuthGuard} from '../core/guard/auth.guard';
+import { CameraComponent } from './components/camera/camera.component';
+
 
 const routes: Routes = [
   {
@@ -66,6 +68,10 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
     ]
+  },
+  {
+    path:'camera/:id',    
+    component : CameraComponent,
   }
 ];
 

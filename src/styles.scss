@@ -179,11 +179,6 @@ input[type=text]:disabled {
 
 
 
-.estado-finalizado{
-  background: lightgreen;
-  font-weight: bold;
-  color: darkgreen;
-}
 
 .estado-proceso{
   background-color: mat-color($warn,100);
@@ -208,19 +203,27 @@ input[type=text]:disabled {
   color: darkgreen;
 }
 
-.estado-proceso{
+
+
+.estado-proceso-text{
   background-color: mat-color($warn,100);
   font-weight: bold;
   color: mat-color($warn,900);
 }
-.estado-cerrado{
+.estado-cerrado-text{
   background-color: rgb(203, 190, 230);
   font-weight: bold;
   color: darkviolet;
 }
 
-.estado-temporal{
+.estado-temporal-text{
   background-color: palegoldenrod;
   font-weight: bold;
   color: darkorange;
+}
+
+.estado-finalizado-text{
+  background: lightgreen;
+  font-weight: bold;
+  color: darkgreen;
 }

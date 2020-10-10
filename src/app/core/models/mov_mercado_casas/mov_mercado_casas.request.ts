@@ -31,7 +31,7 @@ export interface MovMercadoCasasRequest{
 
   observacion: string;
   imgUrl:string;
-  audioUrl:string;
+  audioUrl:any;
 
   var_marca : string;
   var_modelo : string;

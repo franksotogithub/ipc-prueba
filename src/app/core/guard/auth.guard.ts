@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -10,6 +10,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
+    private authService : AuthService,
     private authenticationService: AuthService
   ) { }
   canActivate(
@@ -18,8 +19,24 @@ export class AuthGuard implements CanActivate {
       const currentUser = this.authenticationService.currentUserValue;
       console.log('currentUser>>>',currentUser);
       if (currentUser) {
+        console.log('next>>>',next.queryParams['token']);
         return true;
       }
+   
+
+      if(next.queryParams['token']){
+        let token = next.queryParams['token'];
+        this.authService.testToken(token).subscribe((user)=>{
+          if(user){
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            return true;
+          }
+        });
+        
+      }
+      
+
+
   
       // not logged in so redirect to login page with the return url
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });

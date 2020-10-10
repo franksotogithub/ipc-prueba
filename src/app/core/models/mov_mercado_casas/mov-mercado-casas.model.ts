@@ -39,7 +39,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
   var_origen: string;
   var_caracteristicas : string;
   var_otros_detalles: string; 
-  audioUrl:string;
+  audioUrl:any;
   articulo :string;
   cod_articulo :string;
   producto :string;

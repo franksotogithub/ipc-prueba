@@ -23,6 +23,7 @@ import { AudioDialogComponent } from 'src/app/shared/components/audio-dialog/aud
 import { DescargarDatosDialogComponent } from './components/descargar-datos-dialog/descargar-datos-dialog.component';
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {AppDateAdapter, APP_DATE_FORMATS } from 'src/app/util/format-datepicker';
+import { CameraComponent } from './components/camera/camera.component';
 
 @NgModule({
   declarations: [MercadosComponent, 
@@ -34,6 +35,7 @@ import {AppDateAdapter, APP_DATE_FORMATS } from 'src/app/util/format-datepicker'
      ProductoEditComponent,
      CameraDialogComponent,
      DescargarDatosDialogComponent,
+     CameraComponent,
      
     ],
   imports: [

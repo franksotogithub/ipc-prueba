@@ -18,7 +18,16 @@
                       (+{{estados.value.length - 1}} {{estados.value?.length === 2 ? 'other' : 'others'}})
                     </span>
                   </mat-select-trigger>
-                  <mat-option *ngFor="let estado of estadosList" [value]="estado">{{estado}}</mat-option>
+                  <mat-option *ngFor="let estado of estadosList" [value]="estado">
+                  
+                    <div style="width: 0px;" [ngClass]="{
+                    'estado-finalizado': estado === ESTADO.FINALIZADO,
+                    'estado-temporal': estado === ESTADO.TEMPORAL ,
+                    'estado-proceso': (estado === ESTADO.PROCESO || estado === ESTADO.PENDIENTE),
+                    'estado-cerrado': estado === ESTADO.CERRADO 
+                  }" >{{estado}}</div>
+                  
+                </mat-option>
                 </mat-select>
               </mat-form-field>
 
@@ -42,7 +51,11 @@
 
                   <ng-container *ngIf="column.label==='Acciones';else html1">
                     <mat-cell *matCellDef="let element"  [attr.data-label]="column.label"> 
-                      <button mat-button color="primary" [routerLink]="['edit', element.orden]"><mat-icon>edit</mat-icon></button>
+
+                      <button mat-icon-button type="button"  color="primary" cdkDragHandle  style="pointer-events:all;">
+                        <mat-icon> reorder </mat-icon>
+                      </button>
+                      <button mat-button color="primary"  style="pointer-events:all;" [routerLink]="['edit', element.orden]"><mat-icon>edit</mat-icon></button>
                       
                     </mat-cell>
                   </ng-container>
@@ -78,6 +91,8 @@
           
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+                <!--
                 <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDragLockAxis="y" cdkDrag [cdkDragData]="row"
                 
                 [ngClass]="{
@@ -88,6 +103,21 @@
                 }"
                 
                 ></mat-row>
+              -->
+
+              <mat-row style="pointer-events:none;" *matRowDef="let row; columns: displayedColumns;"  
+              cdkDrag [cdkDragData]="row"
+              [ngClass]="{
+                'estado-finalizado': row.estado === ESTADO.FINALIZADO,
+                'estado-temporal': row.estado === ESTADO.TEMPORAL ,
+                'estado-proceso': (row.estado === ESTADO.PROCESO || row.estado === ESTADO.PENDIENTE),
+                'estado-cerrado': row.estado === ESTADO.CERRADO 
+              }"
+              
+              ></mat-row>
+
+
+
               </mat-table>
               <!--<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
             </div>

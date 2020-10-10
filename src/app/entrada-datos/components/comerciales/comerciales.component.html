@@ -161,7 +161,15 @@
                     (+{{estados.value.length - 1}} {{estados.value?.length === 2 ? 'other' : 'others'}})
                   </span>
                 </mat-select-trigger>
-                <mat-option *ngFor="let estado of estadosList" [value]="estado">{{estado}}</mat-option>
+                <mat-option *ngFor="let estado of estadosList" [value]="estado">
+                    <div style="width: 0px;" [ngClass]="{
+                        'estado-finalizado': estado === ESTADO.FINALIZADO,
+                        'estado-temporal': estado === ESTADO.TEMPORAL ,
+                        'estado-proceso': (estado === ESTADO.PROCESO || estado === ESTADO.PENDIENTE),
+                        'estado-cerrado': estado === ESTADO.CERRADO 
+                      }" >{{estado}}</div>
+
+                </mat-option>
               </mat-select>
             </mat-form-field>
 

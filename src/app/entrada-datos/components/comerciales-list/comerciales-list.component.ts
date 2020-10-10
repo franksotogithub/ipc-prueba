@@ -138,6 +138,8 @@ export class ComercialesListComponent implements OnInit
 
 
   }
+
+  
   filterEstados(e){
       
     let filters:Array<any>=e.value;
@@ -145,4 +147,5 @@ export class ComercialesListComponent implements OnInit
     this.dataSource=this.informantes.filter(m=>{return  filters.some( f=> f===m.estado) } )
 
   }
+
 }

@@ -3,7 +3,11 @@
   <p>{{message}}</p>
 
 </div>
-<div mat-dialog-actions>
-  <button mat-raised-button  color="warn" (click)="confirmar(false)">No Gracias</button>
-  <button mat-raised-button color="primary" (click)="confirmar(true)">Si, confirmo</button>
+<div mat-dialog-actions class="row">
+  
+    <div class="col-6"><button mat-raised-button  color="warn" (click)="confirmar(false)">No </button></div>
+    <div class="col-6"><button mat-raised-button color="primary" (click)="confirmar(true)">Si, confirmo</button></div>
+  
+  
+  
 </div>

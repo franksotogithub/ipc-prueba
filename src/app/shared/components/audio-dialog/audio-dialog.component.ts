@@ -25,18 +25,26 @@ export class AudioDialogComponent implements OnInit {
     recording = false;
    //Url of Blob
     url;
+    file = null;
     error;
+
+
    constructor(private domSanitizer: DomSanitizer,public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public matDialogData: any) {
 
       console.log('this.matDialogData>>>',this.matDialogData);
   
     if(this.matDialogData.audioUrl){
+
       this.url = this.matDialogData.audioUrl;
+      console.log('this.blob>>>',this.url);
+
+      /*this.url = URL.createObjectURL(this.blob);*/
     }
+
    }
    sanitize(url:string){
-       return this.domSanitizer.bypassSecurityTrustUrl(url);
+       return this.domSanitizer.bypassSecurityTrustUrl(this.url);
    }
    /**
     * Start recording.
@@ -50,17 +58,17 @@ export class AudioDialogComponent implements OnInit {
        };
        navigator.mediaDevices
            .getUserMedia(mediaConstraints)
-           .then(this.successCallback.bind(this), this.errorCallback.bind(this));
+           .then( this.successCallback.bind(this), this.errorCallback.bind(this));
    }
    /**
     * Will be called automatically.
     */
-   successCallback(stream) {
+    successCallback(stream) {
        var options = {
            mimeType: "audio/wav",
            numberOfAudioChannels: 1
        };
-       //Start Actuall Recording
+       
        var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
        this.record = new StereoAudioRecorder(stream, options);
        this.record.record();
@@ -69,8 +77,12 @@ export class AudioDialogComponent implements OnInit {
     * Stop recording.
     */
    stopRecording() {
-       this.recording = false;
+    this.recording = false;
+
+    
        this.record.stop(this.processRecording.bind(this));
+   
+       
        this.pauseTimer();
    }
    /**
@@ -78,7 +90,21 @@ export class AudioDialogComponent implements OnInit {
     * @param  {any} blob Blog
     */
    processRecording(blob) {
-       this.url = URL.createObjectURL(blob);
+      
+       var reader = new FileReader();
+       reader.readAsDataURL(blob);
+
+       reader.onload = ()=> { 
+        let base64String = reader.result; 
+       
+        console.log('this.url>>>',base64String);
+        this.url =  base64String;
+        this.dialogRef.close({ audioUrl: this.url});
+        
+      } 
+
+    
+
    }
    /**
     * Process Error.
@@ -88,8 +114,32 @@ export class AudioDialogComponent implements OnInit {
    }
    
    confirmar(e){
-    (e)?this.dialogRef.close({ audioUrl: this.url}):this.dialogRef.close();
+    /*if(e){
+
+      if ( this.recording )
+      { console.log('this.url>>>',this.url);
+        this.stopRecording();
+      }
+      
+      console.log('this.url>>>',this.url);
+      if(this.url){
+        this.dialogRef.close({ audioUrl: this.url});
+      }
+      else{
+        this.dialogRef.close();
+      }
+      
+    }
+    else{
+      this.dialogRef.close();
+    }*/
+    this.dialogRef.close();
     
+   }
+
+
+   cerrar(){
+    this.dialogRef.close();
    }
 
    startTimer() {
@@ -105,6 +155,7 @@ export class AudioDialogComponent implements OnInit {
 
     }, 1000);
   }
+
   pauseTimer() {
     clearInterval(this.interval);
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit ,ViewChild, ElementRef ,Inject, HostListener} from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { Producto} from './../../../core/models/producto.model';
 import { Informante } from 'src/app/core/models/informante.model';
 import { IdbService } from 'src/app/core/services/idb/idb.service';
@@ -21,6 +21,7 @@ import { Estado } from 'src/app/shared/enum/estado.enum';
 import { OnDestroy } from '@angular/core';
 import { MoneyDialogComponent } from 'src/app/shared/components/money-dialog/money-dialog.component';
 import { AudioDialogComponent } from 'src/app/shared/components/audio-dialog/audio-dialog.component';
+import { CameraService } from 'src/app/core/services/camera/camera.service';
 
 @Component({
   selector: 'app-producto-edit',
@@ -65,7 +66,8 @@ export class ProductoEditComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private idbService:IdbService,
     public dialog: MatDialog,
-    
+    private cameraService: CameraService,
+    private router: Router,
     ) {
 
 
@@ -76,9 +78,24 @@ export class ProductoEditComponent implements OnInit {
       
     });
 
+
+
+
    }
 
   ngOnInit() {
+    this.cameraService.imgUrl$.subscribe(result=>{
+      if(result){
+        if (result.imgUrl)
+        { 
+          
+          this.movMercadoCasas.imgUrl=`${result.imgUrl}`;          
+
+          this.changeMovMercadoCasas(this.movMercadoCasas);
+
+        }
+      }
+    });
 
   }
 
@@ -171,8 +188,15 @@ export class ProductoEditComponent implements OnInit {
   
 
   openCamera() {
-    console.log('this.movMercadoCasas Inicial>>>',this.movMercadoCasas);
-    const dialogRef = this.dialog.open(CameraDialogComponent,{
+    /*console.log('this.movMercadoCasas Inicial>>>',this.movMercadoCasas);
+    this.cameraService.setImgUrl(this.movMercadoCasas.imgUrl);*/
+
+   
+    
+  /*  this.cameraService.setPreviusUrl()*/
+
+
+    /*const dialogRef = this.dialog.open(CameraDialogComponent,{
       width: '90%',
       data: {idProducto: this.ordenProducto ,imgUrl:this.movMercadoCasas.imgUrl},
       
@@ -192,7 +216,7 @@ export class ProductoEditComponent implements OnInit {
 
         }
       }
-    });
+    });*/
   }
 
   openAudio(){
