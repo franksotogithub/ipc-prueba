@@ -7,127 +7,129 @@
 
       <mat-card-content>
           
-        <div class="row ">
-
-          <div class="col-md-6 form-group">
-              <mat-form-field class="full-width" appearance="fill">
-                  <mat-label>Usuario:</mat-label>
-                  <input  type="text" placeholder="Usuario"  [(ngModel)]="datos.usuario"  readonly  matInput>
-              </mat-form-field>
-          </div>
-
-          <div class="col-md-6 form-group">
-              <mat-form-field class="full-width" appearance="fill">
-                  <mat-label>Fecha:</mat-label>
-                  <input  type="date" placeholder="Fecha"    [(ngModel)]="datos.fecha" readonly matInput>
-              </mat-form-field>
-          </div>
-
-          <div class="col-md-6 form-group">
-              <mat-form-field class="full-width" appearance="fill">
-                  <mat-label>Ruta:</mat-label>
-                  <input type="text"  placeholder="Ruta"    [(ngModel)]="datos.ruta"  readonly matInput>
-              </mat-form-field>
-          </div>
-   
-          <div class="col-md-6 form-group">
-              <mat-form-field class="full-width" appearance="fill">
-                  <mat-label>Circuito:</mat-label>
-                  <input  placeholder="Circuito"   [(ngModel)]="datos.circuito"  readonly matInput>
-              </mat-form-field>
-          </div>
-
-          <div class="col-md-6 form-group">
-              <mat-form-field class="full-width" appearance="fill">
-                  <mat-label>Distrito:</mat-label>
-                  <input  placeholder="Distrito"    [(ngModel)]="datos.distrito"  readonly matInput >
-              </mat-form-field>
-          </div>
-
-          <div class="col-md-6 form-group">
-              <mat-form-field class="full-width" appearance="fill">
-                  <mat-label>Ubicacion:</mat-label>
-                  <input  placeholder="Ubicacion"   [(ngModel)]="datos.ubicacion" readonly  matInput >
-              </mat-form-field>
-          </div>
-
-
+        <div class="row form-group">
           <div class="col-md-12">
-           
-              <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
-               
-      
-                <ng-container matColumnDef="ruc">
-                  <mat-header-cell *matHeaderCellDef> RUC </mat-header-cell>
-                  <mat-cell *matCellDef="let element" data-label="ruc"> 
-                    <!--<span class="mobile-label">RUC:</span>-->
-                    {{element.ruc}} 
-                  </mat-cell>
-                </ng-container>
-      
-                <ng-container matColumnDef="establecimiento">
-                  <mat-header-cell *matHeaderCellDef> Establecimiento </mat-header-cell>
-                  <mat-cell *matCellDef="let element" data-label="establecimiento"> 
-                    <!--<span class="mobile-label">Establecimiento:</span>-->
-                    {{element.establecimiento}} 
-                  </mat-cell>
-                </ng-container>
+
+            <mat-form-field>
+              <mat-select placeholder=" Estados" [formControl]="estados" multiple (selectionChange)="filterEstados(estados)">
+                <mat-select-trigger>
+                  {{estados.value ? estados.value[0] : ''}}
+                  <span *ngIf="estados.value?.length > 1" class="example-additional-selection">
+                    (+{{estados.value.length - 1}} {{estados.value?.length === 2 ? 'other' : 'others'}})
+                  </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let estado of estadosList" [value]="estado">
                 
-                <ng-container matColumnDef="direccion">
-                    <mat-header-cell *matHeaderCellDef> Direccion </mat-header-cell>
-                    <mat-cell *matCellDef="let element" data-label="direccion"> 
-                      <!--<span class="mobile-label">Direccion:</span>-->
-                      {{element.direccion}} 
-                    </mat-cell>
-                  </ng-container>
-  
-                  <ng-container matColumnDef="giro">
-                    <mat-header-cell *matHeaderCellDef> Giro </mat-header-cell>
-                    <mat-cell *matCellDef="let element" data-label="giro"> 
-                      <!--<span class="mobile-label">Giro:</span>-->
-                      {{element.giro}} 
-  
-                    </mat-cell>
-                  </ng-container>
-                  <!--
-                  <ng-container matColumnDef="avance">
-                    <mat-header-cell *matHeaderCellDef> Avance </mat-header-cell>
-                    <mat-cell *matCellDef="let element" data-label="avance"> 
-                      
-                      {{element.avance}} 
-                    </mat-cell>
-                  </ng-container>
-                    -->
-                    <ng-container matColumnDef="estado">
-                        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
-                        <mat-cell *matCellDef="let element" data-label="estado"> 
-                       
-                          {{element.estado}} 
-                        </mat-cell>
-                    </ng-container>
-  
-                    <ng-container  matColumnDef="id_directorio_ipc">
-                        <mat-header-cell *matHeaderCellDef> Accion </mat-header-cell>
-                        <mat-cell *matCellDef="let element" data-label="accion"> 
-                          <button mat-raised-button color="primary" [routerLink]="['edit', element.id_directorio_ipc]"><mat-icon>edit</mat-icon></button>
-                          
-                        </mat-cell>
-                    </ng-container>
-  
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-              </mat-table>
-  
-          
-  
+                  <div style="width: 0px;" [ngClass]="{
+                  'estado-finalizado': estado === ESTADO.FINALIZADO,
+                  'estado-temporal': estado === ESTADO.TEMPORAL ,
+                  'estado-proceso': (estado === ESTADO.PROCESO || estado === ESTADO.PENDIENTE),
+                  'estado-cerrado': estado === ESTADO.CERRADO 
+                }" >{{estado}}</div>
+                
+              </mat-option>
+              </mat-select>
+            </mat-form-field>
+
           </div>
-          
-  
+       
+          <div class="col-md-12 ">
+            <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  
+            
+            cdkDropList
+            [cdkDropListData]="dataSource"
+            (cdkDropListDropped)="dropTable($event)"
+           #table
+            >
+
+
+
+              
+              <ng-container [matColumnDef]="column.data" *ngFor="let column of columns" >
+                <mat-header-cell *matHeaderCellDef  > {{column.label}} </mat-header-cell>
+
+
+                <ng-container *ngIf="column.label==='Acciones';else html1">
+                  <mat-cell *matCellDef="let element"  [attr.data-label]="column.label"> 
+
+                    <button mat-icon-button type="button"  color="primary" cdkDragHandle  style="pointer-events:all;">
+                      <mat-icon> reorder </mat-icon>
+                    </button>
+                    <button mat-button color="primary"  style="pointer-events:all;" [routerLink]="['edit', element.informante_cod]"><mat-icon>edit</mat-icon></button>
+                    
+                  </mat-cell>
+                </ng-container>
+               
+
+
+                <ng-template #html1>
+
+                  <ng-container *ngIf="column.data=='orden';else html2">
+                    <mat-cell *matCellDef="let element" [attr.data-label]="column.label">
+
+                      <div cdkDragHandle>{{element[column.data]}}</div>  
+
+                      <!--<mat-icon cdkDragHandle > </mat-icon>-->
+                    </mat-cell>
+                  </ng-container>
+                  
+                  <ng-template #html2>
+                    <mat-cell *matCellDef="let element" [attr.data-label]="column.label">
+             
+                      {{element[column.data]}}
+                    </mat-cell>
+                  </ng-template>
+
+            
+
+                </ng-template>
+                
+
+
+              </ng-container>
+
+        
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+              <!--
+              <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDragLockAxis="y" cdkDrag [cdkDragData]="row"
+              
+              [ngClass]="{
+                'estado-finalizado': row.estado === ESTADO.FINALIZADO,
+                'estado-temporal': row.estado === ESTADO.TEMPORAL ,
+                'estado-proceso': (row.estado === ESTADO.PROCESO || row.estado === ESTADO.PENDIENTE),
+                'estado-cerrado': row.estado === ESTADO.CERRADO 
+              }"
+              
+              ></mat-row>
+            -->
+
+            <mat-row style="pointer-events:none;" *matRowDef="let row; columns: displayedColumns;"  
+            cdkDrag [cdkDragData]="row"
+            [ngClass]="{
+              'estado-finalizado': row.estado === ESTADO.FINALIZADO,
+              'estado-temporal': row.estado === ESTADO.TEMPORAL ,
+              'estado-proceso': (row.estado === ESTADO.PROCESO || row.estado === ESTADO.PENDIENTE),
+              'estado-cerrado': row.estado === ESTADO.CERRADO 
+            }"
+            
+            ></mat-row>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="6">No se encontraron resultados</td>
+            </tr>
+
+
+            </mat-table>
+            <div *ngIf="loadingData" class="container-spinner-loading">
+              <mat-progress-spinner color="primary" mode="indeterminate">
+              </mat-progress-spinner>
+          </div>
+            
+            <!--<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
+          </div>
         </div>
-
-     
-
-
       </mat-card-content>
       
       

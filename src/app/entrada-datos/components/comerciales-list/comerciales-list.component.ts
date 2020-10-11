@@ -41,7 +41,7 @@ export class ComercialesListComponent implements OnInit
   estados = new FormControl();
   estadosList: string[] = [ Estado.FINALIZADO, Estado.PENDIENTE, Estado.TEMPORAL, Estado.CERRADO];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  
+  loadingData =false;
   constructor(
     private idbService: IdbService,
     private router: Router,
@@ -89,6 +89,7 @@ export class ComercialesListComponent implements OnInit
 
 
   getInformantesCasasComerciales() {
+    this.loadingData=true;
     this.idbService
     .getAllData(TablesDB.DET_EJEC_CIRCUITO)
     .then((values: DetEjecucionCircuitoResquest[]) => {
@@ -114,6 +115,7 @@ export class ComercialesListComponent implements OnInit
         this.length=this.informantes.length;
 
         this.dataSource=this.informantes; 
+        this.loadingData=false;
      
     });
   }

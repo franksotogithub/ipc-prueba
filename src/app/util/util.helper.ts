@@ -87,4 +87,14 @@ export class UtilHelper {
     }
     return valueConverted;
   }
+
+  public static validarDato( data: any){
+
+    if(data && data !== null &&
+    data !== 'NaN' &&
+    parseFloat(data) !== 0.0 &&  data !== '' ) 
+    return true;
+    else
+    return false;
+  }
 }

@@ -26,7 +26,7 @@ export interface MovMercadoCasasRequest{
   precio_compra: number;
   peso_gr_mercado: number;
   
-  
+  digitacion: boolean;
   /*variedad: VariedadModel;*/
 
   observacion: string;

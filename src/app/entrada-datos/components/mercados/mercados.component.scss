@@ -62,3 +62,71 @@
   }
   
 }
+
+
+
+
+
+
+
+
+.mat-column-orden {
+  flex: 0 0 50px !important;
+  white-space: unset !important;
+
+}
+.mat-column-cod_articulo {
+  flex: 0 0 50px;
+  white-space: unset !important;
+}
+
+.mat-column-producto {
+  flex: 0 0 150px !important;
+  margin-right: 5px;
+
+}
+
+.mat-column-articulo {
+  flex: 0 0 150px !important;
+  margin-right: 5px;
+
+}
+
+.mat-column-precio {
+  flex: 0 0 100px !important;
+  margin-right: 5px;
+
+}
+.mat-column-precio_compra {
+  flex: 0 0 100px !important;
+  margin-right: 5px;
+
+}
+
+.mat-column-peso_gr_mercado {
+  flex: 0 0 100px !important;
+  margin-right: 5px;
+
+}
+
+.mat-column-peso_gr {
+  flex: 0 0 100px !important;
+  margin-right: 5px;
+
+}
+
+.mat-column-digitacion {
+  flex: 0 0 70px !important;
+  margin-right: 5px;
+
+}
+
+.mat-column-ce {
+  flex: 0 0 50px !important;
+  margin: 0px 5px;
+}
+
+.mat-column-cc {
+  flex: 0 0 50px !important;
+  margin: 0px 5px;
+}

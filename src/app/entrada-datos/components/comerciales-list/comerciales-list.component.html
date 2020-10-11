@@ -116,9 +116,16 @@
               
               ></mat-row>
 
-
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="8">No se encontraron resultados</td>
+              </tr>
 
               </mat-table>
+
+              <div *ngIf="loadingData" class="container-spinner-loading">
+                <mat-progress-spinner color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
               <!--<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>-->
             </div>
           </div>

@@ -44,6 +44,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
   cod_articulo :string;
   producto :string;
   cod_producto :string;
+  digitacion: boolean;
   constructor(m?: MovMercadoCasasRequest)
   {
     this.id = m?m.id:null;
@@ -67,6 +68,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
     this.valor=m?m.valor:null;
     this.precio_compra=m?m.precio_compra:null;
     this.peso_gr_mercado=m?m.peso_gr_mercado:null;
+    this.peso_gr=m?m.peso_gr:null;
     /*this.variedad=m?new VariedadModel(m.variedad):null;*/
     this.observacion = m?m.observacion:null;
     this.imgUrl =m?m.imgUrl:null;
@@ -83,7 +85,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
     this.cod_articulo = m?m.cod_articulo:null;
     this.producto  = m?m.producto:null;
     this.cod_producto = m?m.cod_producto:null;
-    
+    this.digitacion = m?m.digitacion:null;
   }
 
 }

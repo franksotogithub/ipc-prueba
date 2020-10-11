@@ -206,24 +206,33 @@ input[type=text]:disabled {
 
 
 .estado-proceso-text{
-  background-color: mat-color($warn,100);
+ 
   font-weight: bold;
   color: mat-color($warn,900);
 }
 .estado-cerrado-text{
-  background-color: rgb(203, 190, 230);
+
   font-weight: bold;
   color: darkviolet;
 }
 
 .estado-temporal-text{
-  background-color: palegoldenrod;
+ 
   font-weight: bold;
   color: darkorange;
 }
 
 .estado-finalizado-text{
-  background: lightgreen;
+  
   font-weight: bold;
   color: darkgreen;
+}
+
+.container-spinner-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background: rgba($color: #000000, $alpha: 0.1);
 }

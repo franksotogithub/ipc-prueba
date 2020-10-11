@@ -8,13 +8,21 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="/entrada-datos/comerciales" >
-        <mat-icon>edit</mat-icon>
+        <mat-icon>local_mall</mat-icon>
         <span>Casas Comerciales</span>
       </button>
+
+      <button mat-menu-item routerLink="/entrada-datos/mercados" >
+        <mat-icon>store mall directory icon</mat-icon>
+        <span>Mercados</span>
+      </button>
+
       <button mat-menu-item routerLink="/entrada-datos/datos" >
         <mat-icon>table_rows</mat-icon>
         <span>Datos</span>
       </button>
+
+      <!--routerLink="/entrada-datos/mercados"-->
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Salir</span>
