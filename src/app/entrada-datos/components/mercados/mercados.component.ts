@@ -427,6 +427,7 @@ if(m.digitacion ){
   }
   
   digitacion(m){
+    
     /*console.log('e>>>',e);*/
     
     /*if(m.digitacion ){
