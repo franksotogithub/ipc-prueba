@@ -18,6 +18,7 @@ import { DetEjecucionCircuitoModel } from 'src/app/core/models/det-ejecucion-cir
 import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragHandle} from '@angular/cdk/drag-drop';
 import { Estado } from 'src/app/shared/enum/estado.enum';
 import { TablesDB } from 'src/app/shared/enum/tables-db.enum';
+import { UtilHelper } from 'src/app/util/util.helper';
 @Component({
   selector: 'app-mercados-list',
   templateUrl: './mercados-list.component.html',
@@ -144,6 +145,24 @@ export class MercadosListComponent implements OnInit {
     let filters:Array<any>=e.value;
 
     this.dataSource=this.informantes.filter(m=>{return  filters.some( f=> f===m.estado) } )
+
+  }
+
+
+  changeBusqueda(event){
+    let q= UtilHelper.cleanCadena(event.target.value);
+    if (q.length>=3){      
+
+      this.dataSource=this.informantes.filter(m=>UtilHelper.cleanCadena(m.informante_nombre).includes(q) || UtilHelper.cleanCadena(m.informante_cod).includes(q) );
+
+    
+    }
+
+    else{
+      this.dataSource=this.informantes;
+    }
+
+    
 
   }
 

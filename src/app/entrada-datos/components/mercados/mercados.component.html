@@ -85,17 +85,43 @@
         <div class="col-6 form-group">
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Fecha programada:</mat-label>
-                <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.fecha_inicio"  [disabled]="true" matInput>
+                <input type="text"  placeholder="Establecimiento"    [value]="informante.fecha_programada_inicio| date: 'dd-MM-yyyy'"  [disabled]="true" matInput>
             </mat-form-field>
         </div>
-        <!--
-        <div class="col-md-6 form-group">
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>RUC:</mat-label>
-                <input  type="text" placeholder="RUC"    [(ngModel)]="informante.ruc" readonly matInput>
+
+        
+        <div class="col-6 form-group">
+            <mat-form-field class="full-width" appearance="outline">
+
+                <mat-label>Fecha y Hora inicio:</mat-label>
+                <input matInput [(ngModel)]="informante.fecha_inicio" readonly  [ngxMatDatetimePicker]="picker1" 
+                (ngModelChange)="changeInformante(informante)"
+                 >
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker1></ngx-mat-datetime-picker>
+
             </mat-form-field>
+    
+
+
         </div>
--->
+
+        <div class="col-6 form-group">
+            <mat-form-field class="full-width" appearance="outline">
+
+                <mat-label>Fecha y Hora fin:</mat-label>
+                <input matInput [(ngModel)]="informante.fecha_fin"  readonly [ngxMatDatetimePicker]="picker2" 
+                (ngModelChange)="changeInformante(informante)"
+                 >
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker2></ngx-mat-datetime-picker>
+
+            </mat-form-field>
+    
+
+
+        </div>
+       
     
 <div class="col-6 form-group">
     <mat-form-field class="full-width" appearance="outline">
@@ -110,7 +136,7 @@
         <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.investigador_nombre"  [disabled]="true" matInput>
     </mat-form-field>
 </div>
-        <div class="col-12 form-group">
+        <div class="col-md-12 form-group">
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Mercado:</mat-label>
                 <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.informante_nombre"  [disabled]="true" matInput>

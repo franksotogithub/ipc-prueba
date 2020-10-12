@@ -371,6 +371,7 @@ if(m.digitacion ){
   }
 
   changeInformante(informante : DetEjecucionCircuitoModel) {
+    console.log('informante',informante);
     this.idbService.updateItem(TablesDB.DET_EJEC_CIRCUITO,informante,informante.id);
   }
 

@@ -97,4 +97,8 @@ export class UtilHelper {
     else
     return false;
   }
+
+  public static cleanCadena(value) {
+    return  value.normalize('NFD').replace(/[\u00C0-\u00FF]/g, '').toUpperCase();
+  }
 }

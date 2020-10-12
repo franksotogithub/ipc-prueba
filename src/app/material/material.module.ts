@@ -29,6 +29,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {
+  NgxMatDatetimePickerModule, 
+  NgxMatNativeDateModule, 
+  NgxMatTimepickerModule 
+} from '@angular-material-components/datetime-picker';
 @NgModule({
   declarations: [],
   imports: [
@@ -61,6 +66,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     DragDropModule,
     MatDatepickerModule,
     MatNativeDateModule,
+
+NgxMatDatetimePickerModule, 
+  NgxMatNativeDateModule, 
+  NgxMatTimepickerModule 
   ],
   exports: [
     MatButtonModule,
@@ -90,7 +99,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSnackBarModule,
     DragDropModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxMatDatetimePickerModule, 
+  NgxMatNativeDateModule, 
+  NgxMatTimepickerModule 
+   
   ]
 })
 export class MaterialModule { }

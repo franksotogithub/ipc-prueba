@@ -8,7 +8,7 @@
       <mat-card-content>
           
         <div class="row form-group">
-          <div class="col-md-12">
+          <div class="col-md-4">
 
             <mat-form-field>
               <mat-select placeholder=" Estados" [formControl]="estados" multiple (selectionChange)="filterEstados(estados)">
@@ -30,6 +30,49 @@
               </mat-option>
               </mat-select>
             </mat-form-field>
+
+          </div>
+
+
+          <div class="col-md-4">
+
+            <mat-form-field>
+              <mat-label>Buscar:</mat-label>
+           
+              <input  type="text"   [(ngModel)]="busqueda"   (input)="changeBusqueda($event)"  matInput>
+
+              <!--
+              <mat-select placeholder=" Estados" [formControl]="estados" multiple (selectionChange)="filterEstados(estados)">
+                <mat-select-trigger>
+                  {{estados.value ? estados.value[0] : ''}}
+                  <span *ngIf="estados.value?.length > 1" class="example-additional-selection">
+                    (+{{estados.value.length - 1}} {{estados.value?.length === 2 ? 'other' : 'others'}})
+                  </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let estado of estadosList" [value]="estado">
+                
+                  <div style="width: 0px;" [ngClass]="{
+                  'estado-finalizado': estado === ESTADO.FINALIZADO,
+                  'estado-temporal': estado === ESTADO.TEMPORAL ,
+                  'estado-proceso': (estado === ESTADO.PROCESO || estado === ESTADO.PENDIENTE),
+                  'estado-cerrado': estado === ESTADO.CERRADO 
+                }" >{{estado}}</div>
+                
+              </mat-option>
+              </mat-select>-->
+            </mat-form-field>
+
+          </div>
+
+
+          <div class="col-md-4">
+
+           <!-- <mat-form-field>
+              <mat-label>Buscar:</mat-label>
+              
+           
+
+            </mat-form-field>-->
 
           </div>
        

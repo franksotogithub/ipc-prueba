@@ -10,7 +10,7 @@ export interface MovMercadoCasasRequest{
   ce: string;
   ce_anterior:string;
   peso_gr:number;
-  perso_kl:number;
+  peso_kl:number;
   fecha_registro:string;
   fecha_sube_dato:string;
   estado:string;

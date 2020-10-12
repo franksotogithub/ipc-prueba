@@ -20,7 +20,7 @@ export interface DetEjecucionCircuitoResquest{
   observacion: string;
   orden: number;
   tipo_encuesta: string;
-
+  fecha_programada_inicio:string;
 
 
   

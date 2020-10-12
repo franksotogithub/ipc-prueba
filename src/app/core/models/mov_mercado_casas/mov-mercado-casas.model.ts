@@ -13,7 +13,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
   ce:string;
   ce_anterior:string;
   peso_gr:number;
-  perso_kl:number;
+  peso_kl:number;
   fecha_registro:string;
   fecha_sube_dato:string;
   estado:string;
@@ -86,6 +86,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
     this.producto  = m?m.producto:null;
     this.cod_producto = m?m.cod_producto:null;
     this.digitacion = m?m.digitacion:null;
+    this.peso_kl = m?m.peso_kl:null;
   }
 
 }

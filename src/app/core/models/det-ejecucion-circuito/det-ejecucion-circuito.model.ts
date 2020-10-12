@@ -7,6 +7,7 @@ export class DetEjecucionCircuitoModel implements DetEjecucionCircuitoResquest {
   estado: string;
   fecha_fin: string;
   fecha_inicio: string;
+  fecha_programada_inicio:string;
   id: number;
   informante_ciudad: string;
   informante_cod: string;
@@ -21,7 +22,7 @@ export class DetEjecucionCircuitoModel implements DetEjecucionCircuitoResquest {
   observacion: string;
   orden: number;
   tipo_encuesta: string;
-
+  
   constructor(det?: DetEjecucionCircuitoResquest) {
     this.circuito_cod=det?det.circuito_cod:null;
     this.circuito_descripcion=det?det.circuito_descripcion:null;
@@ -43,5 +44,7 @@ export class DetEjecucionCircuitoModel implements DetEjecucionCircuitoResquest {
     this.observacion=det?det.observacion:null;
     this.orden=det?det.orden:null;
     this.tipo_encuesta=det?det.tipo_encuesta:null;
+    this.fecha_programada_inicio=det?det.fecha_programada_inicio:null;
   }
 }
+
