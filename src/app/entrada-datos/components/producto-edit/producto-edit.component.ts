@@ -182,6 +182,18 @@ export class ProductoEditComponent implements OnInit {
       this.disabled = false;
     }
 
+    this.cerrar = false;
+    this.disabled = false;
+
+    if (this.informante.estado == Estado.CERRADO) {
+      this.cerrar = true;
+      this.disabled = true;
+    }
+
+  
+
+    this.changeInformante(this.informante);
+
 
 
   }
@@ -289,8 +301,9 @@ export class ProductoEditComponent implements OnInit {
 
 
     this.getCurrentLocation();
-    this.changeEstadoInformante();
     this.changeMovMercadoCasas(m);
+    this.changeEstadoInformante();
+    
     
   }
 

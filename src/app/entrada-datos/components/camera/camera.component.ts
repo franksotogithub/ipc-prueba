@@ -105,7 +105,10 @@ id: number;
 
    this.webcamImage = webcamImage;
    this.imageAsDataUrl = webcamImage.imageAsDataUrl;
-
+  
+   if(webcamImage.imageAsDataUrl){
+     this.camera =false;
+   }
  }
 
  public cameraWasSwitched(deviceId: string): void {
@@ -146,7 +149,11 @@ this.activatedRoute.params.subscribe((params: Params) => {
     if( this.movMercadoCasasModel.imgUrl){
 
       this.imageAsDataUrl = this.movMercadoCasasModel.imgUrl;
- 
+      
+      if( this.imageAsDataUrl){
+        this.camera =false;
+      }
+      
  
     }
   });
@@ -213,14 +220,20 @@ async getItem(target, key) {
   }
   guardar(){
     
-    this.movMercadoCasasModel.imgUrl =this.imageAsDataUrl;
-  
+    this.movMercadoCasasModel.imgUrl =this.imageAsDataUrl; 
     
     this.idbService.updateItem(TablesDB.MOV_MERC_CASAS, this.movMercadoCasasModel,this.id);
      this.router.navigate([this.previusUrl]);
-    /*
-   this.dialogRef.close({ imgUrl:this.imageAsDataUrl});
-*/
+
   }
+
+  close(){
+    
+    
+    this.idbService.updateItem(TablesDB.MOV_MERC_CASAS, this.movMercadoCasasModel,this.id);
+     this.router.navigate([this.previusUrl]);
+
+  }
+
 
 }

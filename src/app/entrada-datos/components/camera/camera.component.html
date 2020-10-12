@@ -16,19 +16,21 @@
                 (initError)="handleInitError($event)"
         ></webcam>
 
+      
 
-        <div class ='tools'>
-
-          <div class="item">
-            <button mat-raised-button (click)="guardar()" ><mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon></button>
+        <div class ='tools row'>
+          <div class="col-4">
+            
+            <button  mat-mini-fab (click)="showNextWebcam(true);" title="Switch Camera"><mat-icon>sync</mat-icon>  </button>
             
           </div>
-          <div class="item">
+          
+          <div  class="col-4">
             <span class="dot" (click)="triggerSnapshot();"></span>
           </div>
 
           
-          <div class="snapshot item" (click)="openPhoto()" > 
+          <div class="col-4 snapshot" (click)="openPhoto()" > 
             <ng-container *ngIf="imageAsDataUrl;else html1">
               <img [src]="imageAsDataUrl"/>
             </ng-container>
@@ -46,13 +48,22 @@
         <div class="wrapper" (window:resize)="onResize($event)">
           <img [src]="imageAsDataUrl"/>
         </div>
-        <div class ='tools'>
-
-          <div class="item">
-            <button mat-raised-button (click)="back()" ><mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon></button>
+        <div class ='tools row'>
+          <div   class="col-4" >
+            <button mat-mini-fab (click)="close()" ><mat-icon>close</mat-icon></button>
             
           </div>
-         
+
+          <div   class="col-4" >
+            <button mat-mini-fab (click)="guardar()" ><mat-icon aria-hidden="false" aria-label="Example home icon">save</mat-icon></button>
+            
+          </div>
+
+          <div class="col-4"  >
+            <button mat-raised-button (click)="back()" ><mat-icon >videocam</mat-icon></button>
+            
+          </div>
+   
 
           
         </div>
