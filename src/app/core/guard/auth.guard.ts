@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       const currentUser = this.authenticationService.currentUserValue;
       console.log('currentUser>>>',currentUser);
       if (currentUser) {
-        console.log('next>>>',next.queryParams['token']);
+       
         return true;
       }
    
@@ -29,6 +29,7 @@ export class AuthGuard implements CanActivate {
         this.authService.testToken(token).subscribe((user)=>{
           if(user){
             localStorage.setItem('currentUser', JSON.stringify(user));
+            this.authService.setCurrentUserValue(user);
             return true;
           }
         });

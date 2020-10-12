@@ -122,6 +122,9 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  public setCurrentUserValue(value) {
+    return this.currentUserSubject.next(value);
+  }
 
 /*
 
