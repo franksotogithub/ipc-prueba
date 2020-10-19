@@ -18,6 +18,7 @@ import { DetEjecucionCircuitoModel } from 'src/app/core/models/det-ejecucion-cir
 import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDragHandle} from '@angular/cdk/drag-drop';
 import { Estado } from 'src/app/shared/enum/estado.enum';
 import { TablesDB } from 'src/app/shared/enum/tables-db.enum';
+import { UtilHelper } from 'src/app/util/util.helper';
 
 @Component({
   selector: 'app-comerciales-list',
@@ -30,7 +31,7 @@ export class ComercialesListComponent implements OnInit
   @ViewChild('table',{static:true}) table: MatTable<DetEjecucionCircuitoModel>;
   columns: any[];
   displayedColumns: string[];
-  busqueda = '';
+  
   /*dataSource: MatTableDataSource<DetEjecucionCircuitoModel>;*/
   dataSource: DetEjecucionCircuitoModel[];
   q = '';
@@ -42,6 +43,10 @@ export class ComercialesListComponent implements OnInit
   estadosList: string[] = [ Estado.FINALIZADO, Estado.PENDIENTE, Estado.TEMPORAL, Estado.CERRADO];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   loadingData =false;
+  circuitoNombre='';
+  investigadorNombre ='';
+  
+  busqueda ='';
   constructor(
     private idbService: IdbService,
     private router: Router,
@@ -81,12 +86,12 @@ export class ComercialesListComponent implements OnInit
     .observe(['(max-width: 770px)'])
     .subscribe((result) => {
       this.displayedColumns = result.matches
-        ? ['orden', 'circuito_cod','investigador_nombre','informante_nombre','informante_giro','id']
+        ? ['orden', 'informante_nombre','informante_direccion','informante_giro','id']
         : ['orden', 'informante_cod','circuito_cod','investigador_nombre','informante_nombre', 'informante_direccion','informante_giro','id'];
     });
    
   }
-
+  /*'circuito_cod','investigador_nombre' circuito_nombre*/
 
   getInformantesCasasComerciales() {
     this.loadingData=true;
@@ -114,9 +119,12 @@ export class ComercialesListComponent implements OnInit
 
         this.length=this.informantes.length;
 
+
         this.dataSource=this.informantes; 
         this.loadingData=false;
-     
+        this.circuitoNombre = this.informantes[0].circuito_nombre;
+
+        this.investigadorNombre = this.informantes[0].investigador_nombre;
     });
   }
 
@@ -149,5 +157,21 @@ export class ComercialesListComponent implements OnInit
     this.dataSource=this.informantes.filter(m=>{return  filters.some( f=> f===m.estado) } )
 
   }
+  
+  changeBusqueda(event){
+    let q= UtilHelper.cleanCadena(event.target.value);
+    if (q.length>=3){      
 
+      this.dataSource=this.informantes.filter(m=>UtilHelper.cleanCadena(m.informante_nombre).includes(q) || UtilHelper.cleanCadena(m.informante_cod).includes(q) );
+
+    
+    }
+
+    else{
+      this.dataSource=this.informantes;
+    }
+
+    
+
+  }
 }

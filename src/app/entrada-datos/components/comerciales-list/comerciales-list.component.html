@@ -8,9 +8,9 @@
         <mat-card-content>
             
           <div class="row form-group">
-            <div class="col-md-12">
+            <div class="col-md-6 form-group">
 
-              <mat-form-field>
+              <mat-form-field class="full-width"  appearance="outline">
                 <mat-select placeholder=" Estados" [formControl]="estados" multiple (selectionChange)="filterEstados(estados)">
                   <mat-select-trigger>
                     {{estados.value ? estados.value[0] : ''}}
@@ -31,7 +31,38 @@
                 </mat-select>
               </mat-form-field>
 
+              
             </div>
+
+            <div class="col-md-6 form-group">
+
+              <mat-form-field class="full-width"  appearance="outline">
+                <mat-label>Buscar:</mat-label>
+             
+                <input  type="text"   [(ngModel)]="busqueda"   (input)="changeBusqueda($event)"  matInput>
+  
+              
+              </mat-form-field>
+              <!--
+              <mat-form-field class="full-width"  appearance="outline">
+                  <mat-label>Buscar:</mat-label>
+                  <input  placeholder="Buscar"   [(ngModel)]="buscar"   matInput>
+              </mat-form-field>-->
+          </div>
+
+            <div class="col-md-6 form-group">
+              <mat-form-field class="full-width"  appearance="outline">
+                  <mat-label>Circuito:</mat-label>
+                  <input  placeholder="Direccion"   [(ngModel)]="circuitoNombre"  [disabled]="true" matInput>
+              </mat-form-field>
+          </div>
+
+          <div class="col-md-6 form-group">
+            <mat-form-field class="full-width"  appearance="outline">
+                <mat-label>Investigador:</mat-label>
+                <input  placeholder="Direccion"   [(ngModel)]="investigadorNombre"  [disabled]="true" matInput>
+            </mat-form-field>
+          </div>
          
             <div class="col-md-12 ">
               <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  

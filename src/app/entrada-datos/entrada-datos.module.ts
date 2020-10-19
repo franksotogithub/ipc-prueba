@@ -24,6 +24,7 @@ import { DescargarDatosDialogComponent } from './components/descargar-datos-dial
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {AppDateAdapter, APP_DATE_FORMATS } from 'src/app/util/format-datepicker';
 import { CameraComponent } from './components/camera/camera.component';
+import { CerrarDialogComponent } from './components/cerrar-dialog/cerrar-dialog.component';
 
 @NgModule({
   declarations: [MercadosComponent, 
@@ -36,6 +37,7 @@ import { CameraComponent } from './components/camera/camera.component';
      CameraDialogComponent,
      DescargarDatosDialogComponent,
      CameraComponent,
+     CerrarDialogComponent,
      
     ],
   imports: [
@@ -54,6 +56,7 @@ import { CameraComponent } from './components/camera/camera.component';
     MoneyDialogComponent,
     AudioDialogComponent,
     DescargarDatosDialogComponent,
+    CerrarDialogComponent,
 
  ],
   /*providers: [

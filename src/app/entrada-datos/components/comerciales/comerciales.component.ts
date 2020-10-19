@@ -21,6 +21,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 
 import { FormControl } from '@angular/forms';
 import { Informante } from 'src/app/core/models/informante.model';
+import { CerrarDialogComponent } from '../cerrar-dialog/cerrar-dialog.component';
 @Component({
   selector: 'app-comerciales',
   templateUrl: './comerciales.component.html',
@@ -330,18 +331,40 @@ export class ComercialesComponent implements OnInit {
   }
 
   cerrarInformante() {
-    this.informante.estado = Estado.CERRADO;
-    this.movMercadoCasasModelList.map((m) => {
-      m.ce = 'F';
-      m.precio = m.precio_anterior
-        ? UtilHelper.formatPrecio(m.precio_anterior)
-        : UtilHelper.formatPrecio(0);
-      m.estado = Estado.CERRADO;
-      this.changeMovMercadoCasas(m);
-      /*this.idbService.movMercadoCasas.next(m);*/
+    const dialogRef = this.dialog.open(CerrarDialogComponent, {
+      /*data: { title: title, message: message },*/
+
     });
-   this.changeInformante(this.informante);
-   this.getEstadoInformante();
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.confirm){
+        this.informante.observacion = result.observacion;
+
+        this.informante.estado = Estado.CERRADO;
+    
+        this.movMercadoCasasModelList.map((m) => {
+          m.ce = 'F';
+          m.precio = m.precio_anterior
+            ? UtilHelper.formatPrecio(m.precio_anterior)
+            : UtilHelper.formatPrecio(0);
+          m.estado = Estado.CERRADO;
+          this.changeMovMercadoCasas(m);
+          
+          });
+    
+    
+       this.changeInformante(this.informante);
+       this.getEstadoInformante();
+
+      }
+
+
+     
+
+    });
+
+
+
   }
 
   abrirInformante() {
@@ -376,8 +399,11 @@ export class ComercialesComponent implements OnInit {
       if (result) {
         if (result.confirm) {
           console.log('confirm', result.confirm);
+
           this.cerrar ? this.cerrarInformante() : this.abrirInformante();
+
         } else {
+
           console.log('confirm', result.confirm);
           this.cerrar = !this.cerrar;
         }
