@@ -78,16 +78,34 @@
                         <input  placeholder="Codigo"    [(ngModel)]="movMercadoCasas.cod_mvariedad"  [disabled]="true" matInput >
                     </mat-form-field>
                 </div>
+<!--
+                        {{element.producto}}
+                        <ng-container *ngIf="element.articulo && element.articulo!=='' " >
+                            / {{element.articulo}}
+                        </ng-container>
+                        
+                        <ng-container *ngIf="element.var_nombre && element.var_nombre!=='' " >
+                            / {{element.var_nombre}}
+                        </ng-container>
 
+
+                        <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Observacion:</mat-label>
+                        <textarea matInput  autocomplete="off"  [(ngModel)]="movMercadoCasas.observacion" (change)="changeMovMercadoCasasModel(movMercadoCasas)" ></textarea>
+                    </mat-form-field>
+                        
+
+-->
            
 
                 <div class="col-md-4 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
-                        <mat-label>Producto:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.producto" [disabled]="true"  matInput >
+                        <mat-label>Producto/Articulo/Variedad/Marca/Modelo:</mat-label>
+                        <textarea matInput [disabled]="true"  [value]="descripcion"  rows="4"></textarea>
+                        <!--<input  placeholder="Producto"   [value]=" movMercadoCasas.producto  " [disabled]="true"  matInput >-->
                     </mat-form-field>
                 </div>
-
+                <!--
                 <div class="col-md-4 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Articulo:</mat-label>
@@ -97,14 +115,15 @@
                 <div class="col-md-4 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Variedad Esp.:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.variedad_nombre" [disabled]="true"  matInput >
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_nombre" [disabled]="true"  matInput >
                     </mat-form-field>
                 </div>
-
+            -->
+            <!--
                 <div class="col-md-4 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Marca:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.variedad_nombre" [disabled]="true"  matInput >
+                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_marca" [disabled]="true"  matInput >
                     </mat-form-field>
                 </div>
                 
@@ -114,26 +133,28 @@
                         <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_modelo" [disabled]="true"  matInput >
                     </mat-form-field>
                 </div>
-
-                <div class="col-md-4 form-group">
+            -->
+                <div class="col-6 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Capacidad/Tam:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_capacidad" [disabled]="true"  matInput >
+                        
+                        <input  placeholder="Capacidad"   [(ngModel)]="movMercadoCasas.var_capacidad" [disabled]="true"  matInput >
                     </mat-form-field>
                 </div>
-                <div class="col-md-4 form-group">
+                <div class="col-6 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Presentacion:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_presentacion" [disabled]="true"  matInput >
+                        <textarea matInput [value]="movMercadoCasas.var_presentacion" rows="3"></textarea>
+                        <!--<input  placeholder="Presentacion"   [(ngModel)]="movMercadoCasas.var_presentacion" [disabled]="true"  matInput >-->
                     </mat-form-field>
                 </div>
-                <div class="col-md-4 form-group">
+                <div class="col-3 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Origen:</mat-label>
-                        <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_origen" [disabled]="true"  matInput >
+                        <input  placeholder="Origen"   [(ngModel)]="movMercadoCasas.var_origen" [disabled]="true"  matInput >
                     </mat-form-field>
                 </div>
-                <div class="col-md-4 form-group">
+                <div class="col-9 form-group">
                     <mat-form-field  class="full-width" appearance="outline">
                         <mat-label>Otros detalles:</mat-label>
                         <input  placeholder="Producto"   [(ngModel)]="movMercadoCasas.var_otros_detalles" [disabled]="true"  matInput >
@@ -186,7 +207,7 @@
                 <div class="col-md-12 form-group">
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Observacion:</mat-label>
-                        <textarea matInput  autocomplete="off"  [(ngModel)]="movMercadoCasas.observacion" (change)="changeMovMercadoCasasModel(movMercadoCasas)" ></textarea>
+                        <textarea matInput  autocomplete="off" rows="3" [(ngModel)]="movMercadoCasas.observacion" (change)="changeMovMercadoCasasModel(movMercadoCasas)" ></textarea>
                     </mat-form-field>
                 </div>
             

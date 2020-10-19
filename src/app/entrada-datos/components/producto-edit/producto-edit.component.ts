@@ -57,6 +57,7 @@ export class ProductoEditComponent implements OnInit {
     { estado: Estado.CERRADO, label: 'Orden Cerrada' },
   ];
   labelEstado = '';
+  descripcion='';
 
   estadosList: string[] = this.listEstado.map((e) => {
     return e.estado;
@@ -152,7 +153,13 @@ export class ProductoEditComponent implements OnInit {
 
       this.movMercadoCasas= this.movMercadoCasasModelList.find((p)=>p.orden==this.ordenProducto);
       [this.preview, this.next]=UtilHelper.getIdsNextPreview(this.movMercadoCasasModelList,this.ordenProducto,'orden');
+      this.descripcion = `${this.movMercadoCasas.producto}/ ${this.movMercadoCasas.articulo}/ ${this.movMercadoCasas.var_nombre}/ ${this.movMercadoCasas.var_marca}/ ${this.movMercadoCasas.var_modelo}` ;
+      
 
+      /*this.descripcion =  this.movMercadoCasas.producto +this.movMercadoCasas.articulo+this.movMercadoCasas.var_nombre
+      + (this.movMercadoCasas.articulo && this.movMercadoCasas.articulo!=='')?this.movMercadoCasas.articulo:''+
+      + (this.movMercadoCasas.var_nombre && this.movMercadoCasas.var_nombre!=='')?this.movMercadoCasas.var_nombre:'';*/
+      /*this.{{movMercadoCasas.producto}} / {{movMercadoCasas.articulo}} / {{movMercadoCasas.var_nombre}}*/
       this.getEstadoMovCasas();
 
     });

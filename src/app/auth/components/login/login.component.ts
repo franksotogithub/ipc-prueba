@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { first } from 'rxjs/operators';
+import { catchError, first, map } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -37,13 +38,42 @@ export class LoginComponent implements OnInit {
       let username =value.username.toLowerCase();
 
       this.authService.login(username,value.password)
-      .pipe(first())
+      .pipe(
+
+        map(user => {
+          // login successful if there's a jwt token in the response
+          /*if (user && user.token) {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+          }
+    */
+
+    console.log('user>>>',user);
+
+
+          
+        }),
+        catchError((error)=>{
+
+          console.log('An error occurred:', error);
+        
+          return throwError(error);
+          
+        })
+
+
+      )
        .subscribe(
-        data => {
+        (data) => {
+          console.log('data>>>',data);
+
+          /*console.log('data>>>',JSON.stringify(data));*/
           this.router.navigate(['/']);
         },
         error => {
-          this.error_message = "El usuario o el password no son correctos";
+          this.error_message=JSON.stringify(error.error) + JSON.stringify(error.message);
+          /*this.error_message = "El usuario o el password no son correctos";*/
         });
       }
   

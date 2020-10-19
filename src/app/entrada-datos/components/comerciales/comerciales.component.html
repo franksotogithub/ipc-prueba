@@ -85,7 +85,7 @@
         <div class="col-6 form-group">
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Fecha programada:</mat-label>
-                <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.fecha_programada_inicio"  [disabled]="true" matInput>
+                <input type="text"  placeholder="Establecimiento"    [value]="informante.fecha_programada_inicio | date: 'dd-MM-yyyy'"  [disabled]="true" matInput>
             </mat-form-field>
         </div>
         <!--
@@ -96,7 +96,7 @@
             </mat-form-field>
         </div>
 -->
-    
+    <!--
 <div class="col-6 form-group">
     <mat-form-field class="full-width" appearance="outline">
         <mat-label>Circuito:</mat-label>
@@ -109,7 +109,8 @@
         <mat-label>Investigador:</mat-label>
         <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.investigador_nombre"  [disabled]="true" matInput>
     </mat-form-field>
-</div>
+</div>-->
+
         <div class="col-12 form-group">
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Establecimiento:</mat-label>
@@ -181,46 +182,18 @@
         <div class="col-md-12">
            
             <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
-            <!--
-
-  id: number;
-  det_ejecucion: number;
-  orden:number;
-  precio:string;
-  precio_anterior:number;
-  cc:number;
-  ce:number;
-  ce_anterior:number;
-  peso_gr:number;
-  perso_kl:number;
-  fecha_registro:string;
-  fecha_sube_dato:string;
-  estado:string;
-  variedad_nombre:string;
-  cod_mvariedad:string;
-  tipo_usuario:string;
-
-  lote: string;
-  anio: string;
-  mes: string;
-  nro_semana: number;
-  valor: number;
-  precio_compra: number;
-  peso_gr_mercado: number;
-  variedad:VariedadModel;
-
-            -->
+           
                
                 <ng-container matColumnDef="orden">
                     <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
-                    <mat-cell *matCellDef="let element"  data-label="Orden" > 
+                    <mat-cell *matCellDef="let element"  data-label="Orden:" > 
                         {{element.orden}} 
                     </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="cod_mvariedad">
                 <mat-header-cell *matHeaderCellDef>Codigo</mat-header-cell>
-                <mat-cell *matCellDef="let element" data-label="Codigo"> 
+                <mat-cell *matCellDef="let element" data-label="Codigo:"> 
                     
                     {{element.cod_mvariedad}} 
                 </mat-cell>
@@ -228,18 +201,23 @@
                 
                 <ng-container matColumnDef="variedad_nombre">
                     <mat-header-cell *matHeaderCellDef>Producto/articulo/variedad</mat-header-cell>
-                    <mat-cell *matCellDef="let element" data-label="Producto/articulo"> 
-                        <!--{{element.variedad.clasificacion.producto_desc}} /
-                        {{element.variedad.clasificacion.articulo_desc }} /{{element.variedad.nombre }} -->
-
-                        {{element.producto}}/{{element.articulo}}/{{element.variedad_nombre}}
+                    <mat-cell *matCellDef="let element" data-label="Producto/articulo/variedad:"> 
+                        {{element.producto}}
+                        <ng-container *ngIf="element.articulo && element.articulo!=='' " >
+                            / {{element.articulo}}
+                        </ng-container>
+                        
+                        <ng-container *ngIf="element.var_nombre && element.var_nombre!=='' " >
+                            / {{element.var_nombre}}
+                        </ng-container>
+                        
                     </mat-cell>
                 </ng-container>
 
                 
             <ng-container matColumnDef="precio">
                 <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell>
-                <mat-cell *matCellDef="let element" data-label="Presentacion"> 
+                <mat-cell *matCellDef="let element" data-label="Precio:"> 
                     <mat-form-field class="full-width" appearance="outline">
                        
                     <input appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.precio"  (change)="changeMovMercadoCasasModel(element,true)"  [disabled]="disabled" matInput>    

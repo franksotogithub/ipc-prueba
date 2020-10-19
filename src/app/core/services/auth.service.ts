@@ -17,12 +17,13 @@ export class AuthService {
   }
   
   login(username:string,password:string){
-    let formData: any = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
+    const body={
+      username:username,
+      password :password
+    }
 
     let url_auth= `${this.ulr_api}/api-token-auth/`;
-    return this.http.post<any>(url_auth,formData).pipe(map(user => {
+    return this.http.post<any>(url_auth,body).pipe(map(user => {
       // login successful if there's a jwt token in the response
       if (user && user.token) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes

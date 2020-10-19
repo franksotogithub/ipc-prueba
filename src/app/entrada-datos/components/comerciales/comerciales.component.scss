@@ -25,6 +25,14 @@
   display: flex;
   justify-content: space-between;
 }
+/*
 .mat-button-base {
+
+}
+*/
+
+button:not(.mat-icon-button){
   margin: 8px 8px 8px 0;
 }
+
+ /*mat-button-base*/

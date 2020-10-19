@@ -14,7 +14,7 @@ export interface MovMercadoCasasRequest{
   fecha_registro:string;
   fecha_sube_dato:string;
   estado:string;
-  variedad_nombre:string;
+  var_nombre:string;
   cod_mvariedad:string;
   tipo_usuario:string;
 

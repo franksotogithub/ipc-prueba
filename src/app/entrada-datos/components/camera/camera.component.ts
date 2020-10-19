@@ -27,18 +27,18 @@ id: number;
    this.width = win.innerWidth;
    this.height = win.innerHeight;
 
-   this.videoOptions.width={ideal: 300};
-   this.videoOptions.height={ideal: 600};
+   /*this.videoOptions.width={ideal: 300};
+   this.videoOptions.height={ideal: 600};*/
    /*this.videoOptions.width={ideal: this.width};*/
 
     /*width : {ideal: 300},
     height : {ideal: 400}
    */
 
-   if( this.width> this.height){
+   /*if( this.width> this.height){
     this.videoOptions.width={ideal: 600};
     this.videoOptions.height={ideal: 400};
-   }
+   }*/
    console.log('---------------------');
    console.log('width:>>',this.width);
    console.log('height:>>',this.height);
@@ -51,8 +51,24 @@ id: number;
  public multipleWebcamsAvailable = false;
  public deviceId: string;
  public videoOptions: MediaTrackConstraints = {
-  width : {ideal: 300},
-  height : {ideal: 600}
+
+ /* width: 480,
+        height: 640,*/
+ width : {ideal: 300},
+  height : {ideal: 600},
+
+
+/*  width : {ideal: 300},
+  height : {ideal: 600},
+*/
+/*
+width : {min: 300,max:400},
+height : {min: 600,max:800},
+*/
+
+/*facingMode: {ideal:"environment"},*/
+
+
  
  };
  public errors: WebcamInitError[] = [];

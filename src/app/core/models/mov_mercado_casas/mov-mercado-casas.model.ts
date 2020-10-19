@@ -17,7 +17,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
   fecha_registro:string;
   fecha_sube_dato:string;
   estado:string;
-  variedad_nombre:string;
+  var_nombre:string;
   cod_mvariedad:string;
   tipo_usuario:string;
 
@@ -57,7 +57,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
     this.fecha_registro=m?m.fecha_registro:null;
     this.fecha_sube_dato=m?m.fecha_sube_dato:null;
     this.estado=m?m.estado:null;
-    this.variedad_nombre=m?m.variedad_nombre:null;
+    this.var_nombre=m?m.var_nombre:null;
     this.cod_mvariedad=m?m.cod_mvariedad:null;
     this.tipo_usuario=m?m.tipo_usuario:null;
   
