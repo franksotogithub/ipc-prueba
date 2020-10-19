@@ -3,7 +3,7 @@ import {  LatLong } from '../core/models/generic/lat-long';
 import * as momentTimezone from 'moment-timezone';
 
 export class UtilHelper {
-
+  public static timezone = 'America/Lima';
   static  getIdsNextPreview(array,id,key){
     let idPreview,idNext;
 
@@ -81,8 +81,21 @@ export class UtilHelper {
     let valueConverted: string = null;
     if (momentTimezone(date).isValid()) {
       // date = momentTimezone(date).subtract('hours', UtilHelper.getClientTimeZone()).toDate();
-      date = momentTimezone(date).subtract('hours', 0).toDate();
-      // valueConverted = momentTimezone(date).tz(this.timezone).toISOString();
+      //date = momentTimezone(date).subtract('hours', 0).toDate();
+      valueConverted = momentTimezone(date).tz(this.timezone).toISOString();
+      //valueConverted = momentTimezone(date).format(format);
+    }
+    return valueConverted;
+  }
+
+
+
+  public static parseUTCDateToString(date: Date,format?:string): string {
+    let valueConverted: string = null;
+    if (momentTimezone(date).isValid()) {
+      // date = momentTimezone(date).subtract('hours', UtilHelper.getClientTimeZone()).toDate();
+      //date = momentTimezone(date).subtract('hours', 0).toDate();
+      //valueConverted = momentTimezone(date).tz(this.timezone).toISOString();
       valueConverted = momentTimezone(date).format(format);
     }
     return valueConverted;

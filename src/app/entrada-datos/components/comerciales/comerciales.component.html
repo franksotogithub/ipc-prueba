@@ -71,6 +71,7 @@
         <br>
     <div class="row ">
         <div class="col-6 form-group">
+
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Informante:</mat-label>
                 <button mat-icon-button matPrefix  [routerLink]="['../', preview]" >
@@ -88,29 +89,7 @@
                 <input type="text"  placeholder="Establecimiento"    [value]="informante.fecha_programada_inicio | date: 'dd-MM-yyyy'"  [disabled]="true" matInput>
             </mat-form-field>
         </div>
-        <!--
-        <div class="col-md-6 form-group">
-            <mat-form-field class="full-width" appearance="fill">
-                <mat-label>RUC:</mat-label>
-                <input  type="text" placeholder="RUC"    [(ngModel)]="informante.ruc" readonly matInput>
-            </mat-form-field>
-        </div>
--->
-    <!--
-<div class="col-6 form-group">
-    <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Circuito:</mat-label>
-        <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.circuito_nombre" [disabled]="true" matInput>
-    </mat-form-field>
-</div>
-
-<div class="col-6 form-group">
-    <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Investigador:</mat-label>
-        <input type="text"  placeholder="Establecimiento"    [(ngModel)]="informante.investigador_nombre"  [disabled]="true" matInput>
-    </mat-form-field>
-</div>-->
-
+       
         <div class="col-12 form-group">
             <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Establecimiento:</mat-label>
@@ -120,15 +99,6 @@
         
 
 
-      
-        <!--
-        <div class="col-md-4 form-group">
-        
-            <mat-slide-toggle [(ngModel)]="isChecked">Finalizar </mat-slide-toggle>
-
-        
-        </div>
--->
         <div class="col-md-12 form-group">
             <mat-form-field class="full-width"  appearance="outline">
                 <mat-label>Direccion:</mat-label>

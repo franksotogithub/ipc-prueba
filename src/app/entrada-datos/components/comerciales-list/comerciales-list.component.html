@@ -43,21 +43,17 @@
   
               
               </mat-form-field>
-              <!--
-              <mat-form-field class="full-width"  appearance="outline">
-                  <mat-label>Buscar:</mat-label>
-                  <input  placeholder="Buscar"   [(ngModel)]="buscar"   matInput>
-              </mat-form-field>-->
+           
           </div>
 
-            <div class="col-md-6 form-group">
+            <div class="col-md-6 form-group" *ngIf="informantes && informantes.length>0">
               <mat-form-field class="full-width"  appearance="outline">
                   <mat-label>Circuito:</mat-label>
                   <input  placeholder="Direccion"   [(ngModel)]="circuitoNombre"  [disabled]="true" matInput>
               </mat-form-field>
           </div>
 
-          <div class="col-md-6 form-group">
+          <div class="col-md-6 form-group" *ngIf="informantes && informantes.length>0">
             <mat-form-field class="full-width"  appearance="outline">
                 <mat-label>Investigador:</mat-label>
                 <input  placeholder="Direccion"   [(ngModel)]="investigadorNombre"  [disabled]="true" matInput>

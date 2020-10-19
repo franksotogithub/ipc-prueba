@@ -122,9 +122,12 @@ export class ComercialesListComponent implements OnInit
 
         this.dataSource=this.informantes; 
         this.loadingData=false;
-        this.circuitoNombre = this.informantes[0].circuito_nombre;
+        if(this.informantes &&this.informantes.length>0){
+          this.circuitoNombre = this.informantes[0].circuito_nombre;
 
-        this.investigadorNombre = this.informantes[0].investigador_nombre;
+          this.investigadorNombre = this.informantes[0].investigador_nombre;
+        }
+        
     });
   }
 

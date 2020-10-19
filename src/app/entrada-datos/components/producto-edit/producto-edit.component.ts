@@ -353,6 +353,7 @@ export class ProductoEditComponent implements OnInit {
       this.informante.longitud = coords['longitude'];
     }
   }
+  
   convertMoneda(){
 
     const dialogRef = this.dialog.open(MoneyDialogComponent,{   
