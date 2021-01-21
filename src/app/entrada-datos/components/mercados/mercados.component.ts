@@ -259,10 +259,16 @@ if(m.digitacion ){
 
 */
 
-    if(m.digitacion){
+    if(UtilHelper.validarDato(m.digitacion)){
+
+      console.log(' UtilHelper.validarDato(m.digitacion) m>>>',m);
+      m.digitacion=UtilHelper.formatPrecio(m.digitacion);
+
+      /*m.precio_compra = UtilHelper.formatPrecio(m.digitacion); */
+      m.precio_compra = parseFloat(m.digitacion);
       m.peso_gr_mercado = 1000;
       m.peso_gr = 1000;
-
+    
       
       this.calcularPrecio(m);
     }

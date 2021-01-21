@@ -15,7 +15,7 @@ import {OnlyNumbersDirective} from './directive/only-numbers.directive';
 import {ButtonLoadingDirective} from './directive/button-loading.directive';
 import { AudioDialogComponent } from './components/audio-dialog/audio-dialog.component';
 import { VariedadTemporalFormDialogComponent } from './components/variedad-temporal-form-dialog/variedad-temporal-form-dialog.component';
-
+import {OnReturnDirective} from './directive/on-return.directive';
 
 
 @NgModule({
@@ -30,6 +30,7 @@ import { VariedadTemporalFormDialogComponent } from './components/variedad-tempo
      MoneyDialogComponent,
      OnlyNumbersDirective,
      ButtonLoadingDirective,
+     OnReturnDirective,
      AudioDialogComponent,
      VariedadTemporalFormDialogComponent,
      
@@ -46,7 +47,8 @@ import { VariedadTemporalFormDialogComponent } from './components/variedad-tempo
     MenuComponent,LoaderComponent,
     NotificationComponent,ConfirmDialogComponent,
     MoneyDialogComponent,OnlyNumbersDirective,
-  ButtonLoadingDirective
+  ButtonLoadingDirective,
+  OnReturnDirective
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

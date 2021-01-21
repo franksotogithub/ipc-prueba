@@ -9,9 +9,6 @@
 
 
 
-
-
-
 .mat-column-orden {
   flex: 0 0 50px !important;
   white-space: unset !important;
@@ -27,6 +24,9 @@
   margin-right: 5px;
 
 }
+
+
+
 
 .mat-column-articulo {
   flex: 0 0 150px !important;
@@ -46,19 +46,19 @@
 }
 
 .mat-column-peso_gr_mercado {
-  flex: 0 0 100px !important;
+  flex: 0 0 50px !important;
   margin-right: 5px;
 
 }
 
 .mat-column-peso_gr {
-  flex: 0 0 100px !important;
+  flex: 0 0 50px !important;
   margin-right: 5px;
 
 }
 
 .mat-column-digitacion {
-  flex: 0 0 70px !important;
+  flex: 0 0 100px !important;
   margin-right: 5px;
 
 }
@@ -70,5 +70,10 @@
 
 .mat-column-cc {
   flex: 0 0 50px !important;
+  margin: 0px 5px;
+}
+
+.mat-column-observacion {
+  flex: 0 0 300px !important;
   margin: 0px 5px;
 }

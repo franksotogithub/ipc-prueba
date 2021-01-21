@@ -87,7 +87,8 @@ export class ComercialesListComponent implements OnInit
     .subscribe((result) => {
       this.displayedColumns = result.matches
         ? ['orden', 'informante_nombre','informante_direccion','informante_giro','id']
-        : ['orden', 'informante_cod','circuito_cod','investigador_nombre','informante_nombre', 'informante_direccion','informante_giro','id'];
+        : ['orden', 'informante_cod','informante_nombre', 'informante_direccion','informante_giro','id'];
+        /*: ['orden', 'informante_cod','circuito_cod','investigador_nombre','informante_nombre', 'informante_direccion','informante_giro','id'];*/
     });
    
   }
@@ -165,7 +166,7 @@ export class ComercialesListComponent implements OnInit
     let q= UtilHelper.cleanCadena(event.target.value);
     if (q.length>=3){      
 
-      this.dataSource=this.informantes.filter(m=>UtilHelper.cleanCadena(m.informante_nombre).includes(q) || UtilHelper.cleanCadena(m.informante_cod).includes(q) );
+      this.dataSource=this.informantes.filter(m=>UtilHelper.cleanCadena(m.informante_nombre).includes(q) || UtilHelper.cleanCadena(m.informante_cod).includes(q) || UtilHelper.cleanCadena(m.informante_direccion).includes(q)  );
 
     
     }

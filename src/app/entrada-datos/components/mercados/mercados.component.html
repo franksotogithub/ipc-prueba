@@ -209,7 +209,7 @@
             <mat-table  [dataSource]="dataSource"  class=" mat-elevation-z8"  >
           
                
-                <ng-container matColumnDef="orden">
+                <ng-container matColumnDef="orden" sticky>
                     <mat-header-cell *matHeaderCellDef>Nº O.</mat-header-cell>
                     <mat-cell *matCellDef="let element"  data-label="Orden" > 
                         {{element.orden}} 
@@ -224,7 +224,7 @@
                 </mat-cell>
                 </ng-container>
             -->
-                <ng-container matColumnDef="producto">
+                <ng-container matColumnDef="producto" >
                     <mat-header-cell *matHeaderCellDef>Producto</mat-header-cell>
                     <mat-cell *matCellDef="let element" data-label="Producto"> 
              
@@ -232,7 +232,7 @@
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="articulo">
+                <ng-container matColumnDef="articulo" >
                     <mat-header-cell *matHeaderCellDef>Articulo</mat-header-cell>
                     <mat-cell *matCellDef="let element" data-label="Articulo"> 
                         <!--{{element.variedad.clasificacion.producto_desc}} /
@@ -245,14 +245,13 @@
                 <ng-container matColumnDef="digitacion">
                     <mat-header-cell *matHeaderCellDef>Digitacion</mat-header-cell>
                     <mat-cell *matCellDef="let element" data-label="Digitacion"> 
-                        
-                        <mat-slide-toggle
-                        class="example-margin" 
-                        [(ngModel)]="element.digitacion"
-                        (change)="changeMovMercadoCasasModel(element)"
-                        >
                       
-                    </mat-slide-toggle>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                           
+                        <input onReturn appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.digitacion"  (keydown.enter)="changeMovMercadoCasasModel(element,false)"    matInput>    
+                        
+                    </mat-form-field>
                     
                     </mat-cell>
                 </ng-container>
@@ -263,7 +262,7 @@
                     <mat-cell *matCellDef="let element" data-label="Precio Compra"> 
                         <mat-form-field class="full-width" appearance="outline">
                            
-                        <input appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.precio_compra"  (change)="changeMovMercadoCasasModel(element)"   matInput>    
+                        <input  onReturn appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.precio_compra"  (change)="changeMovMercadoCasasModel(element)"   matInput>    
                         
                     </mat-form-field>
                     </mat-cell>
@@ -277,7 +276,7 @@
                     <mat-cell *matCellDef="let element" data-label="Peso Mercado"> 
                         <mat-form-field class="full-width" appearance="outline">
                            
-                        <input appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.peso_gr_mercado"  (change)="changeMovMercadoCasasModel(element)"   matInput>    
+                        <input  onReturn appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.peso_gr_mercado"  (change)="changeMovMercadoCasasModel(element)"   matInput>    
                         
                     </mat-form-field>
                     </mat-cell>
@@ -292,7 +291,7 @@
                     <mat-cell *matCellDef="let element" data-label="ce" > 
                         <mat-form-field class="full-width" appearance="outline">
                              
-                            <mat-select [(ngModel)]="element.ce" (ngModelChange)="changeMovMercadoCasasModel(element)" >
+                            <mat-select  onReturn [(ngModel)]="element.ce" (ngModelChange)="changeMovMercadoCasasModel(element)" >
                                 <mat-option *ngFor="let c of ces" [value]="c.id">{{c.id}}</mat-option>
                             </mat-select>
     
@@ -313,7 +312,7 @@
                     <mat-cell *matCellDef="let element" data-label="cc" > 
                         <mat-form-field class="full-width" appearance="outline">
                              
-                            <mat-select [(ngModel)]="element.cc" (ngModelChange)="changeMovMercadoCasasModel(element)" >
+                            <mat-select onReturn [(ngModel)]="element.cc" (ngModelChange)="changeMovMercadoCasasModel(element)" >
                                 <mat-option *ngFor="let c of ccs" [value]="c.id">{{c.id}}</mat-option>
                             </mat-select>
     
@@ -330,7 +329,7 @@
                     <mat-cell *matCellDef="let element" data-label="Peso(gr)"> 
                         <mat-form-field class="full-width" appearance="outline">
                            
-                        <input appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.peso_gr"  (change)="changeMovMercadoCasasModel(element)"   matInput>    
+                        <input onReturn appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.peso_gr"  (change)="changeMovMercadoCasasModel(element)"   matInput>    
                         
                     </mat-form-field>
                     </mat-cell>
@@ -341,7 +340,7 @@
                 <mat-cell *matCellDef="let element" data-label="Presentacion"> 
                     <mat-form-field class="full-width" appearance="outline">
                        
-                    <input appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.precio"  (change)="changeMovMercadoCasasModel(element,true)"  disabled matInput>    
+                    <input  onReturn appOnlyNumber type="text" autocomplete="off"  [(ngModel)]="element.precio"  (change)="changeMovMercadoCasasModel(element,true)"  disabled matInput>    
                     
                 </mat-form-field>
                 </mat-cell>
@@ -353,7 +352,7 @@
                 <mat-header-cell *matHeaderCellDef>Observacion</mat-header-cell>
                 <mat-cell *matCellDef="let element" data-label="observacion"> 
                     <mat-form-field class="full-width" appearance="outline">
-                        <input type="text" autocomplete="off"  [(ngModel)]="element.observacion" (change)="changeMovMercadoCasasModel(element,false)" [disabled]="disabled" matInput  >   
+                        <input onReturn type="text" autocomplete="off"  [(ngModel)]="element.observacion" (change)="changeMovMercadoCasasModel(element,false)" [disabled]="disabled" matInput  >   
                     </mat-form-field>
                     
                 </mat-cell>

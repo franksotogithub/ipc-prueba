@@ -26,6 +26,12 @@ html, body { height: 100%; }
   }
   
 
+.mat-header-row, .mat-footer-row, .mat-row {
+  min-width: 1200px; /* 24 columns, 80px each */
+}
+
+
+
   @media(max-width: 770px) {
     /*.mobile-label {
       width: 200px;
@@ -33,7 +39,12 @@ html, body { height: 100%; }
      font-weight: bold;
      align-items: start;
     }*/
-  
+
+  .mat-header-row, .mat-footer-row, .mat-row {
+  min-width: 0px; /* 24 columns, 80px each */
+}
+
+
     .mat-header-row {
       display: none;
     }
@@ -250,9 +261,9 @@ input[type=text]{
 }
 
 .estado-proceso{
-  background-color: mat-color($warn,100);
+  background-color: mat-color($warn,200);
   font-weight: bold;
-  color: mat-color($warn,900);
+  color: mat-color($warn,600);
 }
 .estado-cerrado{
   background-color: rgb(203, 190, 230);
@@ -277,7 +288,7 @@ input[type=text]{
 .estado-proceso-text{
  
   font-weight: bold;
-  color: mat-color($warn,900);
+  color: mat-color($warn,100);
 }
 .estado-cerrado-text{
 

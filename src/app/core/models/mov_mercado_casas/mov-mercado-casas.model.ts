@@ -44,7 +44,7 @@ export class MovMercadoCasasModel implements MovMercadoCasasRequest{
   cod_articulo :string;
   producto :string;
   cod_producto :string;
-  digitacion: boolean;
+  digitacion: string;
   constructor(m?: MovMercadoCasasRequest)
   {
     this.id = m?m.id:null;

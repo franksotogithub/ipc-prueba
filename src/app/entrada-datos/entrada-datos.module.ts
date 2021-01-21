@@ -26,6 +26,7 @@ import {AppDateAdapter, APP_DATE_FORMATS } from 'src/app/util/format-datepicker'
 import { CameraComponent } from './components/camera/camera.component';
 import { CerrarDialogComponent } from './components/cerrar-dialog/cerrar-dialog.component';
 
+
 @NgModule({
   declarations: [MercadosComponent, 
     
@@ -48,7 +49,8 @@ import { CerrarDialogComponent } from './components/cerrar-dialog/cerrar-dialog.
     FormsModule,
     ReactiveFormsModule,
     WebcamModule,
-    AuthModule
+    AuthModule,
+ 
   ],
   entryComponents: [
     CameraDialogComponent,
