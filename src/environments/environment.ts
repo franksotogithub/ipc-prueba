@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url_api: 'http://127.0.0.1:8000',
+  url_api: 'https://ipc.inei.gob.pe',
  /* url_api: 'http://161.35.225.181:8000',*/
   name_database_local:'ipc-local-database-2'
 };
